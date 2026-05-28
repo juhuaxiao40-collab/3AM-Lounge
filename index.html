@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凌晨三点的休息室 | 3AM Lounge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景层 -->
+    <div class="background">
+        <div class="room-bg"></div>
+        <div class="rain-container" id="rainContainer"></div>
+        <div class="window"></div>
+        <div class="light-effect"></div>
+    </div>
+
+    <!-- BGM控制按钮 -->
+    <div class="bgm-control" id="bgmControl">
+        <button class="bgm-button" id="bgmButton" onclick="toggleBGM()">
+            <span id="bgmIcon">🔇</span>
+        </button>
+        <div class="bgm-tooltip">点击播放背景音乐</div>
+    </div>
+
+    <!-- 角色层 -->
+    <div class="character-container">
+        <div class="character" id="lan">
+            <!-- 角色立绘将在这里显示 -->
+        </div>
+    </div>
+
+    <!-- 对话层 -->
+    <div class="dialogue-box">
+        <div class="character-name" id="characterName">岚</div>
+        <div class="dialogue-text" id="dialogueText">
+            欢迎来到凌晨三点的休息室...
+        </div>
+        <div class="continue-hint" id="continueHint">点击继续 ▼</div>
+    </div>
+
+    <!-- 选择层 -->
+    <div class="choices-container" id="choicesContainer">
+        <!-- 选项将通过JS动态生成 -->
+    </div>
+
+    <!-- 开始按钮 -->
+    <div class="start-screen" id="startScreen">
+        <div class="title">
+            <h1>凌晨三点的休息室</h1>
+            <p class="subtitle">3AM Lounge</p>
+            <p class="tagline">在人生迷茫时，有人陪你走一段路</p>
+        </div>
+        <button class="start-button" id="startButton">开始</button>
+        <div class="start-tips">
+            <p>💡 建议佩戴耳机以获得最佳体验</p>
+            <p>🎵 进入游戏后可点击右上角按钮开启背景音乐</p>
+        </div>
+    </div>
+
+    <script src="story.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

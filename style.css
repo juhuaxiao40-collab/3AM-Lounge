@@ -1,0 +1,906 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* 背景层 */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    animation: backgroundBreath 8s ease-in-out infinite;
+}
+
+@keyframes backgroundBreath {
+    0%, 100% {
+        filter: brightness(1);
+    }
+    50% {
+        filter: brightness(1.05);
+    }
+}
+
+.room-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+        #2d3561 0%,
+        #1f2847 40%,
+        #1a1f3a 100%);
+    position: relative;
+    filter: blur(1px);
+}
+
+/* 星星装饰 */
+.room-bg::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(255, 255, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 80% 10%, rgba(255, 255, 255, 0.5), transparent),
+        radial-gradient(2px 2px at 90% 60%, rgba(255, 255, 255, 0.6), transparent),
+        radial-gradient(1px 1px at 33% 80%, rgba(255, 255, 255, 0.5), transparent);
+    background-size: 200% 200%;
+    animation: twinkle 8s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 1; }
+}
+
+/* 窗户效果 - 更治愈的月光 */
+.window {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 220px;
+    height: 320px;
+    background: linear-gradient(135deg,
+        rgba(150, 180, 220, 0.15) 0%,
+        rgba(120, 150, 200, 0.08) 100%);
+    border: 3px solid rgba(180, 200, 230, 0.25);
+    border-radius: 8px;
+    box-shadow:
+        inset 0 0 60px rgba(150, 180, 220, 0.15),
+        0 0 40px rgba(150, 180, 220, 0.1);
+    overflow: hidden;
+}
+
+/* 窗户十字框 */
+.window::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgba(180, 200, 230, 0.3);
+    transform: translateY(-50%);
+}
+
+.window::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(180, 200, 230, 0.3);
+    transform: translateX(-50%);
+}
+
+/* 月光效果 - 柔和温暖 */
+.light-effect {
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle,
+        rgba(180, 200, 255, 0.2) 0%,
+        rgba(150, 180, 230, 0.1) 40%,
+        transparent 70%);
+    border-radius: 50%;
+    filter: blur(50px);
+    animation: breathe 5s ease-in-out infinite;
+}
+
+@keyframes breathe {
+    0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.9;
+        transform: scale(1.08);
+    }
+}
+
+/* 额外的温暖光晕 */
+.light-effect::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle,
+        rgba(255, 230, 200, 0.15) 0%,
+        transparent 60%);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+/* 角色层 */
+.character-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 80%;
+    z-index: 2;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.character {
+    width: 450px;
+    height: 650px;
+    background: linear-gradient(180deg,
+        rgba(180, 200, 230, 0.08) 0%,
+        rgba(150, 180, 220, 0.12) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(200, 220, 255, 0.4);
+    font-size: 14px;
+    border: 2px solid rgba(180, 200, 230, 0.15);
+    box-shadow: 0 0 30px rgba(150, 180, 220, 0.1);
+}
+
+/* 对话框 - GalGame经典风格 */
+.dialogue-box {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 950px;
+    background: linear-gradient(135deg,
+        rgba(25, 35, 60, 0.95) 0%,
+        rgba(30, 40, 65, 0.93) 100%);
+    border: 3px solid rgba(150, 180, 220, 0.4);
+    border-radius: 20px;
+    padding: 28px 35px;
+    z-index: 10;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 60px rgba(100, 150, 220, 0.15);
+    backdrop-filter: blur(12px);
+    display: none;
+}
+
+/* 对话框装饰边角 */
+.dialogue-box::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(135deg,
+        rgba(150, 180, 220, 0.3) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(150, 180, 220, 0.2) 100%);
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.character-name {
+    color: #b8d4ff;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 14px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 8px rgba(100, 150, 220, 0.4);
+    display: inline-block;
+    padding: 4px 16px;
+    background: rgba(100, 150, 220, 0.15);
+    border-radius: 8px;
+    border-left: 3px solid rgba(150, 180, 220, 0.5);
+}
+
+.dialogue-text {
+    color: #f0f4ff;
+    font-size: 17px;
+    line-height: 1.9;
+    min-height: 65px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.continue-hint {
+    text-align: right;
+    color: rgba(180, 200, 255, 0.7);
+    font-size: 14px;
+    margin-top: 12px;
+    animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* 选择层 - 更可爱的按钮设计 */
+.choices-container {
+    position: fixed;
+    bottom: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 950px;
+    z-index: 11;
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.choice-button {
+    background: linear-gradient(135deg,
+        rgba(40, 55, 85, 0.9) 0%,
+        rgba(35, 50, 80, 0.88) 100%);
+    border: 2.5px solid rgba(150, 180, 220, 0.45);
+    color: #e8f0ff;
+    padding: 20px 30px;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+    backdrop-filter: blur(8px);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 按钮光效 */
+.choice-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(150, 180, 220, 0.2),
+        transparent);
+    transition: left 0.5s;
+}
+
+.choice-button:hover::before {
+    left: 100%;
+}
+
+.choice-button:hover {
+    background: linear-gradient(135deg,
+        rgba(60, 85, 120, 0.95) 0%,
+        rgba(50, 75, 110, 0.93) 100%);
+    border-color: rgba(180, 210, 255, 0.7);
+    transform: translateX(12px) scale(1.02);
+    box-shadow:
+        0 6px 25px rgba(100, 150, 220, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.choice-button:active {
+    transform: translateX(12px) scale(0.98);
+}
+
+/* 开始界面 - 更治愈温暖 */
+.start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+        rgba(35, 45, 75, 0.96) 0%,
+        rgba(30, 40, 70, 0.94) 50%,
+        rgba(25, 35, 65, 0.96) 100%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(20px);
+}
+
+/* 标题装饰 */
+.title {
+    text-align: center;
+    margin-bottom: 70px;
+    position: relative;
+}
+
+.title::before {
+    content: '✦';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: rgba(180, 200, 255, 0.6);
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-10px); }
+}
+
+.title h1 {
+    color: #e8f0ff;
+    font-size: 52px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    text-shadow:
+        0 2px 10px rgba(100, 150, 220, 0.4),
+        0 0 30px rgba(150, 180, 255, 0.2);
+}
+
+.subtitle {
+    color: #b8d4ff;
+    font-size: 22px;
+    letter-spacing: 3px;
+    margin-bottom: 35px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.tagline {
+    color: rgba(200, 220, 255, 0.75);
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    line-height: 1.6;
+}
+
+/* 开始界面提示 */
+.start-tips {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.start-tips p {
+    color: rgba(180, 200, 230, 0.7);
+    font-size: 14px;
+    margin: 8px 0;
+    letter-spacing: 0.5px;
+    line-height: 1.8;
+}
+
+/* 开始按钮 - 更可爱的设计 */
+.start-button {
+    background: linear-gradient(135deg,
+        rgba(100, 150, 220, 0.25) 0%,
+        rgba(80, 130, 200, 0.2) 100%);
+    border: 3px solid rgba(150, 180, 220, 0.6);
+    color: #f0f4ff;
+    padding: 20px 70px;
+    font-size: 20px;
+    border-radius: 35px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 3px;
+    font-weight: 400;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(100, 150, 220, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* 按钮光晕效果 */
+.start-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(150, 180, 220, 0.3);
+    transition: width 0.6s, height 0.6s;
+}
+
+.start-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.start-button:hover {
+    background: linear-gradient(135deg,
+        rgba(120, 170, 240, 0.35) 0%,
+        rgba(100, 150, 220, 0.3) 100%);
+    border-color: rgba(180, 210, 255, 0.85);
+    transform: scale(1.08) translateY(-2px);
+    box-shadow:
+        0 8px 35px rgba(100, 150, 220, 0.5),
+        0 0 50px rgba(150, 180, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.start-button:active {
+    transform: scale(1.02) translateY(0);
+}
+
+/* 隐藏类 */
+.hidden {
+    display: none !important;
+}
+
+/* 雨滴容器 */
+.rain-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* 雨滴样式 */
+.raindrop {
+    position: absolute;
+    width: 1px;
+    height: 15px;
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(150, 180, 220, 0.3) 50%,
+        rgba(150, 180, 220, 0.6) 100%);
+    animation: rainFall linear infinite;
+    opacity: 0.6;
+}
+
+@keyframes rainFall {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.6;
+    }
+    90% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* BGM控制按钮 */
+.bgm-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.bgm-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(30, 40, 60, 0.8);
+    border: 2px solid rgba(150, 180, 220, 0.4);
+    color: #a8c0e0;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.bgm-button:hover {
+    background: rgba(50, 70, 100, 0.9);
+    border-color: rgba(168, 192, 224, 0.7);
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(100, 150, 220, 0.3);
+}
+
+.bgm-button.playing {
+    border-color: rgba(100, 200, 150, 0.6);
+    animation: musicPulse 2s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(100, 200, 150, 0.4);
+    }
+}
+
+.bgm-tooltip {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: rgba(30, 40, 60, 0.95);
+    color: #e8e8e8;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    border: 1px solid rgba(150, 180, 220, 0.3);
+}
+
+.bgm-control:hover .bgm-tooltip {
+    opacity: 1;
+}
+
+/* 点击星星特效 - 流光效果 */
+.click-star {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8),
+                0 0 8px rgba(255, 255, 255, 0.4);
+    animation: streamFloat 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes streamFloat {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0);
+    }
+    20% {
+        opacity: 1;
+        transform: translate(calc(var(--tx) * 0.3), calc(var(--ty) * 0.3)) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--tx), var(--ty)) scale(0.3);
+    }
+}
+
+/* 流光尾迹效果 */
+.click-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 1px;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%);
+    transform: translate(-50%, -50%) rotate(var(--angle));
+    opacity: 0.7;
+}
+
+/* ==================== 响应式设计 ==================== */
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    /* 调整对话框 */
+    .dialogue-box {
+        width: 92%;
+        padding: 20px 25px;
+        bottom: 20px;
+    }
+
+    .character-name {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .dialogue-text {
+        font-size: 15px;
+        line-height: 1.8;
+    }
+
+    .continue-hint {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+
+    /* 调整选项按钮 */
+    .choices-container {
+        width: 92%;
+        bottom: 180px;
+        gap: 12px;
+    }
+
+    .choice-button {
+        padding: 16px 20px;
+        font-size: 14px;
+        border-radius: 12px;
+    }
+
+    /* 调整窗户大小 */
+    .window {
+        width: 150px;
+        height: 220px;
+        top: 10%;
+        right: 8%;
+    }
+
+    /* 调整光效 */
+    .light-effect {
+        width: 300px;
+        height: 300px;
+    }
+
+    /* 调整角色容器 */
+    .character {
+        width: 300px;
+        height: 450px;
+        font-size: 12px;
+    }
+
+    /* 调整开始界面 */
+    .title h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
+
+    .tagline {
+        font-size: 14px;
+        padding: 0 20px;
+    }
+
+    .start-button {
+        padding: 16px 50px;
+        font-size: 18px;
+        border-radius: 30px;
+    }
+
+    .start-tips {
+        margin-top: 30px;
+        padding: 0 20px;
+    }
+
+    .start-tips p {
+        font-size: 12px;
+    }
+
+    /* 调整BGM按钮 */
+    .bgm-control {
+        top: 15px;
+        right: 15px;
+    }
+
+    .bgm-button {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+
+    .bgm-tooltip {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+}
+
+/* 小屏手机适配 */
+@media screen and (max-width: 480px) {
+    .dialogue-box {
+        width: 95%;
+        padding: 18px 20px;
+        bottom: 15px;
+    }
+
+    .character-name {
+        font-size: 15px;
+    }
+
+    .dialogue-text {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .choices-container {
+        width: 95%;
+        bottom: 160px;
+        gap: 10px;
+    }
+
+    .choice-button {
+        padding: 14px 18px;
+        font-size: 13px;
+    }
+
+    .window {
+        width: 120px;
+        height: 180px;
+        top: 8%;
+        right: 5%;
+    }
+
+    .light-effect {
+        width: 250px;
+        height: 250px;
+    }
+
+    .character {
+        width: 250px;
+        height: 380px;
+    }
+
+    .title h1 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 16px;
+    }
+
+    .tagline {
+        font-size: 13px;
+    }
+
+    .start-button {
+        padding: 14px 40px;
+        font-size: 16px;
+    }
+
+    .start-tips p {
+        font-size: 11px;
+    }
+}
+
+/* 平板横屏适配 */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .dialogue-box {
+        width: 85%;
+        max-width: 800px;
+    }
+
+    .choices-container {
+        width: 85%;
+        max-width: 800px;
+    }
+
+    .window {
+        width: 180px;
+        height: 260px;
+    }
+
+    .character {
+        width: 380px;
+        height: 550px;
+    }
+}
+
+/* 大屏幕优化 */
+@media screen and (min-width: 1920px) {
+    .dialogue-box {
+        max-width: 1100px;
+        padding: 32px 40px;
+    }
+
+    .character-name {
+        font-size: 20px;
+    }
+
+    .dialogue-text {
+        font-size: 19px;
+    }
+
+    .choices-container {
+        max-width: 1100px;
+    }
+
+    .choice-button {
+        font-size: 18px;
+        padding: 22px 35px;
+    }
+
+    .window {
+        width: 260px;
+        height: 380px;
+    }
+
+    .character {
+        width: 500px;
+        height: 720px;
+    }
+}
+
+/* 横屏手机提示 */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .dialogue-box {
+        bottom: 10px;
+        padding: 15px 20px;
+    }
+
+    .character-name {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .dialogue-text {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .choices-container {
+        bottom: 120px;
+        gap: 8px;
+    }
+
+    .choice-button {
+        padding: 12px 16px;
+        font-size: 12px;
+    }
+
+    .window {
+        width: 100px;
+        height: 150px;
+    }
+
+    .character {
+        width: 200px;
+        height: 300px;
+    }
+
+    .start-button {
+        padding: 12px 35px;
+        font-size: 16px;
+    }
+}

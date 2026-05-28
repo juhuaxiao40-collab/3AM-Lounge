@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>剧情编辑器 - 凌晨三点的休息室</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            background: #1a1a2e;
+            color: #e8e8e8;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: rgba(30, 40, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(150, 170, 200, 0.3);
+        }
+
+        .header h1 {
+            color: #a8c0e0;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: rgba(200, 210, 230, 0.7);
+            margin-bottom: 5px;
+        }
+
+        .bgm-status {
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(100, 150, 200, 0.2);
+            border-radius: 5px;
+            font-size: 14px;
+            color: rgba(200, 210, 230, 0.9);
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            background: rgba(168, 192, 224, 0.15);
+            border: 2px solid rgba(168, 192, 224, 0.5);
+            color: #e8e8e8;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: rgba(168, 192, 224, 0.25);
+            border-color: rgba(168, 192, 224, 0.8);
+        }
+
+        .btn-primary {
+            background: rgba(100, 150, 200, 0.3);
+            border-color: rgba(100, 150, 200, 0.6);
+        }
+
+        .btn-primary:hover {
+            background: rgba(100, 150, 200, 0.5);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        .node-list {
+            background: rgba(30, 40, 60, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid rgba(150, 170, 200, 0.3);
+            max-height: calc(100vh - 200px);
+            overflow-y: auto;
+        }
+
+        .node-list h2 {
+            color: #a8c0e0;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .node-item {
+            background: rgba(50, 60, 80, 0.6);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .node-item:hover {
+            background: rgba(70, 80, 100, 0.8);
+            border-color: rgba(168, 192, 224, 0.5);
+        }
+
+        .node-item.active {
+            background: rgba(100, 150, 200, 0.4);
+            border-color: rgba(168, 192, 224, 0.8);
+        }
+
+        .node-item .node-id {
+            color: #a8c0e0;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .node-item .node-type {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        .node-type.dialogue {
+            background: rgba(100, 200, 150, 0.3);
+            color: #90ee90;
+        }
+
+        .node-type.choice {
+            background: rgba(255, 200, 100, 0.3);
+            color: #ffd700;
+        }
+
+        .node-type.ending {
+            background: rgba(255, 100, 150, 0.3);
+            color: #ff69b4;
+        }
+
+        .editor-panel {
+            background: rgba(30, 40, 60, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid rgba(150, 170, 200, 0.3);
+        }
+
+        .editor-panel h2 {
+            color: #a8c0e0;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #a8c0e0;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: rgba(20, 25, 35, 0.8);
+            border: 2px solid rgba(150, 170, 200, 0.3);
+            color: #e8e8e8;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: rgba(168, 192, 224, 0.6);
+        }
+
+        .choices-editor {
+            background: rgba(20, 25, 35, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .choice-item {
+            background: rgba(50, 60, 80, 0.6);
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 2px solid rgba(150, 170, 200, 0.2);
+        }
+
+        .choice-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .btn-small {
+            padding: 5px 10px;
+            font-size: 12px;
+        }
+
+        .btn-danger {
+            background: rgba(255, 100, 100, 0.3);
+            border-color: rgba(255, 100, 100, 0.6);
+        }
+
+        .btn-danger:hover {
+            background: rgba(255, 100, 100, 0.5);
+        }
+
+        .preview-section {
+            background: rgba(20, 25, 35, 0.5);
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .preview-section h3 {
+            color: #a8c0e0;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .preview-text {
+            color: #d0d8e8;
+            line-height: 1.6;
+        }
+
+        .node-connections {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .connection-badge {
+            background: rgba(100, 150, 200, 0.3);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .connection-badge:hover {
+            background: rgba(100, 150, 200, 0.5);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: rgba(200, 210, 230, 0.5);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(20, 25, 35, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(150, 170, 200, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(150, 170, 200, 0.5);
+        }
+
+        /* BGM管理弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: rgba(30, 40, 60, 0.95);
+            border: 2px solid rgba(150, 170, 200, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: #a8c0e0;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #e8e8e8;
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: #ff6b6b;
+        }
+
+        .bgm-list {
+            margin-bottom: 20px;
+        }
+
+        .bgm-item {
+            background: rgba(50, 60, 80, 0.6);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 2px solid rgba(150, 170, 200, 0.2);
+        }
+
+        .bgm-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .bgm-name {
+            color: #a8c0e0;
+            font-weight: bold;
+        }
+
+        .bgm-nodes {
+            color: rgba(200, 210, 230, 0.7);
+            font-size: 13px;
+            margin-top: 5px;
+        }
+
+        .upload-section {
+            background: rgba(20, 25, 35, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px 20px;
+            background: rgba(100, 150, 200, 0.3);
+            border: 2px dashed rgba(150, 170, 200, 0.5);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #e8e8e8;
+        }
+
+        .file-input-label:hover {
+            background: rgba(100, 150, 200, 0.4);
+            border-color: rgba(150, 170, 200, 0.7);
+        }
+
+        .node-selector {
+            margin-top: 15px;
+        }
+
+        .node-checkbox-list {
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(20, 25, 35, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .node-checkbox-item {
+            padding: 8px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .node-checkbox-item:hover {
+            background: rgba(50, 60, 80, 0.5);
+        }
+
+        .node-checkbox-item label {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #e8e8e8;
+        }
+
+        .node-checkbox-item input[type="checkbox"] {
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* 素材预览 */
+        .asset-preview {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid rgba(150, 170, 200, 0.3);
+        }
+
+        .asset-item {
+            background: rgba(50, 60, 80, 0.6);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border: 2px solid rgba(150, 170, 200, 0.2);
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .asset-item-preview {
+            flex-shrink: 0;
+        }
+
+        .asset-item-preview img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid rgba(150, 170, 200, 0.3);
+        }
+
+        .asset-item-content {
+            flex: 1;
+        }
+
+        .asset-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .asset-name {
+            color: #a8c0e0;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .asset-type-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: normal;
+        }
+
+        .asset-type-scene {
+            background: rgba(100, 150, 200, 0.3);
+            color: #a8c0e0;
+        }
+
+        .asset-type-character {
+            background: rgba(200, 150, 100, 0.3);
+            color: #e0c8a8;
+        }
+
+        .asset-type-prop {
+            background: rgba(150, 100, 200, 0.3);
+            color: #c8a8e0;
+        }
+
+        .asset-nodes {
+            color: rgba(200, 210, 230, 0.7);
+            font-size: 13px;
+            margin-top: 5px;
+            line-height: 1.6;
+        }
+
+        .node-badge {
+            display: inline-block;
+            background: rgba(100, 150, 200, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 2px;
+            font-size: 12px;
+        }
+
+        /* 素材筛选按钮激活状态 */
+        .btn-small.active {
+            background: rgba(100, 150, 200, 0.5);
+            border-color: rgba(150, 170, 200, 0.8);
+        }
+
+        /* ==================== 响应式设计 ==================== */
+
+        /* 平板和小屏幕 */
+        @media screen and (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .node-list {
+                max-height: 300px;
+                margin-bottom: 15px;
+            }
+
+            .header-buttons {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                font-size: 13px;
+                padding: 8px 15px;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+
+        /* 手机端 */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .header p {
+                font-size: 13px;
+            }
+
+            .header-buttons {
+                gap: 8px;
+            }
+
+            .btn {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .bgm-status {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .node-list {
+                padding: 12px;
+                max-height: 250px;
+            }
+
+            .node-list h2 {
+                font-size: 16px;
+            }
+
+            .node-item {
+                padding: 10px;
+            }
+
+            .node-item .node-id {
+                font-size: 13px;
+            }
+
+            .node-type {
+                font-size: 11px;
+            }
+
+            .editor-panel {
+                padding: 15px;
+            }
+
+            .editor-panel h2 {
+                font-size: 18px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                font-size: 13px;
+                padding: 8px;
+            }
+
+            .modal-content {
+                padding: 15px;
+                max-height: 90vh;
+            }
+
+            .modal-header h2 {
+                font-size: 18px;
+            }
+
+            .upload-section {
+                padding: 15px;
+            }
+
+            .file-input-label {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+
+            .node-checkbox-list {
+                max-height: 150px;
+            }
+
+            .node-checkbox-item {
+                font-size: 13px;
+            }
+        }
+
+        /* 小屏手机 */
+        @media screen and (max-width: 480px) {
+            .header h1 {
+                font-size: 18px;
+            }
+
+            .header-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .node-list {
+                max-height: 200px;
+            }
+
+            .choice-item-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .modal-content {
+                width: 98%;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📝 剧情编辑器</h1>
+            <p>可视化编辑《凌晨三点的休息室》的剧情分支</p>
+            <div class="header-buttons">
+                <button class="btn btn-primary" onclick="saveStory()">💾 保存到文件</button>
+                <button class="btn" onclick="exportJSON()">📤 导出JSON</button>
+                <button class="btn" onclick="document.getElementById('importFile').click()">📥 导入JSON</button>
+                <button class="btn" onclick="openBGMManager()">🎵 BGM管理</button>
+                <button class="btn" onclick="openAssetManager()">🖼️ 素材管理</button>
+                <button class="btn" onclick="addNewNode()">➕ 新增节点</button>
+                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importJSON(event)">
+            </div>
+            <div class="bgm-status" id="bgmStatus">
+                已上传BGM: <span id="bgmCount">0</span> 个 | 素材: <span id="assetCount">0</span> 个
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="node-list">
+                <h2>剧情节点列表</h2>
+                <div id="nodeListContainer"></div>
+            </div>
+
+            <div class="editor-panel">
+                <div id="editorContent">
+                    <div class="empty-state">
+                        <p>👈 请从左侧选择一个节点开始编辑</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 素材管理弹窗 -->
+    <div class="modal" id="assetModal">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <h2>🖼️ 素材管理器</h2>
+                <button class="close-btn" onclick="closeAssetManager()">&times;</button>
+            </div>
+
+            <div class="upload-section">
+                <h3 style="color: #a8c0e0; margin-bottom: 15px;">上传新素材</h3>
+
+                <!-- 素材类型选择 -->
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>素材类型</label>
+                    <select id="assetTypeSelect" style="width: 100%; padding: 10px; background: rgba(20, 25, 35, 0.8); border: 2px solid rgba(150, 170, 200, 0.3); color: #e8e8e8; border-radius: 5px;">
+                        <option value="scene">🌆 场景素材</option>
+                        <option value="character">👤 人物素材</option>
+                        <option value="prop">📦 道具素材</option>
+                    </select>
+                </div>
+
+                <div class="file-input-wrapper">
+                    <input type="file" id="assetFileInput" accept="image/*" style="display: none;" onchange="handleAssetUpload(event)">
+                    <label for="assetFileInput" class="file-input-label">
+                        📁 点击选择图片文件 (支持 JPG, PNG, GIF, WebP)
+                    </label>
+                </div>
+                <div id="uploadedAssetName" style="margin-top: 10px; color: rgba(200, 210, 230, 0.7); font-size: 14px;"></div>
+
+                <div class="node-selector" id="assetNodeSelectorSection" style="display: none;">
+                    <h4 style="color: #a8c0e0; margin-bottom: 10px;">选择应用此素材的节点</h4>
+                    <div style="margin-bottom: 10px;">
+                        <button class="btn btn-small" onclick="selectAllNodesForAsset()">全选</button>
+                        <button class="btn btn-small" onclick="deselectAllNodesForAsset()">取消全选</button>
+                    </div>
+                    <div class="node-checkbox-list" id="assetNodeCheckboxList"></div>
+                    <button class="btn btn-primary" onclick="saveAssetAssignment()" style="margin-top: 15px; width: 100%;">✅ 保存素材配置</button>
+                </div>
+            </div>
+
+            <div class="bgm-list">
+                <h3 style="color: #a8c0e0; margin-bottom: 15px;">已配置的素材</h3>
+
+                <!-- 素材分类标签 -->
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-small" onclick="filterAssets('all')" id="filterAll">全部</button>
+                    <button class="btn btn-small" onclick="filterAssets('scene')" id="filterScene">🌆 场景</button>
+                    <button class="btn btn-small" onclick="filterAssets('character')" id="filterCharacter">👤 人物</button>
+                    <button class="btn btn-small" onclick="filterAssets('prop')" id="filterProp">📦 道具</button>
+                </div>
+
+                <div id="assetListContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BGM管理弹窗 -->
+    <div class="modal" id="bgmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🎵 BGM管理器</h2>
+                <button class="close-btn" onclick="closeBGMManager()">&times;</button>
+            </div>
+
+            <div class="upload-section">
+                <h3 style="color: #a8c0e0; margin-bottom: 15px;">上传新BGM</h3>
+                <div class="file-input-wrapper">
+                    <input type="file" id="bgmFileInput" accept=".mp3,.ogg,.wav" style="display: none;" onchange="handleBGMUpload(event)">
+                    <label for="bgmFileInput" class="file-input-label">
+                        📁 点击选择音频文件 (支持 MP3, OGG, WAV)
+                    </label>
+                </div>
+                <div id="uploadedFileName" style="margin-top: 10px; color: rgba(200, 210, 230, 0.7); font-size: 14px;"></div>
+
+                <div class="node-selector" id="nodeSelectorSection" style="display: none;">
+                    <h4 style="color: #a8c0e0; margin-bottom: 10px;">选择应用此BGM的节点</h4>
+                    <div style="margin-bottom: 10px;">
+                        <button class="btn btn-small" onclick="selectAllNodes()">全选</button>
+                        <button class="btn btn-small" onclick="deselectAllNodes()">取消全选</button>
+                    </div>
+                    <div class="node-checkbox-list" id="nodeCheckboxList"></div>
+                    <button class="btn btn-primary" onclick="saveBGMAssignment()" style="margin-top: 15px; width: 100%;">✅ 保存BGM配置</button>
+                </div>
+            </div>
+
+            <div class="bgm-list">
+                <h3 style="color: #a8c0e0; margin-bottom: 15px;">已配置的BGM</h3>
+                <div id="bgmListContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="story.js"></script>
+    <script src="editor.js"></script>
+</body>
+</html>
