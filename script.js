@@ -9,6 +9,7 @@ const choicesContainer = document.getElementById('choicesContainer');
 const rainContainer = document.getElementById('rainContainer');
 const bgmButton = document.getElementById('bgmButton');
 const bgmIcon = document.getElementById('bgmIcon');
+const assetLayer = document.getElementById('assetLayer');
 
 // ==================== 游戏状态 ====================
 let gameStarted = false;
@@ -22,6 +23,8 @@ let isShowingChoices = false; // 是否正在显示选项
 let bgmPlaying = false; // BGM播放状态
 let currentBGM = null; // 当前播放的BGM ID
 let bgmAudioElements = {}; // BGM音频元素缓存
+let currentAssets = {}; // 当前显示的素材 { type: element }
+let assetElements = {}; // 素材元素缓存
 
 // ==================== 音效系统 ====================
 const soundEffects = {
@@ -203,6 +206,9 @@ function loadNode(nodeId) {
         switchBGM(node.bgm);
     }
 
+    // 显示素材
+    showAssets(node);
+
     if (node.type === 'dialogue') {
         // 普通对话
         showDialogue(node.name, node.text, node.next);
@@ -213,6 +219,117 @@ function loadNode(nodeId) {
         // 结局
         showEnding(node.name, node.text, node.endingTitle);
     }
+}
+
+// ==================== 显示素材 ====================
+function showAssets(node) {
+    // 隐藏所有当前素材
+    Object.keys(currentAssets).forEach(type => {
+        if (currentAssets[type]) {
+            currentAssets[type].style.display = 'none';
+        }
+    });
+
+    // 显示场景素材
+    if (node.scene && typeof assetConfig !== 'undefined') {
+        showAsset(node.scene, 'scene');
+    }
+
+    // 显示人物素材
+    if (node.character && typeof assetConfig !== 'undefined') {
+        showAsset(node.character, 'character');
+    }
+
+    // 显示道具素材
+    if (node.prop && typeof assetConfig !== 'undefined') {
+        showAsset(node.prop, 'prop');
+    }
+}
+
+// ==================== 显示单个素材 ====================
+function showAsset(assetId, assetType) {
+    const asset = assetConfig[assetId];
+    if (!asset || !asset.file) return;
+
+    // 如果已有该素材元素，直接显示
+    if (assetElements[assetId]) {
+        currentAssets[assetType] = assetElements[assetId];
+        assetElements[assetId].style.display = 'block';
+        return;
+    }
+
+    // 创建素材元素
+    const isVideo = asset.fileType === 'video';
+    const isGif = asset.name && asset.name.match(/\.gif$/i);
+    const loopCount = asset.loopCount || -1;
+
+    let element;
+    if (isVideo) {
+        element = document.createElement('video');
+        element.src = asset.file;
+        element.className = `asset-${assetType}`;
+        element.style.maxWidth = '100%';
+        element.style.maxHeight = '100%';
+        
+        // 设置循环
+        if (loopCount === -1) {
+            element.loop = true;
+        } else {
+            element.loop = false;
+            let playCount = 0;
+            element.addEventListener('ended', () => {
+                playCount++;
+                if (playCount < loopCount) {
+                    element.currentTime = 0;
+                    element.play();
+                }
+            });
+        }
+        
+        element.play().catch(() => {});
+    } else {
+        element = document.createElement('img');
+        element.src = asset.file;
+        element.className = `asset-${assetType}`;
+        
+        // GIF循环控制（通过CSS或JavaScript）
+        if (isGif && loopCount > 0) {
+            // 通过重新加载实现有限循环
+            let playCount = 0;
+            const originalSrc = asset.file;
+            
+            element.addEventListener('load', () => {
+                if (playCount > 0) {
+                    playCount++;
+                    if (playCount >= loopCount) {
+                        // 循环结束，显示静态帧
+                        element.src = '';
+                        // 创建canvas获取最后一帧
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = element.naturalWidth;
+                        canvas.height = element.naturalHeight;
+                        ctx.drawImage(element, 0, 0);
+                        element.src = canvas.toDataURL();
+                    }
+                }
+            });
+            
+            element.addEventListener('animationiteration', () => {
+                playCount++;
+                if (playCount >= loopCount) {
+                    element.style.animationIterationCount = '1';
+                }
+            });
+        }
+    }
+
+    // 缓存元素
+    assetElements[assetId] = element;
+    currentAssets[assetType] = element;
+    
+    // 添加到DOM
+    assetLayer.appendChild(element);
 }
 
 // ==================== 打字机效果 ====================

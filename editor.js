@@ -776,6 +776,7 @@ function handleAssetUpload(event) {
     const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
     const isImage = validImageTypes.includes(file.type);
     const isVideo = validVideoTypes.includes(file.type) || file.name.match(/\.(mp4|webm|ogv|mov)$/i);
+    const isAnimated = isVideo || file.name.match(/\.gif$/i); // GIF或视频
 
     if (!isImage && !isVideo) {
         alert('请上传有效的图片或视频文件（图片: JPG, PNG, GIF, WebP | 视频: MP4, WebM, OGV, MOV）');
@@ -802,11 +803,22 @@ function handleAssetUpload(event) {
             type: assetType,
             file: e.target.result, // Base64数据
             fileType: fileType,
+            loopCount: -1, // 默认无限循环
             nodes: []
         };
 
         const typeLabel = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
         document.getElementById('uploadedAssetName').textContent = `✅ 已选择: ${file.name} (${typeLabel} - ${fileType === 'video' ? '视频' : '图片'})`;
+        
+        // 显示循环设置（仅视频和GIF）
+        if (isAnimated) {
+            document.getElementById('loopSettings').style.display = 'block';
+            document.getElementById('loopCountSelect').value = '-1';
+        } else {
+            document.getElementById('loopSettings').style.display = 'none';
+            currentUploadedAsset.loopCount = -1;
+        }
+        
         document.getElementById('assetNodeSelectorSection').style.display = 'block';
         renderAssetNodeCheckboxList();
     };
@@ -873,6 +885,12 @@ function saveAssetAssignment() {
         return;
     }
 
+    // 获取循环次数设置
+    const loopCountSelect = document.getElementById('loopCountSelect');
+    if (loopCountSelect && loopCountSelect.style.display !== 'none') {
+        currentUploadedAsset.loopCount = parseInt(loopCountSelect.value);
+    }
+
     currentUploadedAsset.nodes = selectedNodes;
 
     // 保存到素材数据库
@@ -889,11 +907,13 @@ function saveAssetAssignment() {
     });
 
     const typeText = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
-    alert(`✅ ${typeText}素材配置成功！\n已应用到 ${selectedNodes.length} 个节点`);
+    const loopInfo = currentUploadedAsset.loopCount === -1 ? '（无限循环）' : `（循环${currentUploadedAsset.loopCount}次）`;
+    alert(`✅ ${typeText}素材配置成功！${loopInfo}\n已应用到 ${selectedNodes.length} 个节点`);
 
     // 重置状态
     currentUploadedAsset = null;
     document.getElementById('assetNodeSelectorSection').style.display = 'none';
+    document.getElementById('loopSettings').style.display = 'none';
     document.getElementById('uploadedAssetName').textContent = '';
     document.getElementById('assetFileInput').value = '';
 
@@ -947,6 +967,12 @@ function renderAssetList() {
             previewContent = asset.file ? `<img src="${asset.file}" alt="${asset.name}">` : '<div style="width: 120px; height: 120px; background: rgba(100, 100, 100, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(200, 200, 200, 0.5);">无预览</div>';
         }
 
+        // 循环次数显示
+        const isAnimated = isVideo || asset.name.match(/\.gif$/i);
+        const loopCount = asset.loopCount || -1;
+        const loopText = loopCount === -1 ? '🔄 无限循环' : `🔄 循环${loopCount}次`;
+        const loopBadge = isAnimated ? `<span class="asset-type-badge" style="background: rgba(100, 200, 150, 0.3); color: #90ee90;">${loopText}</span>` : '';
+
         item.innerHTML = `
             <div class="asset-item-preview">
                 ${previewContent}
@@ -957,6 +983,8 @@ function renderAssetList() {
                         ${typeIcon} ${asset.name}
                         <span class="asset-type-badge ${typeBadgeClass}">${typeText}</span>
                         ${isVideo ? '<span class="asset-type-badge" style="background: rgba(255, 100, 100, 0.3); color: #ff6b6b;">🎬 视频</span>' : ''}
+                        ${asset.name.match(/\.gif$/i) ? '<span class="asset-type-badge" style="background: rgba(255, 200, 100, 0.3); color: #ffd700;">🎨 GIF</span>' : ''}
+                        ${loopBadge}
                     </div>
                     <button class="btn btn-small btn-danger" onclick="deleteAsset('${assetId}')">删除</button>
                 </div>

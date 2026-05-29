@@ -775,6 +775,27 @@
                 </div>
                 <div id="uploadedAssetName" style="margin-top: 10px; color: rgba(200, 210, 230, 0.7); font-size: 14px;"></div>
 
+                <!-- 循环次数设置 -->
+                <div class="form-group" id="loopSettings" style="margin-bottom: 15px; display: none;">
+                    <label>🔄 循环次数（仅视频/GIF生效）</label>
+                    <select id="loopCountSelect" style="width: 100%; padding: 10px; background: rgba(20, 25, 35, 0.8); border: 2px solid rgba(150, 170, 200, 0.3); color: #e8e8e8; border-radius: 5px;">
+                        <option value="-1">🔄 无限循环</option>
+                        <option value="1">1 次</option>
+                        <option value="2">2 次</option>
+                        <option value="3">3 次</option>
+                        <option value="4">4 次</option>
+                        <option value="5">5 次</option>
+                        <option value="6">6 次</option>
+                        <option value="7">7 次</option>
+                        <option value="8">8 次</option>
+                        <option value="9">9 次</option>
+                        <option value="10">10 次</option>
+                    </select>
+                    <small style="color: rgba(200, 210, 230, 0.6); display: block; margin-top: 5px;">
+                        无限循环: -1, 有限循环: 1-10次
+                    </small>
+                </div>
+
                 <div class="node-selector" id="assetNodeSelectorSection" style="display: none;">
                     <h4 style="color: #a8c0e0; margin-bottom: 10px;">选择应用此素材的节点</h4>
                     <div style="margin-bottom: 10px;">
