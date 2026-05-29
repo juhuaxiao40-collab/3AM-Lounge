@@ -772,15 +772,20 @@ function handleAssetUpload(event) {
     if (!file) return;
 
     // 检查文件类型
-    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-    if (!validTypes.includes(file.type)) {
-        alert('请上传有效的图片文件（JPG, PNG, GIF, WebP）');
+    const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    const validVideoTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime'];
+    const isImage = validImageTypes.includes(file.type);
+    const isVideo = validVideoTypes.includes(file.type) || file.name.match(/\.(mp4|webm|ogv|mov)$/i);
+
+    if (!isImage && !isVideo) {
+        alert('请上传有效的图片或视频文件（图片: JPG, PNG, GIF, WebP | 视频: MP4, WebM, OGV, MOV）');
         return;
     }
 
-    // 检查文件大小（限制5MB）
-    if (file.size > 5 * 1024 * 1024) {
-        alert('图片文件不能超过5MB，请压缩后再上传');
+    // 检查文件大小（图片限制5MB，视频限制50MB）
+    const maxSize = isVideo ? 50 * 1024 * 1024 : 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+        alert(`${isVideo ? '视频' : '图片'}文件不能超过${isVideo ? '50MB' : '5MB'}，请压缩后再上传`);
         return;
     }
 
@@ -789,16 +794,19 @@ function handleAssetUpload(event) {
     reader.onload = function(e) {
         const assetType = document.getElementById('assetTypeSelect').value;
         const assetId = `${assetType}_${Date.now()}`;
+        const fileType = isVideo ? 'video' : 'image';
 
         currentUploadedAsset = {
             id: assetId,
             name: file.name,
             type: assetType,
             file: e.target.result, // Base64数据
+            fileType: fileType,
             nodes: []
         };
 
-        document.getElementById('uploadedAssetName').textContent = `✅ 已选择: ${file.name} (${assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具'})`;
+        const typeLabel = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
+        document.getElementById('uploadedAssetName').textContent = `✅ 已选择: ${file.name} (${typeLabel} - ${fileType === 'video' ? '视频' : '图片'})`;
         document.getElementById('assetNodeSelectorSection').style.display = 'block';
         renderAssetNodeCheckboxList();
     };
@@ -922,19 +930,33 @@ function renderAssetList() {
         const typeText = asset.type === 'scene' ? '场景' : asset.type === 'character' ? '人物' : '道具';
         const typeIcon = asset.type === 'scene' ? '🌆' : asset.type === 'character' ? '👤' : '📦';
         const typeBadgeClass = `asset-type-${asset.type}`;
+        const isVideo = asset.fileType === 'video';
 
         // 生成节点标签
         const nodeBadges = asset.nodes.map(nodeId => `<span class="node-badge">${nodeId}</span>`).join('');
 
+        // 预览内容
+        let previewContent;
+        if (isVideo) {
+            previewContent = `
+                <video src="${asset.file}" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; border: 2px solid rgba(150, 170, 200, 0.3);" controls preload="metadata">
+                    您的浏览器不支持视频预览
+                </video>
+            `;
+        } else {
+            previewContent = asset.file ? `<img src="${asset.file}" alt="${asset.name}">` : '<div style="width: 120px; height: 120px; background: rgba(100, 100, 100, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(200, 200, 200, 0.5);">无预览</div>';
+        }
+
         item.innerHTML = `
             <div class="asset-item-preview">
-                ${asset.file ? `<img src="${asset.file}" alt="${asset.name}">` : '<div style="width: 120px; height: 120px; background: rgba(100, 100, 100, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(200, 200, 200, 0.5);">无预览</div>'}
+                ${previewContent}
             </div>
             <div class="asset-item-content">
                 <div class="asset-item-header">
                     <div class="asset-name">
                         ${typeIcon} ${asset.name}
                         <span class="asset-type-badge ${typeBadgeClass}">${typeText}</span>
+                        ${isVideo ? '<span class="asset-type-badge" style="background: rgba(255, 100, 100, 0.3); color: #ff6b6b;">🎬 视频</span>' : ''}
                     </div>
                     <button class="btn btn-small btn-danger" onclick="deleteAsset('${assetId}')">删除</button>
                 </div>
