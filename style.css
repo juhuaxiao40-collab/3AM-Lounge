@@ -170,17 +170,9 @@ body {
 .character {
     width: 450px;
     height: 650px;
-    background: linear-gradient(180deg,
-        rgba(180, 200, 230, 0.08) 0%,
-        rgba(150, 180, 220, 0.12) 100%);
-    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(200, 220, 255, 0.4);
-    font-size: 14px;
-    border: 2px solid rgba(180, 200, 230, 0.15);
-    box-shadow: 0 0 30px rgba(150, 180, 220, 0.1);
 }
 
 /* 对话框 - GalGame经典风格 */
