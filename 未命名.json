@@ -1,0 +1,609 @@
+{
+  "meta": {
+    "title": "凌晨三点的休息室（完整长篇剧情）",
+    "estimatedPlayTime": "60-75分钟/结局，全分支约5小时",
+    "theme": "在无人知晓的深夜，两个迷茫的人互相陪伴着长大。",
+    "timeLine": "0:50 → 5:20，雨夜",
+    "characters": ["岚（Lan）", "你（玩家）"]
+  },
+  "start": {
+    "id": "start",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……你也还没睡吗？",
+    "next": "d1"
+  },
+  "d1": {
+    "id": "d1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "外面一直在下雨。",
+    "next": "d2"
+  },
+  "d2": {
+    "id": "d2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不知道为什么，每次下雨的时候，我都会突然变得特别清醒。",
+    "next": "d3"
+  },
+  "d3": {
+    "id": "d3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "明明白天还能假装自己过得不错。",
+    "next": "d4"
+  },
+  "d4": {
+    "id": "d4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "可一到凌晨，情绪就像坏掉的水龙头一样关不住。",
+    "next": "d5"
+  },
+  "d5": {
+    "id": "d5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "啊，对了……我叫岚。",
+    "next": "d6"
+  },
+  "d6": {
+    "id": "d6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "是个很普通的大学生。",
+    "next": "d7"
+  },
+  "d7": {
+    "id": "d7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "普通到，丢进人群里就再也找不到的那种。",
+    "next": "d8"
+  },
+  "d8": {
+    "id": "d8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你会经常失眠吗？",
+    "next": "d9"
+  },
+  "d9": {
+    "id": "d9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我最近几乎每天都这样。躺床上翻来覆去，眼睛闭着，脑子在跑马拉松。宿舍很安静，只有室友轻微的呼噜声。耳机里放着白噪音，可心里还是很乱。",
+    "next": "d10"
+  },
+  "d10": {
+    "id": "d10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你也会突然不想回消息吗？有时候手机亮了，我点开看一眼，又锁屏。不是忙，就是突然没力气说话。好像多说一个字，情绪就会漏出来。",
+    "next": "d11"
+  },
+  "d11": {
+    "id": "d11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你有没有那种……明明很累，却睡不着的时候？白天赶课、赶作业、赶ddl，一刻不停。到了晚上，终于躺下了，反而睡不着。好像身体在抗议：你今天又没好好照顾自己。",
+    "next": "d12"
+  },
+  "d12": {
+    "id": "d12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "最近学校一直在催毕业规划。周围的人好像都已经知道自己以后要做什么了。有人考研，有人创业，有人已经拿到了实习offer。只有我……还像站在雾里。",
+    "next": "d13"
+  },
+  "d13": {
+    "id": "d13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实我最近……有点不知道该怎么办了。",
+    "next": "choice_1"
+  },
+  "choice_1": {
+    "id": "choice_1",
+    "type": "choice",
+    "name": "岚",
+    "text": "你最近，最常为什么事情焦虑？",
+    "choices": [
+      {
+        "text": "对未来很迷茫",
+        "next": "future_1"
+      },
+      {
+        "text": "压力太大了",
+        "next": "stress_1"
+      },
+      {
+        "text": "感觉很孤独",
+        "next": "lonely_1"
+      }
+    ]
+  },
+  "future_1": {
+    "id": "future_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "未来啊……其实我最害怕的也是这个。",
+    "next": "future_2"
+  },
+  "future_2": {
+    "id": "future_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "老师上周找我们谈话，说“大三了，该定方向了”。我站在办公室门口，手心全是汗。我想说“我还没准备好”，但说不出口。好像长大是一场必须按时交卷的考试。",
+    "next": "future_3"
+  },
+  "future_3": {
+    "id": "future_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "爸妈每次打电话，都绕着弯问“以后打算去哪”。他们不说压力，但语气里全是期待。我不想让他们失望，可我真的不知道答案。",
+    "next": "future_4"
+  },
+  "future_4": {
+    "id": "future_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "前段时间我投了很多实习简历。改简历改到凌晨两点，一个字一个字抠。选了十几家公司，小心翼翼地调整每一份投递。",
+    "next": "future_5"
+  },
+  "future_5": {
+    "id": "future_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每次邮箱弹出新消息，我都会紧张一下。心跳很快，点开前先深呼吸。结果打开之后，大部分都是自动回复：“感谢投递，暂不匹配”。",
+    "next": "future_6"
+  },
+  "future_6": {
+    "id": "future_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有一次甚至连拒绝邮件都没有。我盯着空荡荡的收件箱看了很久。窗外雨还在下，宿舍灯都关了，只有我电脑屏幕亮着。突然特别想哭。",
+    "next": "future_7"
+  },
+  "future_7": {
+    "id": "future_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不是因为失败。而是因为那一瞬间，我突然觉得自己好像很没用。",
+    "next": "future_8"
+  },
+  "future_8": {
+    "id": "future_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "刷朋友圈的时候，最难受。有人晒实习转正，有人晒竞赛获奖，有人晒保研成功。他们笑得很开心，生活看起来闪闪发光。",
+    "next": "future_9"
+  },
+  "future_9": {
+    "id": "future_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "明明大家都差不多年纪。为什么别人好像已经开始发光了。而我还在原地打转。我是不是……落后太多了？",
+    "next": "future_10"
+  },
+  "future_10": {
+    "id": "future_10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "长大以后，好像没人会告诉你该怎么办了。小时候有人教你走路、写字、做题。可到了人生路口，没人给你标准答案。只能自己站在原地，看着别人往前走。",
+    "next": "future_11"
+  },
+  "future_11": {
+    "id": "future_11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候情绪特别满的时候，我会打开微信。点开一个对话框，打一大段话。写自己的害怕、迷茫、累、委屈。写得很认真，像写日记一样。",
+    "next": "future_12"
+  },
+  "future_12": {
+    "id": "future_12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "写完之后，我会盯着屏幕看很久。然后一个字一个字删掉。最后只留下一个句号，或者什么都不留。我不知道该发给谁。发给朋友？怕他们觉得我矫情。发给家人？怕他们担心。发给谁都不对，最后只能发给自己。",
+    "next": "future_13"
+  },
+  "future_13": {
+    "id": "future_13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "昨天凌晨三点，我偷偷去了操场。雨停了一会儿，风很冷。我坐在看台最高的地方，下面空无一人。我对着夜空，小声问自己：如果我突然消失几天。会有人发现吗？会有人找我吗？会有人记得我吗？",
+    "next": "future_14"
+  },
+  "future_14": {
+    "id": "future_14",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "风很大，吹得眼睛很酸。我突然觉得，自己好像从来没被人真正在意过。",
+    "next": "future_choice"
+  },
+  "future_choice": {
+    "id": "future_choice",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果是你的话……会怎么面对这种迷茫？",
+    "choices": [
+      {
+        "text": "慢一点也没关系",
+        "next": "future_good_1"
+      },
+      {
+        "text": "其实大家都很害怕",
+        "next": "future_real_1"
+      }
+    ]
+  },
+  "future_good_1": {
+    "id": "future_good_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……慢一点，也没关系吗？",
+    "next": "future_good_2"
+  },
+  "future_good_2": {
+    "id": "future_good_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "以前好像从来没人和我说过这种话。大家都在催我往前跑。老师、父母、甚至我自己。可我其实只是有点累了。",
+    "next": "future_good_3"
+  },
+  "future_good_3": {
+    "id": "future_good_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候我会偷偷想。如果人生不是比赛就好了。这样的话，是不是就不用一直和别人比较。",
+    "next": "future_good_4"
+  },
+  "future_good_4": {
+    "id": "future_good_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "今天下午我一个人去了学校后面的便利店。结账的时候，店员姐姐问我是不是很累。我当时愣了一下。因为已经很久没人问过我累不累了。",
+    "next": "future_good_5"
+  },
+  "future_good_5": {
+    "id": "future_good_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "后来我提着关东煮回宿舍的时候。突然觉得，原来人真的会因为一句很普通的话被救一下。现在也是。听见你说‘慢一点也没关系’的时候。",
+    "next": "future_good_6"
+  },
+  "future_good_6": {
+    "id": "future_good_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "聊了这么久，一直都是我在说自己的事。你……是不是也很累？你也会在深夜睡不着，想很多事吗？",
+    "next": "future_good_7"
+  },
+  "future_good_7": {
+    "id": "future_good_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……原来你也是。我一直以为，只有我一个人这样。对不起，刚才一直让你听我抱怨。",
+    "next": "future_good_8"
+  },
+  "future_good_8": {
+    "id": "future_good_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实很多时候，我不是看见希望才坚持。而是坚持着坚持着，才慢慢看见一点光。你也是，对吧？你也一直在默默撑着，对吗？",
+    "next": "future_good_9"
+  },
+  "future_good_9": {
+    "id": "future_good_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "future_end_1"
+  },
+  "future_end_1": {
+    "id": "future_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "原来长大不是突然变得厉害。而是即使害怕，也还是愿意继续往前。不用和别人比，不用赶进度。我可以慢慢走，走得慢一点也没关系。谢谢你今晚陪我聊天。你让我知道，迷茫不是错，慢下来也不是失败。天亮了，雨停了。新的一天，我想试着对自己温柔一点。",
+    "endingTitle": "结局A：慢慢长大的勇气"
+  },
+  "future_real_1": {
+    "id": "future_real_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……是这样吗？原来大家都会害怕未来。",
+    "next": "future_real_2"
+  },
+  "future_real_2": {
+    "id": "future_real_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前总以为，只有我是废物。因为别人看起来都很厉害。后来有一次。我和室友半夜聊天。她突然问我。‘你说我们以后真的会变成想成为的大人吗？’",
+    "next": "future_real_3"
+  },
+  "future_real_3": {
+    "id": "future_real_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那一刻我才发现。原来每个人都在偷偷害怕。只是大家白天都装得很镇定。其实有时候能撑到今天。就已经很厉害了吧。",
+    "next": "future_real_4"
+  },
+  "future_real_4": {
+    "id": "future_real_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "谢谢你愿意和我说这些。你让我知道，我不是一个人。",
+    "next": "future_real_5"
+  },
+  "future_real_5": {
+    "id": "future_real_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "future_end_2"
+  },
+  "future_end_2": {
+    "id": "future_end_2",
+    "type": "ending",
+    "name": "岚",
+    "text": "原来不是只有我一个人站在黑夜里。原来每个人都在偷偷崩溃、偷偷害怕、偷偷努力。我不是异类，我只是普通的、在长大的人。谢谢你让我知道，迷茫并不是一件可耻的事情。以后再觉得难过的时候，我会想起：原来大家都一样，都在努力生活。",
+    "endingTitle": "结局B：原来大家都一样"
+  },
+  "stress_1": {
+    "id": "stress_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "压力吗……最近我也快喘不过气了。",
+    "next": "stress_2"
+  },
+  "stress_2": {
+    "id": "stress_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "前几天为了做答辩，我连续熬了三个通宵。咖啡喝到胃疼，还是不敢停下来。因为总觉得，只要稍微休息一下，就会被别人超过。",
+    "next": "stress_3"
+  },
+  "stress_3": {
+    "id": "stress_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "白天我会假装自己没事。和同学聊天、吃饭、开玩笑。可一到晚上。我就会突然很想哭。",
+    "next": "stress_4"
+  },
+  "stress_4": {
+    "id": "stress_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有一次凌晨两点。我一个人在阳台吹风。那时候我突然在想。如果我消失几天，会有人发现吗？",
+    "next": "stress_5"
+  },
+  "stress_5": {
+    "id": "stress_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "食堂吃饭，我总是一个人。看着周围三三两两聊天，我会假装专注吃饭。其实耳朵一直在听，心里有点空。群聊里我总是潜水。看着大家热闹聊天，我偶尔点赞，从不说话。好像自己是这个热闹世界的旁观者。",
+    "next": "stress_6"
+  },
+  "stress_6": {
+    "id": "stress_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "朋友圈很久没发动态了。想发点难过的，怕别人觉得负能量。想发点开心的，又不是真心的。最后干脆不发，像消失了一样。",
+    "next": "stress_7"
+  },
+  "stress_7": {
+    "id": "stress_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实……我有时候会情绪很低落。不是不开心，是没感觉，很空。不想说话，不想动，不想见人。我不想告诉别人，怕他们觉得我矫情。也怕成为别人的负担。所以我总是假装没事，笑着和别人聊天。可只有我自己知道，有时候笑着笑着，眼泪差点掉下来。",
+    "next": "stress_choice"
+  },
+  "stress_choice": {
+    "id": "stress_choice",
+    "type": "choice",
+    "name": "岚",
+    "text": "你会怎么面对这种压力？",
+    "choices": [
+      {
+        "text": "你已经很努力了",
+        "next": "stress_good_1"
+      },
+      {
+        "text": "累的时候就休息吧",
+        "next": "stress_soft_1"
+      }
+    ]
+  },
+  "stress_good_1": {
+    "id": "stress_good_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……真的会有人这么想吗？",
+    "next": "stress_good_2"
+  },
+  "stress_good_2": {
+    "id": "stress_good_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我总觉得自己做得不够好。别人拿奖学金的时候。我在担心会不会挂科。别人已经开始规划未来的时候。我连明天都不知道怎么办。",
+    "next": "stress_good_3"
+  },
+  "stress_good_3": {
+    "id": "stress_good_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候我会很讨厌自己。觉得自己为什么不能再优秀一点。可是现在听你这么说。突然觉得，好像终于有人愿意理解我了。原来被人接住，是这种感觉。",
+    "next": "stress_good_4"
+  },
+  "stress_good_4": {
+    "id": "stress_good_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "stress_end_1"
+  },
+  "stress_end_1": {
+    "id": "stress_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "有时候能撑到今天，就已经很厉害了。我一直逼自己优秀、逼自己坚强、逼自己不流泪。从来没人告诉我：“你已经够好了”。谢谢你今晚接住了快要掉下去的我。原来被人理解、被人接住，是这么温暖的感觉。以后我也会试着，对自己好一点。",
+    "endingTitle": "结局C：被理解的夜晚"
+  },
+  "stress_soft_1": {
+    "id": "stress_soft_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "休息吗……我已经很久没有真正休息过了。",
+    "next": "stress_soft_2"
+  },
+  "stress_soft_2": {
+    "id": "stress_soft_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每次躺下的时候。脑子里都会自动开始想待办事项。作业、答辩、实习、未来。感觉人生像一条不会停止的传送带。",
+    "next": "stress_soft_3"
+  },
+  "stress_soft_3": {
+    "id": "stress_soft_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "可是现在窗外下着雨。这里又很安静。突然觉得，如果稍微停一下。好像也不会世界末日。等天亮以后，再继续努力吧。",
+    "next": "stress_soft_4"
+  },
+  "stress_soft_4": {
+    "id": "stress_soft_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "stress_end_2"
+  },
+  "stress_end_2": {
+    "id": "stress_end_2",
+    "type": "ending",
+    "name": "岚",
+    "text": "原来人不是机器，也可以允许自己偶尔脆弱一下。我一直以为，休息就是偷懒、就是没用。可现在才知道，累了就休息，是对自己最基本的温柔。等天亮以后，再继续努力吧。今晚，我想好好睡一觉，不逼自己，不焦虑未来。谢谢你，让我敢停下来喘一口气。",
+    "endingTitle": "结局D：短暂休息的资格"
+  },
+  "lonely_1": {
+    "id": "lonely_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "孤独吗……其实我以前一直觉得，大学应该是很热闹的。",
+    "next": "lonely_2"
+  },
+  "lonely_2": {
+    "id": "lonely_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "会有很多朋友。每天都过得像青春电影一样。可后来才发现。人就算坐在人群里，也还是会孤独。",
+    "next": "lonely_3"
+  },
+  "lonely_3": {
+    "id": "lonely_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "最难受的时候。我会故意戴着耳机在校园里乱走。假装有人陪着自己。其实耳机里什么都没放，只是不想听周围的热闹。",
+    "next": "lonely_4"
+  },
+  "lonely_4": {
+    "id": "lonely_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "小时候我很怕黑。每次停电的时候。我都会躲到妈妈旁边。后来长大以后。身边的人越来越多。可我反而更容易害怕黑夜了。因为很多情绪已经不知道该和谁说。",
+    "next": "lonely_choice"
+  },
+  "lonely_choice": {
+    "id": "lonely_choice",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果是你的话，会怎么面对这种孤独？",
+    "choices": [
+      {
+        "text": "至少现在还有我陪你",
+        "next": "lonely_good_1"
+      },
+      {
+        "text": "孤独不代表没人爱你",
+        "next": "lonely_soft_1"
+      }
+    ]
+  },
+  "lonely_good_1": {
+    "id": "lonely_good_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……你这样说的话，我会有点想哭。",
+    "next": "lonely_good_2"
+  },
+  "lonely_good_2": {
+    "id": "lonely_good_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "原来真的会有人。愿意在深夜陪一个陌生人聊天。但现在。我突然觉得这个世界好像也没那么糟糕。",
+    "next": "lonely_good_3"
+  },
+  "lonely_good_3": {
+    "id": "lonely_good_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "lonely_end_1"
+  },
+  "lonely_end_1": {
+    "id": "lonely_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "原来陪别人走出黑夜的时候，自己也会慢慢看见光。以后如果你也难过、也迷茫、也睡不着。希望也会有人这样陪着你。就像你今晚陪着我一样。天亮了，我们都要好好的。",
+    "endingTitle": "结局E：黑夜里的陪伴"
+  },
+  "lonely_soft_1": {
+    "id": "lonely_soft_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "孤独……不代表没人爱吗？",
+    "next": "lonely_soft_2"
+  },
+  "lonely_soft_2": {
+    "id": "lonely_soft_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前总觉得。没人主动找我，就是我不够重要。后来我发现。大家其实都在自己的生活里努力挣扎。有的人忙着兼职。有的人忙着考研。有的人甚至连情绪崩溃的时间都没有。",
+    "next": "lonely_soft_3"
+  },
+  "lonely_soft_3": {
+    "id": "lonely_soft_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "也许不是没人爱我们。只是长大以后，大家表达爱的方式变笨了。谢谢你今晚让我明白这一点。",
+    "next": "lonely_soft_4"
+  },
+  "lonely_soft_4": {
+    "id": "lonely_soft_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你听，雨好像小了一点。天快亮了。原来黑夜不是无限长的。再难的夜晚，也会过去。",
+    "next": "lonely_end_2"
+  },
+  "lonely_end_2": {
+    "id": "lonely_end_2",
+    "type": "ending",
+    "name": "岚",
+    "text": "孤独不会立刻消失，但我已经没那么害怕它了。长大就是，学会和孤独握手言和。不是没人爱，只是爱不一定时刻在场。我可以一个人吃饭、一个人走路、一个人面对黑夜。谢谢你让我明白，孤独不是缺陷，而是成长的一部分。以后再感到孤独的时候，我会想起：我自己，也是可以陪伴自己的人。",
+    "endingTitle": "结局F：学会与孤独相处"
+  },
+  "bad_end_1": {
+    "id": "bad_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "……嗯，你说得对。是我想太多了。抱歉，耽误你时间了。",
+    "endingTitle": "隐藏结局：已读未回"
+  },
+  "true_end_all": {
+    "id": "true_end_all",
+    "type": "ending",
+    "name": "岚",
+    "text": "原来这场相遇，不是我被你拯救，也不是你被我治愈。而是两个同样迷茫的人，在深夜互相取暖、互相陪伴、互相成长。你陪我走过了黑夜，我也陪你看见了光。长大从来不是一个人的事。原来最好的治愈，就是：有人懂你的脆弱，有人陪你的迷茫，有人和你一起，慢慢长大。天亮了。我们，都要好好长大。",
+    "endingTitle": "隐藏真结局：天亮以后"
+  }
+}

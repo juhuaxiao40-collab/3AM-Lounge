@@ -3,178 +3,317 @@
     "id": "start",
     "type": "dialogue",
     "name": "岚",
-    "text": "深夜好...你也睡不着吗？",
-    "next": "intro_1"
+    "text": "……还没睡吗？",
+    "next": "intro_1",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "intro_1": {
     "id": "intro_1",
     "type": "dialogue",
     "name": "岚",
-    "text": "我是岚，一个普通的女大学生。",
-    "next": "intro_2"
+    "text": "外面又下雨了。每次这种天气，脑子就会变得特别乱。",
+    "next": "intro_2",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "intro_2": {
     "id": "intro_2",
     "type": "dialogue",
     "name": "岚",
-    "text": "最近总是会想很多事情，关于未来，关于自己...",
-    "next": "intro_3"
+    "text": "啊，忘了自我介绍……我是岚，一个很普通的大学生。",
+    "next": "intro_3",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "intro_3": {
     "id": "intro_3",
     "type": "dialogue",
     "name": "岚",
-    "text": "有时候觉得，长大真的好难啊。",
-    "next": "choice_1"
+    "text": "最近一到晚上，就总忍不住胡思乱想。明明白天还假装得挺正常的。",
+    "next": "intro_4",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
+  },
+  "intro_4": {
+    "id": "intro_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你会不会也有这种时候？宿舍都熄灯了，别人好像都睡得很安稳，只有自己还醒着。",
+    "next": "choice_1",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "choice_1": {
     "id": "choice_1",
     "type": "choice",
     "name": "岚",
-    "text": "你呢？你也是因为睡不着才来到这里的吗？",
+    "text": "你今晚……是为什么来到这里的？",
     "choices": [
       {
-        "text": "我也是...最近压力好大",
+        "text": "最近压力真的很大",
         "next": "path_a_1"
       },
       {
-        "text": "其实我只是路过而已",
+        "text": "其实只是有点睡不着",
         "next": "path_b_1"
       },
       {
         "text": "我想听听你的故事",
         "next": "path_c_1"
       }
-    ]
+    ],
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_a_1": {
     "id": "path_a_1",
     "type": "dialogue",
     "name": "岚",
-    "text": "是吧...有时候真的很想逃避呢。",
-    "next": "path_a_2"
+    "text": "……我也是。",
+    "next": "path_a_2",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_a_2": {
     "id": "path_a_2",
     "type": "dialogue",
     "name": "岚",
-    "text": "但是逃避好像也解决不了问题，反而会让自己更焦虑。",
-    "next": "path_a_3"
+    "text": "前几天投出去的实习简历，又没有回应。明明已经改了好多遍了。",
+    "next": "path_a_3",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_a_3": {
     "id": "path_a_3",
     "type": "dialogue",
     "name": "岚",
-    "text": "你知道吗，我最近在想...也许我们不需要那么着急。",
-    "next": "choice_a_1"
+    "text": "有时候真的会怀疑……是不是自己根本不够好。",
+    "next": "path_a_4",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
+  },
+  "path_a_4": {
+    "id": "path_a_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但一直逃避的话，好像又会更难受。",
+    "next": "choice_a_1",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "choice_a_1": {
     "id": "choice_a_1",
     "type": "choice",
     "name": "岚",
-    "text": "慢慢来，也没关系的吧？",
+    "text": "你觉得……慢一点，也没关系吗？",
     "choices": [
       {
-        "text": "是啊，慢慢来就好",
+        "text": "是啊，慢慢来也很好",
         "next": "ending_a_good"
       },
       {
-        "text": "但是时间不等人啊",
+        "text": "可是时间真的会让人害怕",
         "next": "ending_a_normal"
       }
-    ]
+    ],
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "ending_a_good": {
     "id": "ending_a_good",
     "type": "ending",
     "name": "岚",
-    "text": "嗯...谢谢你陪我聊天。我想，我们都会慢慢找到自己的节奏的。晚安。",
-    "endingTitle": "结局A：慢慢来也没关系"
+    "text": "……谢谢你。以前好像从来没人和我说过这种话。大家总是让我再努力一点。也许以后，我也能试着不那么逼自己了。",
+    "endingTitle": "结局A：慢慢来也没关系",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "ending_a_normal": {
     "id": "ending_a_normal",
     "type": "ending",
     "name": "岚",
-    "text": "也对...不过至少今晚，我们可以不用想那么多。谢谢你陪我。",
-    "endingTitle": "结局B：今夜的休息"
+    "text": "是啊……我也很害怕被时间丢下。不过至少今晚，我们都不用一个人撑着了。",
+    "endingTitle": "结局B：今夜的休息",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_b_1": {
     "id": "path_b_1",
     "type": "dialogue",
     "name": "岚",
-    "text": "这样啊...不过既然来了，要不要聊聊天？",
-    "next": "path_b_2"
+    "text": "这样啊……其实能睡不着的人，大概心里都装着很多事情吧。",
+    "next": "path_b_2",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_b_2": {
     "id": "path_b_2",
     "type": "dialogue",
     "name": "岚",
-    "text": "其实我也不知道该说什么，只是...一个人的时候总是会想太多。",
-    "next": "path_b_3"
+    "text": "我有时候会盯着聊天框发呆，打了一大段话，又一个字一个字删掉。",
+    "next": "path_b_3",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_b_3": {
     "id": "path_b_3",
     "type": "dialogue",
     "name": "岚",
-    "text": "有人陪着的感觉，好像就没那么难熬了。",
-    "next": "ending_b"
+    "text": "总觉得自己的情绪会打扰别人。",
+    "next": "path_b_4",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
+  },
+  "path_b_4": {
+    "id": "path_b_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不过现在有人陪着聊天……好像就没那么难熬了。",
+    "next": "ending_b",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "ending_b": {
     "id": "ending_b",
     "type": "ending",
     "name": "岚",
-    "text": "谢谢你愿意留下来。虽然我们可能只是陌生人，但这份陪伴...我会记得的。",
-    "endingTitle": "结局C：陌生人的温柔"
+    "text": "谢谢你愿意留下来。原来陪别人走出黑夜的时候，自己也会慢慢看见光。",
+    "endingTitle": "结局C：陌生人的温柔",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_c_1": {
     "id": "path_c_1",
     "type": "dialogue",
     "name": "岚",
-    "text": "我的故事吗...其实也没什么特别的。",
-    "next": "path_c_2"
+    "text": "我的故事吗……其实也没什么特别的。",
+    "next": "path_c_2",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_c_2": {
     "id": "path_c_2",
     "type": "dialogue",
     "name": "岚",
-    "text": "就是一个普通大学生，每天上课、写作业、担心未来...",
-    "next": "path_c_3"
+    "text": "白天上课、赶作业、做PPT，然后假装自己对未来很有把握。",
+    "next": "path_c_3",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "path_c_3": {
     "id": "path_c_3",
     "type": "dialogue",
     "name": "岚",
-    "text": "有时候会想，我这么努力，真的有意义吗？",
-    "next": "choice_c_1"
+    "text": "但其实……我连自己以后会变成什么样的大人都不知道。",
+    "next": "path_c_4",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
+  },
+  "path_c_4": {
+    "id": "path_c_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候甚至会想，如果我突然消失几天，会有人发现吗……",
+    "next": "path_c_5",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
+  },
+  "path_c_5": {
+    "id": "path_c_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……抱歉，是不是突然说了奇怪的话。",
+    "next": "choice_c_1",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "choice_c_1": {
     "id": "choice_c_1",
     "type": "choice",
     "name": "岚",
-    "text": "你觉得呢？",
+    "text": "你觉得，我现在做的这些努力……真的有意义吗？",
     "choices": [
       {
-        "text": "你的努力一定会有人看见",
+        "text": "一定会有人记得你的努力",
         "next": "ending_c_good"
       },
       {
-        "text": "意义是自己定义的",
+        "text": "意义本来就是自己定义的",
         "next": "ending_c_think"
       }
-    ]
+    ],
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "ending_c_good": {
     "id": "ending_c_good",
     "type": "ending",
     "name": "岚",
-    "text": "...谢谢你。我会记住这句话的。也许明天醒来，我会更有勇气一点。",
-    "endingTitle": "结局D：总会有人记得你的努力"
+    "text": "……谢谢你。我会记住这句话的。也许很多人都不是看见希望才坚持，而是坚持着坚持着，才慢慢看见光。",
+    "endingTitle": "结局D：总会有人记得你的努力",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   },
   "ending_c_think": {
     "id": "ending_c_think",
     "type": "ending",
     "name": "岚",
-    "text": "自己定义吗...我好像从来没有这样想过。谢谢你，让我有了新的思考方向。",
-    "endingTitle": "结局E：寻找自己的答案"
+    "text": "自己定义吗……我好像从来没有这样想过。原来长大不是突然学会坚强，而是即使害怕，也还是继续往前。",
+    "endingTitle": "结局E：寻找自己的答案",
+    "scenes": [
+      "scene_1780017643307"
+    ],
+    "bgm": "bgm_1780017671883"
   }
 }

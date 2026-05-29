@@ -24,6 +24,11 @@ let currentBGM = null; // 当前播放的BGM ID
 let bgmAudioElements = {}; // BGM音频元素缓存
 let currentAssets = {}; // 当前显示的素材 { type: element }
 let assetElements = {}; // 素材元素缓存
+let visitedChoiceNodes = []; // 访问过的选择节点历史 [{id, title}]
+
+// ==================== DOM元素 ====================
+const backtrackModal = document.getElementById('backtrackModal');
+const backtrackList = document.getElementById('backtrackList');
 
 // ==================== 音效系统 ====================
 const soundEffects = {
@@ -382,6 +387,16 @@ function showChoices(choices) {
     choicesContainer.innerHTML = '';
     choicesContainer.style.display = 'flex';
 
+    // 记录当前选择节点到历史
+    const node = storyData[currentNodeId];
+    if (node && !visitedChoiceNodes.some(n => n.id === currentNodeId)) {
+        visitedChoiceNodes.push({
+            id: currentNodeId,
+            title: node.text || '选择节点',
+            timestamp: Date.now()
+        });
+    }
+
     choices.forEach((choice, index) => {
         const button = document.createElement('button');
         button.className = 'choice-button';
@@ -637,4 +652,87 @@ function fadeOutAudio(audio, duration = 1000) {
             audio.currentTime = 0;
         }
     }, stepTime);
+}
+
+// ==================== 回溯功能 ====================
+function showBacktrackMenu() {
+    renderBacktrackList();
+    backtrackModal.classList.add('active');
+}
+
+function hideBacktrackMenu() {
+    backtrackModal.classList.remove('active');
+}
+
+function renderBacktrackList() {
+    backtrackList.innerHTML = '';
+
+    if (visitedChoiceNodes.length === 0) {
+        backtrackList.innerHTML = '<div class="backtrack-empty">暂无可回溯的选择节点</div>';
+        return;
+    }
+
+    const sortedNodes = [...visitedChoiceNodes].sort((a, b) => a.timestamp - b.timestamp);
+
+    sortedNodes.forEach((node, index) => {
+        const item = document.createElement('div');
+        item.className = `backtrack-item ${node.id === currentNodeId ? 'current' : ''}`;
+        item.addEventListener('click', () => {
+            backtrackToNode(node.id);
+        });
+
+        const title = document.createElement('div');
+        title.className = 'backtrack-item-title';
+        title.textContent = `${index + 1}. ${node.title.length > 20 ? node.title.substring(0, 20) + '...' : node.title}`;
+
+        const hint = document.createElement('div');
+        hint.className = 'backtrack-item-hint';
+        hint.textContent = node.id === currentNodeId ? '当前位置' : `节点ID: ${node.id}`;
+
+        item.appendChild(title);
+        item.appendChild(hint);
+        backtrackList.appendChild(item);
+    });
+}
+
+function backtrackToNode(nodeId) {
+    hideBacktrackMenu();
+    clearAssets();
+    currentNodeId = nodeId;
+    isShowingChoices = false;
+    choicesContainer.style.display = 'none';
+    loadNode(nodeId);
+}
+
+function restartGame() {
+    hideBacktrackMenu();
+    
+    if (currentBGM && bgmAudioElements[currentBGM]) {
+        bgmAudioElements[currentBGM].pause();
+        bgmAudioElements[currentBGM].currentTime = 0;
+    }
+    
+    clearAssets();
+    
+    currentNodeId = 'start';
+    currentBGM = null;
+    visitedChoiceNodes = [];
+    isShowingChoices = false;
+    canContinue = false;
+    isTyping = false;
+    
+    dialogueBox.style.display = 'none';
+    choicesContainer.style.display = 'none';
+    startScreen.style.display = 'flex';
+    
+    bgmPlaying = false;
+    bgmIcon.textContent = '🔇';
+    bgmButton.classList.remove('playing');
+}
+
+function clearAssets() {
+    Object.values(assetElements).forEach(element => {
+        element.style.display = 'none';
+    });
+    currentAssets = {};
 }

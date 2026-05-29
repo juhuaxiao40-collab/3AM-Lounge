@@ -23,6 +23,14 @@
         <div class="bgm-tooltip">点击播放背景音乐</div>
     </div>
 
+    <!-- 回溯按钮 -->
+    <div class="backtrack-control" id="backtrackControl">
+        <button class="backtrack-button" id="backtrackButton" onclick="showBacktrackMenu()">
+            <span>⏪</span>
+        </button>
+        <div class="backtrack-tooltip">回溯剧情</div>
+    </div>
+
     <!-- 角色层 -->
     <div class="character-container">
         <div class="character" id="lan">
@@ -55,6 +63,30 @@
         <div class="start-tips">
             <p>💡 建议佩戴耳机以获得最佳体验</p>
             <p>🎵 进入游戏后可点击右上角按钮开启背景音乐</p>
+        </div>
+    </div>
+
+    <!-- 回溯菜单 -->
+    <div class="backtrack-modal" id="backtrackModal">
+        <div class="backtrack-overlay" onclick="hideBacktrackMenu()"></div>
+        <div class="backtrack-content">
+            <div class="backtrack-header">
+                <h2>⏪ 剧情回溯</h2>
+                <button class="backtrack-close" onclick="hideBacktrackMenu()">✕</button>
+            </div>
+            <div class="backtrack-body">
+                <div class="backtrack-section">
+                    <h3>选择回溯节点</h3>
+                    <div class="backtrack-list" id="backtrackList">
+                        <!-- 动态生成选择节点列表 -->
+                    </div>
+                </div>
+                <div class="backtrack-actions">
+                    <button class="backtrack-action-btn backtrack-restart" onclick="restartGame()">
+                        🔄 重新开始
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
