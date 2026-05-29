@@ -804,6 +804,7 @@ function handleAssetUpload(event) {
             file: e.target.result, // Base64数据
             fileType: fileType,
             loopCount: -1, // 默认无限循环
+            muted: false, // 默认不静音
             nodes: []
         };
 
@@ -817,6 +818,15 @@ function handleAssetUpload(event) {
         } else {
             document.getElementById('loopSettings').style.display = 'none';
             currentUploadedAsset.loopCount = -1;
+        }
+        
+        // 显示静音设置（仅视频）
+        if (isVideo) {
+            document.getElementById('videoMuteSettings').style.display = 'block';
+            document.getElementById('videoMuteSelect').value = 'false';
+        } else {
+            document.getElementById('videoMuteSettings').style.display = 'none';
+            currentUploadedAsset.muted = false;
         }
         
         document.getElementById('assetNodeSelectorSection').style.display = 'block';
@@ -891,29 +901,50 @@ function saveAssetAssignment() {
         currentUploadedAsset.loopCount = parseInt(loopCountSelect.value);
     }
 
+    // 获取静音设置
+    const videoMuteSelect = document.getElementById('videoMuteSelect');
+    if (videoMuteSelect && videoMuteSelect.style.display !== 'none') {
+        currentUploadedAsset.muted = videoMuteSelect.value === 'true';
+    }
+
     currentUploadedAsset.nodes = selectedNodes;
 
     // 保存到素材数据库
     assetDatabase[currentUploadedAsset.id] = currentUploadedAsset;
 
-    // 更新节点的素材字段
+    // 更新节点的素材字段（支持叠加多个素材）
     const assetType = currentUploadedAsset.type;
-    const fieldName = assetType; // 'scene', 'character', 'prop'
+    const fieldName = assetType + 's'; // 'scenes', 'characters', 'props'
 
     selectedNodes.forEach(nodeId => {
         if (storyDataCopy[nodeId]) {
-            storyDataCopy[nodeId][fieldName] = currentUploadedAsset.id;
+            // 如果字段不存在，初始化为数组
+            if (!storyDataCopy[nodeId][fieldName]) {
+                storyDataCopy[nodeId][fieldName] = [];
+            }
+            // 如果是数组，添加新素材（避免重复）
+            if (Array.isArray(storyDataCopy[nodeId][fieldName])) {
+                if (!storyDataCopy[nodeId][fieldName].includes(currentUploadedAsset.id)) {
+                    storyDataCopy[nodeId][fieldName].push(currentUploadedAsset.id);
+                }
+            } else {
+                // 如果是旧格式（单个ID），转换为数组
+                const oldId = storyDataCopy[nodeId][fieldName];
+                storyDataCopy[nodeId][fieldName] = [oldId, currentUploadedAsset.id];
+            }
         }
     });
 
     const typeText = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
     const loopInfo = currentUploadedAsset.loopCount === -1 ? '（无限循环）' : `（循环${currentUploadedAsset.loopCount}次）`;
-    alert(`✅ ${typeText}素材配置成功！${loopInfo}\n已应用到 ${selectedNodes.length} 个节点`);
+    const muteInfo = currentUploadedAsset.muted ? '（已静音）' : '';
+    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}\n已应用到 ${selectedNodes.length} 个节点`);
 
     // 重置状态
     currentUploadedAsset = null;
     document.getElementById('assetNodeSelectorSection').style.display = 'none';
     document.getElementById('loopSettings').style.display = 'none';
+    document.getElementById('videoMuteSettings').style.display = 'none';
     document.getElementById('uploadedAssetName').textContent = '';
     document.getElementById('assetFileInput').value = '';
 

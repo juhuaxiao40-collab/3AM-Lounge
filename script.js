@@ -6,7 +6,6 @@ const characterName = document.getElementById('characterName');
 const dialogueText = document.getElementById('dialogueText');
 const continueHint = document.getElementById('continueHint');
 const choicesContainer = document.getElementById('choicesContainer');
-const rainContainer = document.getElementById('rainContainer');
 const bgmButton = document.getElementById('bgmButton');
 const bgmIcon = document.getElementById('bgmIcon');
 const assetLayer = document.getElementById('assetLayer');
@@ -146,36 +145,7 @@ function playSound(soundType) {
     }
 }
 
-// ==================== 初始化雨滴效果 ====================
-function initRain() {
-    const rainCount = 80; // 雨滴数量
 
-    for (let i = 0; i < rainCount; i++) {
-        createRaindrop();
-    }
-}
-
-function createRaindrop() {
-    const raindrop = document.createElement('div');
-    raindrop.className = 'raindrop';
-
-    // 随机位置
-    raindrop.style.left = Math.random() * 100 + '%';
-
-    // 随机延迟
-    raindrop.style.animationDelay = Math.random() * 2 + 's';
-
-    // 随机持续时间（速度）
-    raindrop.style.animationDuration = (Math.random() * 0.5 + 0.8) + 's';
-
-    // 随机不透明度
-    raindrop.style.opacity = Math.random() * 0.3 + 0.3;
-
-    rainContainer.appendChild(raindrop);
-}
-
-// 页面加载时初始化雨滴
-initRain();
 
 // 初始化音效系统
 initSoundEffects();
@@ -230,19 +200,28 @@ function showAssets(node) {
         }
     });
 
-    // 显示场景素材
-    if (node.scene && typeof assetConfig !== 'undefined') {
-        showAsset(node.scene, 'scene');
-    }
-
-    // 显示人物素材
-    if (node.character && typeof assetConfig !== 'undefined') {
-        showAsset(node.character, 'character');
-    }
-
-    // 显示道具素材
-    if (node.prop && typeof assetConfig !== 'undefined') {
-        showAsset(node.prop, 'prop');
+    // 显示场景素材（支持单个或多个）
+    if (typeof assetConfig !== 'undefined') {
+        // 场景素材
+        if (node.scenes && Array.isArray(node.scenes)) {
+            node.scenes.forEach(assetId => showAsset(assetId, 'scene'));
+        } else if (node.scene) {
+            showAsset(node.scene, 'scene');
+        }
+        
+        // 人物素材
+        if (node.characters && Array.isArray(node.characters)) {
+            node.characters.forEach(assetId => showAsset(assetId, 'character'));
+        } else if (node.character) {
+            showAsset(node.character, 'character');
+        }
+        
+        // 道具素材
+        if (node.props && Array.isArray(node.props)) {
+            node.props.forEach(assetId => showAsset(assetId, 'prop'));
+        } else if (node.prop) {
+            showAsset(node.prop, 'prop');
+        }
     }
 }
 
@@ -270,6 +249,9 @@ function showAsset(assetId, assetType) {
         element.className = `asset-${assetType}`;
         element.style.maxWidth = '100%';
         element.style.maxHeight = '100%';
+        
+        // 设置静音
+        element.muted = asset.muted || false;
         
         // 设置循环
         if (loopCount === -1) {

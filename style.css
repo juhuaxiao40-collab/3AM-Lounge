@@ -103,47 +103,6 @@ body {
     50% { opacity: 1; }
 }
 
-/* 窗户效果 - 更治愈的月光 */
-.window {
-    position: absolute;
-    top: 8%;
-    right: 12%;
-    width: 220px;
-    height: 320px;
-    background: linear-gradient(135deg,
-        rgba(150, 180, 220, 0.15) 0%,
-        rgba(120, 150, 200, 0.08) 100%);
-    border: 3px solid rgba(180, 200, 230, 0.25);
-    border-radius: 8px;
-    box-shadow:
-        inset 0 0 60px rgba(150, 180, 220, 0.15),
-        0 0 40px rgba(150, 180, 220, 0.1);
-    overflow: hidden;
-}
-
-/* 窗户十字框 */
-.window::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: rgba(180, 200, 230, 0.3);
-    transform: translateY(-50%);
-}
-
-.window::after {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background: rgba(180, 200, 230, 0.3);
-    transform: translateX(-50%);
-}
-
 /* 月光效果 - 柔和温暖 */
 .light-effect {
     position: absolute;
@@ -513,46 +472,7 @@ body {
 }
 
 /* 雨滴容器 */
-.rain-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    z-index: 2;
-}
 
-/* 雨滴样式 */
-.raindrop {
-    position: absolute;
-    width: 1px;
-    height: 15px;
-    background: linear-gradient(180deg,
-        transparent 0%,
-        rgba(150, 180, 220, 0.3) 50%,
-        rgba(150, 180, 220, 0.6) 100%);
-    animation: rainFall linear infinite;
-    opacity: 0.6;
-}
-
-@keyframes rainFall {
-    0% {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.6;
-    }
-    90% {
-        opacity: 0.6;
-    }
-    100% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-}
 
 /* BGM控制按钮 */
 .bgm-control {
