@@ -8,6 +8,62 @@ let currentUploadedAsset = null; // 当前上传的素材临时存储
 let currentAssetFilter = 'all'; // 当前素材筛选类型
 let positionHistory = []; // 位置历史记录 [{x, y, label}]
 
+// ==================== 持久化存储 ====================
+function savePersistedData() {
+    try {
+        const dataToSave = {
+            bgmDatabase: bgmDatabase,
+            assetDatabase: assetDatabase,
+            storyDataCopy: storyDataCopy,
+            timestamp: Date.now()
+        };
+        localStorage.setItem('editorPersistedData', JSON.stringify(dataToSave));
+        console.log('✅ 编辑器数据已保存到本地存储');
+    } catch (e) {
+        console.error('❌ 保存数据失败:', e);
+    }
+}
+
+function loadPersistedData() {
+    try {
+        const saved = localStorage.getItem('editorPersistedData');
+        if (saved) {
+            const data = JSON.parse(saved);
+
+            // 恢复BGM数据库
+            if (data.bgmDatabase && Object.keys(data.bgmDatabase).length > 0) {
+                bgmDatabase = data.bgmDatabase;
+                console.log('✅ 已恢复BGM配置:', Object.keys(bgmDatabase).length, '个');
+            }
+
+            // 恢复素材数据库
+            if (data.assetDatabase && Object.keys(data.assetDatabase).length > 0) {
+                assetDatabase = data.assetDatabase;
+                console.log('✅ 已恢复素材配置:', Object.keys(assetDatabase).length, '个');
+            }
+
+            // 恢复剧情数据（如果有修改）
+            if (data.storyDataCopy) {
+                storyDataCopy = data.storyDataCopy;
+                console.log('✅ 已恢复剧情数据');
+            }
+
+            const savedTime = new Date(data.timestamp).toLocaleString('zh-CN');
+            console.log('📅 上次保存时间:', savedTime);
+        }
+    } catch (e) {
+        console.error('❌ 加载数据失败:', e);
+    }
+}
+
+function clearPersistedData() {
+    if (confirm('⚠️ 确定要清除所有本地保存的编辑记录吗？\n\n这将删除：\n- 所有BGM配置\n- 所有素材配置\n- 剧情修改记录\n\n此操作不可恢复！')) {
+        localStorage.removeItem('editorPersistedData');
+        alert('✅ 本地数据已清除！\n\n请刷新页面重新开始。');
+        location.reload();
+    }
+}
+
 // 加载位置历史
 function loadPositionHistory() {
     const saved = localStorage.getItem('assetPositionHistory');
@@ -88,56 +144,58 @@ function setPosition(x, y) {
 function updatePositionPreview() {
     const gamePreviewAssets = document.getElementById('gamePreviewAssets');
     const gamePreviewCoords = document.getElementById('gamePreviewCoords');
-    
+
     if (!gamePreviewAssets || !gamePreviewCoords) return;
-    
+
     const position = currentUploadedAsset?.position || { x: 50, y: 80 };
     const size = currentUploadedAsset?.size || { width: 100, height: 100 };
-    
+
     // 更新坐标和大小显示
     gamePreviewCoords.textContent = `X: ${position.x}% | Y: ${position.y}% | W: ${size.width}% | H: ${size.height}%`;
-    
+
     if (!currentUploadedAsset || !currentUploadedAsset.file) {
         gamePreviewAssets.innerHTML = '';
         return;
     }
-    
+
     const assetType = currentUploadedAsset.type;
     const isVideo = currentUploadedAsset.fileType === 'video';
-    
+
     let assetHTML;
     if (isVideo) {
         assetHTML = `
-            <video src="${currentUploadedAsset.file}" ${currentUploadedAsset.muted ? 'muted' : ''} playsinline style="display: block;">
+            <video src="${currentUploadedAsset.file}" ${currentUploadedAsset.muted ? 'muted' : ''} loop autoplay playsinline style="display: block; width: 100%; height: 100%; object-fit: contain;">
                 您的浏览器不支持视频播放
             </video>
         `;
     } else {
         assetHTML = `
-            <img src="${currentUploadedAsset.file}" alt="预览">
+            <img src="${currentUploadedAsset.file}" alt="预览" style="width: 100%; height: 100%; object-fit: contain;">
         `;
     }
-    
-    // 计算素材的实际尺寸（基于屏幕百分比）
-    let maxWidth = 100;
-    let maxHeight = 100;
-    
-    if (assetType === 'character') {
-        maxWidth = 40;  // 人物最大宽度占屏幕40%
-        maxHeight = 55; // 人物最大高度占屏幕55%
-    } else if (assetType === 'prop') {
-        maxWidth = 30;  // 道具最大宽度占屏幕30%
-        maxHeight = 30; // 道具最大高度占屏幕30%
+
+    // 根据素材类型设置样式，与script.js保持一致
+    if (assetType === 'scene') {
+        // 场景素材填充整个预览区域
+        gamePreviewAssets.innerHTML = `
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+                ${assetHTML}
+            </div>
+        `;
+    } else if (assetType === 'character' || assetType === 'prop') {
+        // 人物和道具素材按位置和大小显示，使用与script.js相同的计算方式
+        const baseMaxWidth = assetType === 'character' ? 300 : 200;
+        const baseMaxHeight = assetType === 'character' ? 450 : 200;
+
+        const actualMaxWidth = (size.width / 100) * baseMaxWidth;
+        const actualMaxHeight = (size.height / 100) * baseMaxHeight;
+
+        gamePreviewAssets.innerHTML = `
+            <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}px; max-height: ${actualMaxHeight}px; width: 100%; height: 100%; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
+                ${assetHTML}
+            </div>
+        `;
     }
-    
-    const actualWidth = (size.width / 100) * maxWidth;
-    const actualHeight = (size.height / 100) * maxHeight;
-    
-    gamePreviewAssets.innerHTML = `
-        <div class="game-preview-asset ${assetType}" style="left: ${position.x}%; top: ${position.y}%; width: ${actualWidth}%; max-width: ${actualWidth}%;">
-            ${assetHTML}
-        </div>
-    `;
 }
 
 // 设置素材大小
@@ -154,6 +212,9 @@ function setAssetSize(width, height) {
 
 // ==================== 初始化 ====================
 document.addEventListener('DOMContentLoaded', () => {
+    // 加载持久化数据
+    loadPersistedData();
+
     renderNodeList();
     loadBGMFromStory();
     loadAssetsFromStory();
@@ -730,7 +791,10 @@ function saveBGMAssignment() {
         }
     });
 
-    alert(`✅ BGM配置成功！\n已应用到 ${selectedNodes.length} 个节点`);
+    alert(`✅ BGM配置成功！\n已应用到 ${selectedNodes.length} 个节点\n\n💾 配置已自动保存到本地存储`);
+
+    // 保存到本地存储
+    savePersistedData();
 
     currentUploadedBGM = null;
     document.getElementById('nodeSelectorSection').style.display = 'none';
@@ -1017,7 +1081,10 @@ function saveAssetAssignment() {
     const muteInfo = currentUploadedAsset.muted ? '（已静音）' : '';
     const posInfo = currentUploadedAsset.position ? `（位置: ${currentUploadedAsset.position.x}%, ${currentUploadedAsset.position.y}%）` : '';
     const sizeInfo = currentUploadedAsset.size ? `（大小: ${currentUploadedAsset.size.width}% × ${currentUploadedAsset.size.height}%）` : '';
-    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}${sizeInfo}\n已应用到 ${selectedNodes.length} 个节点\n\n� 请在完成所有素材添加后，点击顶部「保存到文件」按钮下载配置`);
+    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}${sizeInfo}\n已应用到 ${selectedNodes.length} 个节点\n\n💾 配置已自动保存到本地存储\n📥 请在完成所有素材添加后，点击顶部「保存到文件」按钮下载配置`);
+
+    // 保存到本地存储
+    savePersistedData();
 
     currentUploadedAsset = null;
     document.getElementById('assetNodeSelectorSection').style.display = 'none';

@@ -986,10 +986,13 @@
         .game-preview-screen {
             position: relative;
             width: 100%;
-            padding-top: 177.78%; /* 1080x1920 = 9/16 = 177.78% */
-            background: #0a0f19;
-            border-radius: 0 0 6px 6px;
+            max-width: 360px;
+            margin: 20px auto;
+            padding-top: 177.78%; /* 9:16 手机屏幕比例 */
+            background: linear-gradient(180deg, #2d3561 0%, #1f2847 40%, #1a1f3a 100%);
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
 
         .game-preview-inner {
@@ -1036,6 +1039,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 5;
         }
 
         .game-preview-character {
@@ -1044,6 +1048,8 @@
             left: 50%;
             transform: translateX(-50%);
             pointer-events: none;
+            max-width: 40%;
+            max-height: 50%;
             z-index: 10;
         }
 
@@ -1056,44 +1062,54 @@
 
         .game-preview-dialogue {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
-            padding: 15px;
-            padding-bottom: 25px;
-            border-radius: 15px 15px 0 0;
-            border-top: 2px solid rgba(150, 180, 220, 0.3);
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 88%;
+            background: linear-gradient(135deg, rgba(25, 35, 60, 0.95) 0%, rgba(30, 40, 65, 0.93) 100%);
+            border: 2px solid rgba(150, 180, 220, 0.4);
+            border-radius: 12px;
+            padding: 15px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
             z-index: 20;
         }
 
         .game-preview-name {
-            color: #a8c0e0;
+            color: #b8d4ff;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 13px;
             margin-bottom: 8px;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
 
         .game-preview-text {
-            color: #e8e8e8;
-            font-size: 13px;
+            color: #f0f4ff;
+            font-size: 12px;
             line-height: 1.6;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-            margin-bottom: 10px;
+            min-height: 40px;
+            margin-bottom: 8px;
         }
 
         .game-preview-hint {
             text-align: right;
-            color: rgba(168, 192, 224, 0.6);
-            font-size: 12px;
+            color: rgba(180, 200, 255, 0.6);
+            font-size: 11px;
         }
 
         .game-preview-coords {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            color: rgba(106, 183, 255, 0.9);
+            font-family: monospace;
+            z-index: 30;
+            pointer-events: none;
+        }
             padding: 5px 10px;
             border-radius: 5px;
             font-size: 11px;
@@ -1174,6 +1190,62 @@
             padding: 2px 8px;
             border-radius: 3px;
         }
+
+        /* 顶端边界标线 - 标记手机屏幕实际顶端 */
+        .game-preview-boundary-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent 0%, rgba(0, 255, 100, 0.8) 50%, transparent 100%);
+            box-shadow: 0 0 10px rgba(0, 255, 100, 0.5);
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        .game-preview-boundary-top::before {
+            content: '▼ 手机屏幕顶端 (0%)';
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: rgba(0, 255, 100, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            border: 1px solid rgba(0, 255, 100, 0.5);
+        }
+
+        /* 底端边界标线 - 标记手机屏幕实际底端 */
+        .game-preview-boundary-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent 0%, rgba(255, 100, 0, 0.8) 50%, transparent 100%);
+            box-shadow: 0 0 10px rgba(255, 100, 0, 0.5);
+            z-index: 35;
+            pointer-events: none;
+        }
+
+        .game-preview-boundary-bottom::before {
+            content: '▲ 手机屏幕底端 (100%)';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: rgba(255, 100, 0, 0.9);
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3px 10px;
+            border-radius: 4px;
+            white-space: nowrap;
+            border: 1px solid rgba(255, 100, 0, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -1186,6 +1258,7 @@
                 <button class="btn" onclick="exportJSON()">📤 导出JSON</button>
                 <button class="btn" onclick="document.getElementById('importFile').click()">📥 导入JSON</button>
                 <button class="btn" onclick="openBGMManager()">🎵 BGM管理</button>
+                <button class="btn btn-danger" onclick="clearPersistedData()" style="background: rgba(255, 100, 100, 0.2); border-color: rgba(255, 100, 100, 0.4);">🗑️ 清除本地数据</button>
                 <button class="btn" onclick="openAssetManager()">🖼️ 素材管理</button>
                 <button class="btn" onclick="addNewNode()">➕ 新增节点</button>
                 <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importJSON(event)">
@@ -1299,6 +1372,10 @@
                             <div class="game-preview-coords" id="gamePreviewCoords">X: 50% | Y: 80%</div>
                             <!-- 安全区域提示 -->
                             <div class="game-preview-safe-area"></div>
+                            <!-- 顶端标线 -->
+                            <div class="game-preview-boundary-top"></div>
+                            <!-- 底端标线 -->
+                            <div class="game-preview-boundary-bottom"></div>
                         </div>
                     </div>
                     
@@ -1322,24 +1399,24 @@
                     <div style="display: flex; gap: 10px; margin-bottom: 10px;">
                         <div style="flex: 1;">
                             <label style="font-size: 12px; color: rgba(200, 210, 230, 0.7);">宽度 (%)</label>
-                            <input type="range" id="assetWidth" min="10" max="100" value="100" step="5" 
+                            <input type="range" id="assetWidth" min="10" max="300" value="100" step="5"
                                 style="width: 100%; margin-top: 5px;">
                             <span id="assetWidthValue" style="font-size: 12px; color: rgba(168, 192, 224, 0.9);">100%</span>
                         </div>
                         <div style="flex: 1;">
                             <label style="font-size: 12px; color: rgba(200, 210, 230, 0.7);">高度 (%)</label>
-                            <input type="range" id="assetHeight" min="10" max="100" value="100" step="5" 
+                            <input type="range" id="assetHeight" min="10" max="300" value="100" step="5"
                                 style="width: 100%; margin-top: 5px;">
                             <span id="assetHeightValue" style="font-size: 12px; color: rgba(168, 192, 224, 0.9);">100%</span>
                         </div>
                     </div>
-                    
+
                     <!-- 快速大小预设 -->
                     <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px;">
-                        <button class="btn btn-xs" onclick="setAssetSize(100, 100)">原始大小</button>
-                        <button class="btn btn-xs" onclick="setAssetSize(75, 75)">75%</button>
                         <button class="btn btn-xs" onclick="setAssetSize(50, 50)">50%</button>
-                        <button class="btn btn-xs" onclick="setAssetSize(25, 25)">25%</button>
+                        <button class="btn btn-xs" onclick="setAssetSize(100, 100)">100%</button>
+                        <button class="btn btn-xs" onclick="setAssetSize(150, 150)">150%</button>
+                        <button class="btn btn-xs" onclick="setAssetSize(200, 200)">200%</button>
                     </div>
                     
                     <!-- 快速位置预设 -->

@@ -281,7 +281,8 @@ function showAsset(assetId, assetType) {
         } else {
             element.style.width = '100%';
             element.style.height = '100%';
-            element.style.objectFit = 'cover';
+            element.style.objectFit = 'contain';
+            element.style.objectPosition = 'center';
         }
         
         // 设置静音
@@ -325,7 +326,8 @@ function showAsset(assetId, assetType) {
         } else {
             element.style.width = '100%';
             element.style.height = '100%';
-            element.style.objectFit = 'cover';
+            element.style.objectFit = 'contain';
+            element.style.objectPosition = 'center';
         }
         
         // GIF循环控制（通过CSS或JavaScript）
