@@ -200,8 +200,17 @@ function loadNode(nodeId) {
 function showAssets(node) {
     // 隐藏所有当前素材
     Object.keys(currentAssets).forEach(type => {
-        if (currentAssets[type]) {
-            currentAssets[type].style.display = 'none';
+        const assets = currentAssets[type];
+        if (assets) {
+            if (Array.isArray(assets)) {
+                assets.forEach(asset => {
+                    if (asset.style) {
+                        asset.style.display = 'none';
+                    }
+                });
+            } else if (assets.style) {
+                assets.style.display = 'none';
+            }
         }
     });
 
