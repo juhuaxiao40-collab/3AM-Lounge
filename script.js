@@ -256,6 +256,7 @@ function showAsset(assetId, assetType) {
     const isGif = asset.name && asset.name.match(/\.gif$/i);
     const loopCount = asset.loopCount || -1;
     const position = asset.position || { x: 50, y: assetType === 'character' ? 80 : 50 };
+    const size = asset.size || { width: 100, height: 100 };
 
     let element;
     if (isVideo) {
@@ -263,14 +264,20 @@ function showAsset(assetId, assetType) {
         element.src = asset.file;
         element.className = `asset-${assetType}`;
         
-        // 设置位置（人物和道具）
+        // 设置位置和大小（人物和道具）
         if (assetType === 'character' || assetType === 'prop') {
             element.style.position = 'absolute';
             element.style.left = `${position.x}%`;
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
-            element.style.maxWidth = assetType === 'character' ? '300px' : '200px';
-            element.style.maxHeight = assetType === 'character' ? '450px' : '200px';
+            
+            const baseMaxWidth = assetType === 'character' ? 300 : 200;
+            const baseMaxHeight = assetType === 'character' ? 450 : 200;
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}px`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}px`;
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.objectFit = 'contain';
         } else {
             element.style.width = '100%';
             element.style.height = '100%';
@@ -301,14 +308,20 @@ function showAsset(assetId, assetType) {
         element.src = asset.file;
         element.className = `asset-${assetType}`;
         
-        // 设置位置（人物和道具）
+        // 设置位置和大小（人物和道具）
         if (assetType === 'character' || assetType === 'prop') {
             element.style.position = 'absolute';
             element.style.left = `${position.x}%`;
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
-            element.style.maxWidth = assetType === 'character' ? '300px' : '200px';
-            element.style.maxHeight = assetType === 'character' ? '450px' : '200px';
+            
+            const baseMaxWidth = assetType === 'character' ? 300 : 200;
+            const baseMaxHeight = assetType === 'character' ? 450 : 200;
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}px`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}px`;
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.objectFit = 'contain';
         } else {
             element.style.width = '100%';
             element.style.height = '100%';

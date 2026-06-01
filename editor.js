@@ -92,9 +92,10 @@ function updatePositionPreview() {
     if (!gamePreviewAssets || !gamePreviewCoords) return;
     
     const position = currentUploadedAsset?.position || { x: 50, y: 80 };
+    const size = currentUploadedAsset?.size || { width: 100, height: 100 };
     
-    // 更新坐标显示
-    gamePreviewCoords.textContent = `X: ${position.x}% | Y: ${position.y}%`;
+    // 更新坐标和大小显示
+    gamePreviewCoords.textContent = `X: ${position.x}% | Y: ${position.y}% | W: ${size.width}% | H: ${size.height}%`;
     
     if (!currentUploadedAsset || !currentUploadedAsset.file) {
         gamePreviewAssets.innerHTML = '';
@@ -117,11 +118,38 @@ function updatePositionPreview() {
         `;
     }
     
+    // 计算素材的实际尺寸（基于屏幕百分比）
+    let maxWidth = 100;
+    let maxHeight = 100;
+    
+    if (assetType === 'character') {
+        maxWidth = 40;  // 人物最大宽度占屏幕40%
+        maxHeight = 55; // 人物最大高度占屏幕55%
+    } else if (assetType === 'prop') {
+        maxWidth = 30;  // 道具最大宽度占屏幕30%
+        maxHeight = 30; // 道具最大高度占屏幕30%
+    }
+    
+    const actualWidth = (size.width / 100) * maxWidth;
+    const actualHeight = (size.height / 100) * maxHeight;
+    
     gamePreviewAssets.innerHTML = `
-        <div class="game-preview-asset ${assetType}" style="left: ${position.x}%; top: ${position.y}%;">
+        <div class="game-preview-asset ${assetType}" style="left: ${position.x}%; top: ${position.y}%; width: ${actualWidth}%; max-width: ${actualWidth}%;">
             ${assetHTML}
         </div>
     `;
+}
+
+// 设置素材大小
+function setAssetSize(width, height) {
+    document.getElementById('assetWidth').value = width;
+    document.getElementById('assetWidthValue').textContent = `${width}%`;
+    document.getElementById('assetHeight').value = height;
+    document.getElementById('assetHeightValue').textContent = `${height}%`;
+    if (currentUploadedAsset) {
+        currentUploadedAsset.size = { width, height };
+        updatePositionPreview();
+    }
 }
 
 // ==================== 初始化 ====================
@@ -154,6 +182,30 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentUploadedAsset) {
             currentUploadedAsset.position = currentUploadedAsset.position || { x: 50, y: 80 };
             currentUploadedAsset.position.y = parseInt(e.target.value);
+            updatePositionPreview();
+        }
+    });
+    
+    // 设置大小滑块事件
+    const assetWidth = document.getElementById('assetWidth');
+    const assetHeight = document.getElementById('assetHeight');
+    const assetWidthValue = document.getElementById('assetWidthValue');
+    const assetHeightValue = document.getElementById('assetHeightValue');
+    
+    assetWidth?.addEventListener('input', (e) => {
+        assetWidthValue.textContent = `${e.target.value}%`;
+        if (currentUploadedAsset) {
+            currentUploadedAsset.size = currentUploadedAsset.size || { width: 100, height: 100 };
+            currentUploadedAsset.size.width = parseInt(e.target.value);
+            updatePositionPreview();
+        }
+    });
+    
+    assetHeight?.addEventListener('input', (e) => {
+        assetHeightValue.textContent = `${e.target.value}%`;
+        if (currentUploadedAsset) {
+            currentUploadedAsset.size = currentUploadedAsset.size || { width: 100, height: 100 };
+            currentUploadedAsset.size.height = parseInt(e.target.value);
             updatePositionPreview();
         }
     });
@@ -810,7 +862,8 @@ function handleAssetUpload(event) {
             loopCount: -1,
             muted: false,
             nodes: [],
-            position: { x: 50, y: assetType === 'character' ? 80 : 50 }
+            position: { x: 50, y: assetType === 'character' ? 80 : 50 },
+            size: { width: 100, height: 100 }
         };
 
         const typeLabel = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
@@ -838,11 +891,16 @@ function handleAssetUpload(event) {
             document.getElementById('positionXValue').textContent = '50%';
             document.getElementById('positionY').value = assetType === 'character' ? 80 : 50;
             document.getElementById('positionYValue').textContent = `${assetType === 'character' ? 80 : 50}%`;
+            document.getElementById('assetWidth').value = 100;
+            document.getElementById('assetWidthValue').textContent = '100%';
+            document.getElementById('assetHeight').value = 100;
+            document.getElementById('assetHeightValue').textContent = '100%';
             renderPositionHistory();
             updatePositionPreview();
         } else {
             document.getElementById('positionSettings').style.display = 'none';
             currentUploadedAsset.position = null;
+            currentUploadedAsset.size = null;
         }
         
         document.getElementById('assetNodeSelectorSection').style.display = 'block';
