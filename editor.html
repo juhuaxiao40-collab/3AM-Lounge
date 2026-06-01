@@ -805,6 +805,43 @@
                     </select>
                 </div>
 
+                <!-- 位置调整设置（人物和道具） -->
+                <div class="form-group" id="positionSettings" style="margin-bottom: 15px; display: none;">
+                    <label>📍 位置调整</label>
+                    <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px; color: rgba(200, 210, 230, 0.7);">X 位置 (%)</label>
+                            <input type="range" id="positionX" min="0" max="100" value="50" step="1" 
+                                style="width: 100%; margin-top: 5px;">
+                            <span id="positionXValue" style="font-size: 12px; color: rgba(168, 192, 224, 0.9);">50%</span>
+                        </div>
+                        <div style="flex: 1;">
+                            <label style="font-size: 12px; color: rgba(200, 210, 230, 0.7);">Y 位置 (%)</label>
+                            <input type="range" id="positionY" min="0" max="100" value="80" step="1" 
+                                style="width: 100%; margin-top: 5px;">
+                            <span id="positionYValue" style="font-size: 12px; color: rgba(168, 192, 224, 0.9);">80%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- 快速位置预设 -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">
+                        <button class="btn btn-xs" onclick="setPosition(50, 80)">底部居中</button>
+                        <button class="btn btn-xs" onclick="setPosition(20, 80)">左下</button>
+                        <button class="btn btn-xs" onclick="setPosition(80, 80)">右下</button>
+                        <button class="btn btn-xs" onclick="setPosition(50, 50)">居中</button>
+                        <button class="btn btn-xs" onclick="setPosition(20, 50)">左中</button>
+                        <button class="btn btn-xs" onclick="setPosition(80, 50)">右中</button>
+                    </div>
+                    
+                    <!-- 位置历史记录 -->
+                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(150, 170, 200, 0.2);">
+                        <label style="font-size: 12px; color: rgba(200, 210, 230, 0.7);">📋 位置历史</label>
+                        <div id="positionHistoryList" style="margin-top: 8px; max-height: 80px; overflow-y: auto;">
+                            <div style="text-align: center; color: rgba(150, 170, 200, 0.5); font-size: 12px;">暂无位置记录</div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="node-selector" id="assetNodeSelectorSection" style="display: none;">
                     <h4 style="color: #a8c0e0; margin-bottom: 10px;">选择应用此素材的节点</h4>
                     <div style="margin-bottom: 10px;">
@@ -817,7 +854,10 @@
             </div>
 
             <div class="bgm-list">
-                <h3 style="color: #a8c0e0; margin-bottom: 15px;">已配置的素材</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="color: #a8c0e0; margin-bottom: 0;">已配置的素材</h3>
+                    <button class="btn btn-primary btn-small" onclick="openPreviewModal()">👁️ 预览素材</button>
+                </div>
 
                 <!-- 素材分类标签 -->
                 <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
@@ -864,6 +904,29 @@
             <div class="bgm-list">
                 <h3 style="color: #a8c0e0; margin-bottom: 15px;">已配置的BGM</h3>
                 <div id="bgmListContainer"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 素材预览弹窗 -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content preview-modal-content">
+            <div class="modal-header">
+                <h2>👁️ 素材预览</h2>
+                <button class="close-btn" onclick="closePreviewModal()">&times;</button>
+            </div>
+            <div class="preview-body">
+                <div class="preview-controls">
+                    <label>选择节点预览:</label>
+                    <select id="previewNodeSelect" onchange="updatePreview()">
+                        <option value="">请选择节点</option>
+                    </select>
+                </div>
+                <div class="preview-area" id="previewArea">
+                    <div class="preview-background">
+                        <!-- 预览素材会在这里显示 -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>

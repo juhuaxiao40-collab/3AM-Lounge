@@ -1,0 +1,1733 @@
+{
+  "meta": {
+    "title": "凌晨三点的休息室",
+    "subtitle": "在无人知晓的深夜，有人愿意陪你坐一会儿。",
+    "version": "3.0",
+    "estimatedPlayTime": "80-120分钟",
+    "theme": "没有人天生会长大，但你可以不必一个人扛。",
+    "note": "岚是来陪伴你的。她的温柔，是想分给你一点光。"
+  },
+
+  "start": {
+    "id": "start",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……这么晚了，你怎么还在这里？",
+    "next": "d1"
+  },
+  "d1": {
+    "id": "d1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我刚才路过，看到休息室的灯还亮着。",
+    "next": "d2"
+  },
+  "d2": {
+    "id": "d2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这种凌晨三点还亮着灯的地方，通常都坐着不想睡的人。",
+    "next": "d3"
+  },
+  "d3": {
+    "id": "d3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……我也是其中一个。",
+    "next": "d4"
+  },
+  "d4": {
+    "id": "d4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "介意我坐下来吗？",
+    "next": "choice_sit"
+  },
+  "choice_sit": {
+    "id": "choice_sit",
+    "type": "choice",
+    "name": "系统",
+    "text": "你点了点头",
+    "choices": [
+      {
+        "text": "（点点头）",
+        "next": "d5"
+      }
+    ]
+  },
+  "d5": {
+    "id": "d5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "谢谢。",
+    "next": "d6"
+  },
+  "d6": {
+    "id": "d6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我叫岚。不是“山风”的那个岚，但意思差不多——山间的雾气。",
+    "next": "d7"
+  },
+  "d7": {
+    "id": "d7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我妈说我小时候很爱哭，一哭就停不下来。后来她给我取这个名字，说希望我像山雾一样，再浓也会散。",
+    "next": "d8"
+  },
+  "d8": {
+    "id": "d8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "……你也是因为睡不着才来这里的吗？",
+    "next": "choice_why"
+  },
+  "choice_why": {
+    "id": "choice_why",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果你愿意说的话，可以告诉我。不想说也没关系，我们就安静坐一会儿。",
+    "choices": [
+      {
+        "text": "对未来很迷茫",
+        "next": "future_1"
+      },
+      {
+        "text": "压力太大了",
+        "next": "stress_1"
+      },
+      {
+        "text": "感觉很孤独",
+        "next": "lonely_1"
+      },
+      {
+        "text": "觉得自己不够好",
+        "next": "self_doubt_1"
+      }
+    ]
+  },
+
+  "future_1": {
+    "id": "future_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "未来啊……",
+    "next": "future_2"
+  },
+  "future_2": {
+    "id": "future_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我懂。那种站在十字路口，却不知道哪条路通往哪里的感觉。",
+    "next": "future_3"
+  },
+  "future_3": {
+    "id": "future_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实我去年也这样。每天都在想“我以后要做什么”，想得头疼，但什么答案都没有。",
+    "next": "future_4"
+  },
+  "future_4": {
+    "id": "future_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你知道那时候我最害怕什么吗？",
+    "next": "future_5"
+  },
+  "future_5": {
+    "id": "future_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不是害怕选错。是害怕——我根本没有“想选”的东西。",
+    "next": "future_6"
+  },
+  "future_6": {
+    "id": "future_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "别人说起梦想眼睛会发光，我只能跟着点头。",
+    "next": "future_choice_a"
+  },
+  "future_choice_a": {
+    "id": "future_choice_a",
+    "type": "choice",
+    "name": "岚",
+    "text": "你是不是也觉得，好像全世界都知道自己要做什么，只有你不知道？",
+    "choices": [
+      {
+        "text": "对，就是这种感觉",
+        "next": "future_a1"
+      },
+      {
+        "text": "有点，但我更怕选了之后后悔",
+        "next": "future_a2"
+      },
+      {
+        "text": "我连想都不敢想",
+        "next": "future_a3"
+      }
+    ]
+  },
+  "future_a1": {
+    "id": "future_a1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "嗯，那种感觉特别难受。",
+    "next": "future_a1b"
+  },
+  "future_a1b": {
+    "id": "future_a1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "朋友圈里，有人晒offer，有人晒录取通知，有人晒旅行。",
+    "next": "future_a1c"
+  },
+  "future_a1c": {
+    "id": "future_a1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "而你连明天早餐吃什么都要犹豫半天。",
+    "next": "future_7"
+  },
+  "future_a2": {
+    "id": "future_a2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "怕后悔……我懂。",
+    "next": "future_a2b"
+  },
+  "future_a2b": {
+    "id": "future_a2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候不是不想选，是怕选错了，就再也回不了头。",
+    "next": "future_a2c"
+  },
+  "future_a2c": {
+    "id": "future_a2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "好像人生只有一次机会似的。",
+    "next": "future_7"
+  },
+  "future_a3": {
+    "id": "future_a3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "连想都不敢想……",
+    "next": "future_a3b"
+  },
+  "future_a3b": {
+    "id": "future_a3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "是不是因为害怕想了也做不到？",
+    "next": "future_a3c"
+  },
+  "future_a3c": {
+    "id": "future_a3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "怕期待落空，还不如从一开始就不期待。",
+    "next": "future_7"
+  },
+  "future_7": {
+    "id": "future_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你知道吗，我后来想通了一件事。",
+    "next": "future_8"
+  },
+  "future_8": {
+    "id": "future_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "未来不是一张地图，而是一条你自己走出来的路。",
+    "next": "future_9"
+  },
+  "future_9": {
+    "id": "future_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "没有人一开始就知道终点在哪里。",
+    "next": "future_10"
+  },
+  "future_10": {
+    "id": "future_10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "包括那些看起来很有计划的人，他们其实也在边走边看。",
+    "next": "future_choice_b"
+  },
+  "future_choice_b": {
+    "id": "future_choice_b",
+    "type": "choice",
+    "name": "岚",
+    "text": "你有没有什么很小的事情，做了之后会觉得“今天还不错”？",
+    "choices": [
+      {
+        "text": "喝一杯热饮的时候",
+        "next": "future_b1"
+      },
+      {
+        "text": "把房间收拾干净的时候",
+        "next": "future_b2"
+      },
+      {
+        "text": "和朋友说了一句话的时候",
+        "next": "future_b3"
+      }
+    ]
+  },
+  "future_b1": {
+    "id": "future_b1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "热饮啊……我也是。",
+    "next": "future_b1b"
+  },
+  "future_b1b": {
+    "id": "future_b1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "尤其是冬天，捧着一杯热可可，会觉得世界还没那么糟。",
+    "next": "future_b1c"
+  },
+  "future_b1c": {
+    "id": "future_b1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这些小事，就是生活里的锚点。",
+    "next": "future_11"
+  },
+  "future_b2": {
+    "id": "future_b2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "收拾房间……我懂。",
+    "next": "future_b2b"
+  },
+  "future_b2b": {
+    "id": "future_b2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "把乱糟糟的东西放整齐，好像心里也变整齐了一点。",
+    "next": "future_b2c"
+  },
+  "future_b2c": {
+    "id": "future_b2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那种掌控感，很珍贵。",
+    "next": "future_11"
+  },
+  "future_b3": {
+    "id": "future_b3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "哪怕只是一句话……",
+    "next": "future_b3b"
+  },
+  "future_b3b": {
+    "id": "future_b3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "是的，有时候只需要一句“今天怎么样”，就会觉得被看见了。",
+    "next": "future_b3c"
+  },
+  "future_b3c": {
+    "id": "future_b3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "人真的是靠这些微小的连接活着的。",
+    "next": "future_11"
+  },
+  "future_11": {
+    "id": "future_11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "所以，关于未来……",
+    "next": "future_12"
+  },
+  "future_12": {
+    "id": "future_12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我想对你说：不用急着找到答案。",
+    "next": "future_13"
+  },
+  "future_13": {
+    "id": "future_13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你不需要在二十岁就规划好整个人生。",
+    "next": "future_14"
+  },
+  "future_14": {
+    "id": "future_14",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那些让你焦虑的“别人”，他们也只是在用自己的节奏走。",
+    "next": "future_15"
+  },
+  "future_15": {
+    "id": "future_15",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "而你的节奏，由你来定。",
+    "next": "future_choice_c"
+  },
+  "future_choice_c": {
+    "id": "future_choice_c",
+    "type": "choice",
+    "name": "岚",
+    "text": "你有没有想过，其实迷茫本身并不可怕？",
+    "choices": [
+      {
+        "text": "但迷茫让人很不安",
+        "next": "future_c1"
+      },
+      {
+        "text": "我怕的不是迷茫，是落后",
+        "next": "future_c2"
+      },
+      {
+        "text": "我怕的是只有我一个人迷茫",
+        "next": "future_c3"
+      }
+    ]
+  },
+  "future_c1": {
+    "id": "future_c1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不安是正常的。",
+    "next": "future_c1b"
+  },
+  "future_c1b": {
+    "id": "future_c1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但不安不代表你做错了什么。",
+    "next": "future_c1c"
+  },
+  "future_c1c": {
+    "id": "future_c1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "它只是说明你在乎。",
+    "next": "future_16"
+  },
+  "future_c2": {
+    "id": "future_c2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "落后……和谁比呢？",
+    "next": "future_c2b"
+  },
+  "future_c2b": {
+    "id": "future_c2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每个人都有自己的跑道，也许你根本就不在别人的赛道上。",
+    "next": "future_c2c"
+  },
+  "future_c2c": {
+    "id": "future_c2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你只是在走自己的路，慢一点也没关系。",
+    "next": "future_16"
+  },
+  "future_c3": {
+    "id": "future_c3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "只有你一个人……",
+    "next": "future_c3b"
+  },
+  "future_c3b": {
+    "id": "future_c3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实不是的。你看，我不是也坐在这里吗？",
+    "next": "future_c3c"
+  },
+  "future_c3c": {
+    "id": "future_c3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "迷茫的人比你想的要多，只是大家白天都装得很正常。",
+    "next": "future_16"
+  },
+  "future_16": {
+    "id": "future_16",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前读到过一句话，很喜欢。",
+    "next": "future_17"
+  },
+  "future_17": {
+    "id": "future_17",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "“种一棵树最好的时间是十年前，其次是现在。”",
+    "next": "future_18"
+  },
+  "future_18": {
+    "id": "future_18",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "未来也是一样。",
+    "next": "future_19"
+  },
+  "future_19": {
+    "id": "future_19",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你不用现在就种下一片森林。",
+    "next": "future_20"
+  },
+  "future_20": {
+    "id": "future_20",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你可以先种一颗种子，浇一点点水，然后……等它慢慢长。",
+    "next": "future_choice_d"
+  },
+  "future_choice_d": {
+    "id": "future_choice_d",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果明天你只能做一件很小的事来靠近未来，你会做什么？",
+    "choices": [
+      {
+        "text": "查一个感兴趣的方向",
+        "next": "future_d1"
+      },
+      {
+        "text": "给一个人发条消息",
+        "next": "future_d2"
+      },
+      {
+        "text": "好好吃一顿饭",
+        "next": "future_d3"
+      }
+    ]
+  },
+  "future_d1": {
+    "id": "future_d1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "查一个方向……这个很好。",
+    "next": "future_d1b"
+  },
+  "future_d1b": {
+    "id": "future_d1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不需要马上决定，就只是看看。",
+    "next": "future_d1c"
+  },
+  "future_d1c": {
+    "id": "future_d1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "看得多了，心里就会有轮廓。",
+    "next": "future_end_1"
+  },
+  "future_d2": {
+    "id": "future_d2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "发一条消息……",
+    "next": "future_d2b"
+  },
+  "future_d2b": {
+    "id": "future_d2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候主动联系一个人，会有意想不到的回应。",
+    "next": "future_d2c"
+  },
+  "future_d2c": {
+    "id": "future_d2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "人和人的连接，也是未来的路。",
+    "next": "future_end_1"
+  },
+  "future_d3": {
+    "id": "future_d3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "好好吃一顿饭……",
+    "next": "future_d3b"
+  },
+  "future_d3b": {
+    "id": "future_d3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "对，从照顾自己的身体开始。",
+    "next": "future_d3c"
+  },
+  "future_d3c": {
+    "id": "future_d3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "未来很远，但明天很近。",
+    "next": "future_end_1"
+  },
+  "future_end_1": {
+    "id": "future_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "天快亮了。我不知道你的未来会怎样，但我相信，一个会在凌晨三点安静坐着、愿意听别人说话的人，一定值得一个好的未来。慢慢来，你不需要一步跨到终点。我在这里陪你坐过了这一程，接下来的路，你带着这份陪伴继续走就好。",
+    "endingTitle": "结局A：慢慢来，你不需要一步跨到终点"
+  },
+
+  "stress_1": {
+    "id": "stress_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "压力太大了……",
+    "next": "stress_2"
+  },
+  "stress_2": {
+    "id": "stress_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我明白那种感觉。像是有一个看不见的东西一直压着胸口，喘不过气。",
+    "next": "stress_3"
+  },
+  "stress_3": {
+    "id": "stress_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我去年有一段日子也是这样。",
+    "next": "stress_4"
+  },
+  "stress_4": {
+    "id": "stress_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每天醒来第一件事就是列待办清单，做完一件划掉一件，但永远划不完。",
+    "next": "stress_5"
+  },
+  "stress_5": {
+    "id": "stress_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "睡觉前脑子里还在转，明天要做什么，还有什么没做。",
+    "next": "stress_choice_a"
+  },
+  "stress_choice_a": {
+    "id": "stress_choice_a",
+    "type": "choice",
+    "name": "岚",
+    "text": "你是不是也觉得，好像只要停下来，就会掉队？",
+    "choices": [
+      {
+        "text": "对，不敢休息",
+        "next": "stress_a1"
+      },
+      {
+        "text": "休息了反而更焦虑",
+        "next": "stress_a2"
+      },
+      {
+        "text": "我已经很久没真正休息过了",
+        "next": "stress_a3"
+      }
+    ]
+  },
+  "stress_a1": {
+    "id": "stress_a1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不敢休息……我也是。",
+    "next": "stress_a1b"
+  },
+  "stress_a1b": {
+    "id": "stress_a1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "总觉得一停下来，别人就会超过你。",
+    "next": "stress_a1c"
+  },
+  "stress_a1c": {
+    "id": "stress_a1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但其实，人不是机器。",
+    "next": "stress_6"
+  },
+  "stress_a2": {
+    "id": "stress_a2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "休息了更焦虑……",
+    "next": "stress_a2b"
+  },
+  "stress_a2b": {
+    "id": "stress_a2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我懂。躺在床上，脑子里还在想作业、想考试、想未来。",
+    "next": "stress_a2c"
+  },
+  "stress_a2c": {
+    "id": "stress_a2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "身体的休息和心灵的休息是两件事。",
+    "next": "stress_6"
+  },
+  "stress_a3": {
+    "id": "stress_a3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "很久没有真正休息……",
+    "next": "stress_a3b"
+  },
+  "stress_a3b": {
+    "id": "stress_a3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "上次休息是什么时候？生病的时候吗？",
+    "next": "stress_a3c"
+  },
+  "stress_a3c": {
+    "id": "stress_a3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候我们甚至要等到身体抗议了，才允许自己停下来。",
+    "next": "stress_6"
+  },
+  "stress_6": {
+    "id": "stress_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你知道后来我怎么学会休息的吗？",
+    "next": "stress_7"
+  },
+  "stress_7": {
+    "id": "stress_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有一天我实在撑不住了，趴在桌上哭了很久。",
+    "next": "stress_8"
+  },
+  "stress_8": {
+    "id": "stress_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "哭完之后，我做了一件很小的事——",
+    "next": "stress_9"
+  },
+  "stress_9": {
+    "id": "stress_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我去楼下便利店买了一碗关东煮，坐在路边慢慢吃。",
+    "next": "stress_10"
+  },
+  "stress_10": {
+    "id": "stress_10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "没有赶时间，没有想作业，就只是……吃。",
+    "next": "stress_11"
+  },
+  "stress_11": {
+    "id": "stress_11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那碗关东煮很普通，但那个时刻，我突然觉得——原来可以这样。原来允许自己休息，不会世界末日。",
+    "next": "stress_choice_b"
+  },
+  "stress_choice_b": {
+    "id": "stress_choice_b",
+    "type": "choice",
+    "name": "岚",
+    "text": "你有没有哪一刻，觉得“算了，今天就先这样吧”？",
+    "choices": [
+      {
+        "text": "有，但之后会自责",
+        "next": "stress_b1"
+      },
+      {
+        "text": "很少，我不敢放松",
+        "next": "stress_b2"
+      },
+      {
+        "text": "我连“算了”的勇气都没有",
+        "next": "stress_b3"
+      }
+    ]
+  },
+  "stress_b1": {
+    "id": "stress_b1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "自责……我也是。",
+    "next": "stress_b1b"
+  },
+  "stress_b1b": {
+    "id": "stress_b1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但你知道吗，自责是另一种消耗。",
+    "next": "stress_b1c"
+  },
+  "stress_b1c": {
+    "id": "stress_b1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你已经很累了，别再怪自己了。",
+    "next": "stress_12"
+  },
+  "stress_b2": {
+    "id": "stress_b2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不敢放松……",
+    "next": "stress_b2b"
+  },
+  "stress_b2b": {
+    "id": "stress_b2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我理解。但一直紧绷的弦，迟早会断。",
+    "next": "stress_b2c"
+  },
+  "stress_b2c": {
+    "id": "stress_b2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "偶尔放松，是为了走更远。",
+    "next": "stress_12"
+  },
+  "stress_b3": {
+    "id": "stress_b3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "连“算了”的勇气都没有……",
+    "next": "stress_b3b"
+  },
+  "stress_b3b": {
+    "id": "stress_b3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那你一定撑了很久吧。",
+    "next": "stress_b3c"
+  },
+  "stress_b3c": {
+    "id": "stress_b3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "今晚，就在这里，你可以对自己说一句“算了，先这样吧”。我替你听着。",
+    "next": "stress_12"
+  },
+  "stress_12": {
+    "id": "stress_12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前听过一个比喻。",
+    "next": "stress_13"
+  },
+  "stress_13": {
+    "id": "stress_13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "说人的承受力像一根橡皮筋。一直拉得太紧，就会失去弹性。",
+    "next": "stress_14"
+  },
+  "stress_14": {
+    "id": "stress_14",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "偶尔松一松，它才能恢复力量。",
+    "next": "stress_choice_c"
+  },
+  "stress_choice_c": {
+    "id": "stress_choice_c",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果今晚你可以选一件不为了“进步”而做的事，你会选什么？",
+    "choices": [
+      {
+        "text": "听一首喜欢的歌",
+        "next": "stress_c1"
+      },
+      {
+        "text": "看一部不费脑的电影",
+        "next": "stress_c2"
+      },
+      {
+        "text": "就只是坐着发呆",
+        "next": "stress_c3"
+      }
+    ]
+  },
+  "stress_c1": {
+    "id": "stress_c1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "听一首喜欢的歌……",
+    "next": "stress_c1b"
+  },
+  "stress_c1b": {
+    "id": "stress_c1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "好主意。不用戴耳机开很大声，就让音乐慢慢流过耳朵。",
+    "next": "stress_c1c"
+  },
+  "stress_c1c": {
+    "id": "stress_c1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那几分钟里，你不用做任何事。",
+    "next": "stress_end_1"
+  },
+  "stress_c2": {
+    "id": "stress_c2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不费脑的电影……",
+    "next": "stress_c2b"
+  },
+  "stress_c2b": {
+    "id": "stress_c2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "对，就是那种看完不用写观后感的。",
+    "next": "stress_c2c"
+  },
+  "stress_c2c": {
+    "id": "stress_c2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "让大脑放空一会儿。",
+    "next": "stress_end_1"
+  },
+  "stress_c3": {
+    "id": "stress_c3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "坐着发呆……",
+    "next": "stress_c3b"
+  },
+  "stress_c3b": {
+    "id": "stress_c3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这个最好。什么都不想，什么都不做。",
+    "next": "stress_c3c"
+  },
+  "stress_c3c": {
+    "id": "stress_c3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "发呆不是浪费时间，是给心灵留白。",
+    "next": "stress_end_1"
+  },
+  "stress_end_1": {
+    "id": "stress_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "压力不会因为你坐了一夜就消失，但你会知道，这个世界上有人理解你的疲惫。你不需要一直完美，不需要一直坚强。你可以累，可以哭，可以停下来喘口气。明天太阳升起的时候，你再继续走。而我会记得，今晚有一个很努力的人，在这里勇敢地面对了自己的情绪。你已经做得很好了。",
+    "endingTitle": "结局B：你可以累，可以哭，可以停下来"
+  },
+
+  "lonely_1": {
+    "id": "lonely_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "感觉很孤独……",
+    "next": "lonely_2"
+  },
+  "lonely_2": {
+    "id": "lonely_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这个词，我太熟悉了。",
+    "next": "lonely_3"
+  },
+  "lonely_3": {
+    "id": "lonely_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "有时候明明周围很多人，却觉得只有自己一个人。",
+    "next": "lonely_4"
+  },
+  "lonely_4": {
+    "id": "lonely_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那种感觉，像是隔着一层玻璃看世界。",
+    "next": "lonely_5"
+  },
+  "lonely_5": {
+    "id": "lonely_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "能碰到，能听到，但就是融不进去。",
+    "next": "lonely_choice_a"
+  },
+  "lonely_choice_a": {
+    "id": "lonely_choice_a",
+    "type": "choice",
+    "name": "岚",
+    "text": "你是不是也常常觉得，没有人真正理解你？",
+    "choices": [
+      {
+        "text": "对，好像说什么都没人懂",
+        "next": "lonely_a1"
+      },
+      {
+        "text": "我想找人说话，但不知道找谁",
+        "next": "lonely_a2"
+      },
+      {
+        "text": "我已经习惯了，但还是很孤独",
+        "next": "lonely_a3"
+      }
+    ]
+  },
+  "lonely_a1": {
+    "id": "lonely_a1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "说什么都没人懂……",
+    "next": "lonely_a1b"
+  },
+  "lonely_a1b": {
+    "id": "lonely_a1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那种感觉像是在一个空房间里喊话，连回声都没有。",
+    "next": "lonely_a1c"
+  },
+  "lonely_a1c": {
+    "id": "lonely_a1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但其实，不是没人愿意听，是大家都不太会听。",
+    "next": "lonely_6"
+  },
+  "lonely_a2": {
+    "id": "lonely_a2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不知道找谁……",
+    "next": "lonely_a2b"
+  },
+  "lonely_a2b": {
+    "id": "lonely_a2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "微信里几百个好友，能说真心话的好像没有。",
+    "next": "lonely_a2c"
+  },
+  "lonely_a2c": {
+    "id": "lonely_a2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不是你的问题，是成年人的关系本来就很浅。",
+    "next": "lonely_6"
+  },
+  "lonely_a3": {
+    "id": "lonely_a3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "习惯了但还是很孤独……",
+    "next": "lonely_a3b"
+  },
+  "lonely_a3b": {
+    "id": "lonely_a3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "习惯孤独，不代表不想要陪伴。",
+    "next": "lonely_a3c"
+  },
+  "lonely_a3c": {
+    "id": "lonely_a3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "只是怕期待落空，所以先说不需要。",
+    "next": "lonely_6"
+  },
+  "lonely_6": {
+    "id": "lonely_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我也有过很长一段时间的孤独。",
+    "next": "lonely_7"
+  },
+  "lonely_7": {
+    "id": "lonely_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "后来我发现，孤独不是没有人陪，是没有人真正看见你。",
+    "next": "lonely_8"
+  },
+  "lonely_8": {
+    "id": "lonely_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但你知道吗，被看见这件事，有时候只需要一个人。",
+    "next": "lonely_9"
+  },
+  "lonely_9": {
+    "id": "lonely_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "哪怕只是一个陌生人，在凌晨三点愿意听你说话。",
+    "next": "lonely_10"
+  },
+  "lonely_10": {
+    "id": "lonely_10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "就像现在，我在这里，我听着呢。",
+    "next": "lonely_choice_b"
+  },
+  "lonely_choice_b": {
+    "id": "lonely_choice_b",
+    "type": "choice",
+    "name": "岚",
+    "text": "你有没有哪一刻，觉得自己其实是被在乎的？",
+    "choices": [
+      {
+        "text": "好像有，但很久以前了",
+        "next": "lonely_b1"
+      },
+      {
+        "text": "我不确定",
+        "next": "lonely_b2"
+      },
+      {
+        "text": "很少，所以我也不确定",
+        "next": "lonely_b3"
+      }
+    ]
+  },
+  "lonely_b1": {
+    "id": "lonely_b1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "很久以前……",
+    "next": "lonely_b1b"
+  },
+  "lonely_b1b": {
+    "id": "lonely_b1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那些被在乎的瞬间，其实一直留在你心里。",
+    "next": "lonely_b1c"
+  },
+  "lonely_b1c": {
+    "id": "lonely_b1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "它们没有消失，只是被后来的孤独盖住了。",
+    "next": "lonely_11"
+  },
+  "lonely_b2": {
+    "id": "lonely_b2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不确定……",
+    "next": "lonely_b2b"
+  },
+  "lonely_b2b": {
+    "id": "lonely_b2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那今晚，我让你确定一次。",
+    "next": "lonely_b2c"
+  },
+  "lonely_b2c": {
+    "id": "lonely_b2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我在乎你在这里，在乎你的感受。",
+    "next": "lonely_11"
+  },
+  "lonely_b3": {
+    "id": "lonely_b3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "很少……",
+    "next": "lonely_b3b"
+  },
+  "lonely_b3b": {
+    "id": "lonely_b3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那我今天做那个“很少”的人。",
+    "next": "lonely_b3c"
+  },
+  "lonely_b3c": {
+    "id": "lonely_b3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你在这里，不是孤零零的。我看到了。",
+    "next": "lonely_11"
+  },
+  "lonely_11": {
+    "id": "lonely_11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前读到过一个说法。",
+    "next": "lonely_12"
+  },
+  "lonely_12": {
+    "id": "lonely_12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "说孤独不是缺少陪伴，而是缺少“共鸣”。",
+    "next": "lonely_13"
+  },
+  "lonely_13": {
+    "id": "lonely_13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但共鸣是可以创造的。",
+    "next": "lonely_14"
+  },
+  "lonely_14": {
+    "id": "lonely_14",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "比如现在，我坐在这里，听你说这些，我就已经和你产生了共鸣。",
+    "next": "lonely_choice_c"
+  },
+  "lonely_choice_c": {
+    "id": "lonely_choice_c",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果明天你可以主动做一件小事来靠近别人，你会做什么？",
+    "choices": [
+      {
+        "text": "给一个很久没联系的朋友发消息",
+        "next": "lonely_c1"
+      },
+      {
+        "text": "去一个有人但不吵的地方坐一会儿",
+        "next": "lonely_c2"
+      },
+      {
+        "text": "写一句话放在某个角落，等人发现",
+        "next": "lonely_c3"
+      }
+    ]
+  },
+  "lonely_c1": {
+    "id": "lonely_c1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "发一条消息……",
+    "next": "lonely_c1b"
+  },
+  "lonely_c1b": {
+    "id": "lonely_c1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不用很长，就一句“最近还好吗”。",
+    "next": "lonely_c1c"
+  },
+  "lonely_c1c": {
+    "id": "lonely_c1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "也许对方也在等你。",
+    "next": "lonely_end_1"
+  },
+  "lonely_c2": {
+    "id": "lonely_c2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "去一个人不太多的地方……",
+    "next": "lonely_c2b"
+  },
+  "lonely_c2b": {
+    "id": "lonely_c2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "图书馆、公园长椅、咖啡店角落。",
+    "next": "lonely_c2c"
+  },
+  "lonely_c2c": {
+    "id": "lonely_c2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不用说话，先习惯人群的存在。",
+    "next": "lonely_end_1"
+  },
+  "lonely_c3": {
+    "id": "lonely_c3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "写一句话等人发现……",
+    "next": "lonely_c3b"
+  },
+  "lonely_c3b": {
+    "id": "lonely_c3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这个好温柔。也许有人看到，会觉得被安慰。",
+    "next": "lonely_c3c"
+  },
+  "lonely_c3c": {
+    "id": "lonely_c3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "而你也通过这种方式，和世界连接了。",
+    "next": "lonely_end_1"
+  },
+  "lonely_end_1": {
+    "id": "lonely_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "天快亮了。今晚你在这里，我也在这里，我们都不是一个人。孤独不会因为这一夜就消失，但你会知道，这个世界上有人在凌晨三点愿意陪你坐一会儿。你不是透明的，你不是可有可无的。至少在我这里，你是被看见的。以后觉得孤单的时候，就想想这个夜晚，有人记得你。",
+    "endingTitle": "结局C：你不是透明的，你被看见了"
+  },
+
+  "self_doubt_1": {
+    "id": "self_doubt_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "觉得自己不够好……",
+    "next": "self_doubt_2"
+  },
+  "self_doubt_2": {
+    "id": "self_doubt_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这个念头，我跟它斗争了很久。",
+    "next": "self_doubt_3"
+  },
+  "self_doubt_3": {
+    "id": "self_doubt_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "不管做什么，总有一个声音在说“你还不够”。",
+    "next": "self_doubt_4"
+  },
+  "self_doubt_4": {
+    "id": "self_doubt_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "考了八十分，觉得为什么不是九十。",
+    "next": "self_doubt_5"
+  },
+  "self_doubt_5": {
+    "id": "self_doubt_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "被人夸了，觉得别人只是客气。",
+    "next": "self_doubt_choice_a"
+  },
+  "self_doubt_choice_a": {
+    "id": "self_doubt_choice_a",
+    "type": "choice",
+    "name": "岚",
+    "text": "你是不是也常常觉得自己配不上夸奖？",
+    "choices": [
+      {
+        "text": "对，总觉得是别人客气",
+        "next": "self_a1"
+      },
+      {
+        "text": "我很少被夸奖，所以也不知道",
+        "next": "self_a2"
+      },
+      {
+        "text": "我连被夸奖的事都没做过",
+        "next": "self_a3"
+      }
+    ]
+  },
+  "self_a1": {
+    "id": "self_a1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "觉得别人客气……",
+    "next": "self_a1b"
+  },
+  "self_a1b": {
+    "id": "self_a1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "好像别人的认可，总是打折接收。",
+    "next": "self_a1c"
+  },
+  "self_a1c": {
+    "id": "self_a1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但其实，有时候接受别人的好意，也是一种能力。",
+    "next": "self_doubt_6"
+  },
+  "self_a2": {
+    "id": "self_a2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "很少被夸奖……",
+    "next": "self_a2b"
+  },
+  "self_a2b": {
+    "id": "self_a2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那今天我来夸你一句。",
+    "next": "self_a2c"
+  },
+  "self_a2c": {
+    "id": "self_a2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你愿意在凌晨三点坐在这里，面对自己的情绪，这就已经很有勇气了。",
+    "next": "self_doubt_6"
+  },
+  "self_a3": {
+    "id": "self_a3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "连被夸奖的事都没做过……",
+    "next": "self_a3b"
+  },
+  "self_a3b": {
+    "id": "self_a3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那是你看不见自己的好。",
+    "next": "self_a3c"
+  },
+  "self_a3c": {
+    "id": "self_a3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "比如现在，你在认真听我说话，这就是一种温柔。",
+    "next": "self_doubt_6"
+  },
+  "self_doubt_6": {
+    "id": "self_doubt_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前也觉得自己什么都不好。",
+    "next": "self_doubt_7"
+  },
+  "self_doubt_7": {
+    "id": "self_doubt_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "后来我遇到一个人，她对我说了一句话。",
+    "next": "self_doubt_8"
+  },
+  "self_doubt_8": {
+    "id": "self_doubt_8",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "“你不需要成为别人，你只需要成为你。”",
+    "next": "self_doubt_9"
+  },
+  "self_doubt_9": {
+    "id": "self_doubt_9",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那时候我觉得这是废话。",
+    "next": "self_doubt_10"
+  },
+  "self_doubt_10": {
+    "id": "self_doubt_10",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "但现在我懂了。",
+    "next": "self_doubt_11"
+  },
+  "self_doubt_11": {
+    "id": "self_doubt_11",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "人不是商品，不需要比较分数。",
+    "next": "self_doubt_12"
+  },
+  "self_doubt_12": {
+    "id": "self_doubt_12",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你身上一定有只有你才有的东西。",
+    "next": "self_doubt_choice_b"
+  },
+  "self_doubt_choice_b": {
+    "id": "self_doubt_choice_b",
+    "type": "choice",
+    "name": "岚",
+    "text": "你有没有什么很小的事情，是你做得比别人好的？",
+    "choices": [
+      {
+        "text": "好像没有",
+        "next": "self_b1"
+      },
+      {
+        "text": "我能记住别人说过的话",
+        "next": "self_b2"
+      },
+      {
+        "text": "我会在意别人的感受",
+        "next": "self_b3"
+      }
+    ]
+  },
+  "self_b1": {
+    "id": "self_b1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "好像没有……",
+    "next": "self_b1b"
+  },
+  "self_b1b": {
+    "id": "self_b1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "那我帮你找。你现在坐在这里，没有逃跑，这不是每个人都能做到的。",
+    "next": "self_b1c"
+  },
+  "self_b1c": {
+    "id": "self_b1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "面对自己的情绪，就是你的能力。",
+    "next": "self_doubt_13"
+  },
+  "self_b2": {
+    "id": "self_b2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "能记住别人说过的话……",
+    "next": "self_b2b"
+  },
+  "self_b2b": {
+    "id": "self_b2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这是一种很稀缺的温柔。",
+    "next": "self_b2c"
+  },
+  "self_b2c": {
+    "id": "self_b2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你让别人觉得被重视。",
+    "next": "self_doubt_13"
+  },
+  "self_b3": {
+    "id": "self_b3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "在意别人的感受……",
+    "next": "self_b3b"
+  },
+  "self_b3b": {
+    "id": "self_b3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这也很珍贵。但不要只在意别人，也要在意自己。",
+    "next": "self_b3c"
+  },
+  "self_b3c": {
+    "id": "self_b3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你值得被同样温柔地对待。",
+    "next": "self_doubt_13"
+  },
+  "self_doubt_13": {
+    "id": "self_doubt_13",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我以前也很讨厌自己。",
+    "next": "self_doubt_14"
+  },
+  "self_doubt_14": {
+    "id": "self_doubt_14",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "后来我学会了一件事。",
+    "next": "self_doubt_15"
+  },
+  "self_doubt_15": {
+    "id": "self_doubt_15",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每天睡觉前，回想一件今天做得不错的小事。",
+    "next": "self_doubt_16"
+  },
+  "self_doubt_16": {
+    "id": "self_doubt_16",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "哪怕只是“今天按时起床了”。",
+    "next": "self_doubt_17"
+  },
+  "self_doubt_17": {
+    "id": "self_doubt_17",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "慢慢地，你会发现，你其实一直在变好。",
+    "next": "self_doubt_choice_c"
+  },
+  "self_doubt_choice_c": {
+    "id": "self_doubt_choice_c",
+    "type": "choice",
+    "name": "岚",
+    "text": "如果今晚你可以对自己说一句肯定的话，你会说什么？",
+    "choices": [
+      {
+        "text": "我撑过了今天，已经很了不起了",
+        "next": "self_c1"
+      },
+      {
+        "text": "我值得被好好对待",
+        "next": "self_c2"
+      },
+      {
+        "text": "我不需要完美，也可以被爱",
+        "next": "self_c3"
+      }
+    ]
+  },
+  "self_c1": {
+    "id": "self_c1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "撑过了今天，已经很了不起。",
+    "next": "self_c1b"
+  },
+  "self_c1b": {
+    "id": "self_c1b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这句话，我希望你能记住。",
+    "next": "self_c1c"
+  },
+  "self_c1c": {
+    "id": "self_c1c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "每天说给自己听。",
+    "next": "self_end_1"
+  },
+  "self_c2": {
+    "id": "self_c2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我值得被好好对待……",
+    "next": "self_c2b"
+  },
+  "self_c2b": {
+    "id": "self_c2b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "是的，你值得。不需要条件。",
+    "next": "self_c2c"
+  },
+  "self_c2c": {
+    "id": "self_c2c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "记住这句话。",
+    "next": "self_end_1"
+  },
+  "self_c3": {
+    "id": "self_c3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "我不需要完美，也可以被爱……",
+    "next": "self_c3b"
+  },
+  "self_c3b": {
+    "id": "self_c3b",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "这是最重要的一句话。",
+    "next": "self_c3c"
+  },
+  "self_c3c": {
+    "id": "self_c3c",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "没有人是完美的，但每个人都值得被爱。",
+    "next": "self_end_1"
+  },
+  "self_end_1": {
+    "id": "self_end_1",
+    "type": "ending",
+    "name": "岚",
+    "text": "天快亮了。你不需要在一夜之间就爱上自己，但希望你能开始对自己温柔一点。你比你想象的要好，你比你认为的要坚强。那些你觉得自己不够好的地方，也许正是别人眼里你的特别之处。今晚你愿意听我说这些，就已经在照顾自己了。以后觉得不够好的时候，回来想想这个夜晚——有人觉得你很好，而那个人也可以慢慢变成你自己。",
+    "endingTitle": "结局D：你比你想象的要好"
+  },
+
+  "extra_ending_1": {
+    "id": "extra_ending_1",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "雨声好像小了一点。",
+    "next": "extra_ending_2"
+  },
+  "extra_ending_2": {
+    "id": "extra_ending_2",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "你知道吗，我以前很怕雷雨。",
+    "next": "extra_ending_3"
+  },
+  "extra_ending_3": {
+    "id": "extra_ending_3",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "后来我发现，只要有人在旁边，雷声就没那么可怕了。",
+    "next": "extra_ending_4"
+  },
+  "extra_ending_4": {
+    "id": "extra_ending_4",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "今晚也一样。有你在，雨声也温柔了一点。",
+    "next": "extra_ending_5"
+  },
+  "extra_ending_5": {
+    "id": "extra_ending_5",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "谢谢你愿意坐在这里，听我说这些。",
+    "next": "extra_ending_6"
+  },
+  "extra_ending_6": {
+    "id": "extra_ending_6",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "其实我今晚也睡不着，但现在突然没那么难受了。",
+    "next": "extra_ending_7"
+  },
+  "extra_ending_7": {
+    "id": "extra_ending_7",
+    "type": "dialogue",
+    "name": "岚",
+    "text": "也许这就是陪伴的意义吧——不是因为解决了问题，而是因为有人分担了情绪。",
+    "next": "extra_ending_8"
+  },
+  "extra_ending_8": {
+    "id": "extra_ending_8",
+    "type": "ending",
+    "name": "岚",
+    "text": "天快亮了。我要回宿舍了，你也早点休息。如果以后还睡不着，也许我还会在这里。但不管怎样，你要记得：你从来都不是一个人。这个世界很大，但总有人在你看不见的地方，和你一样醒着，一样努力，一样渴望被理解。你值得被温柔对待，从今晚开始，从你自己开始。",
+    "endingTitle": "隐藏结局：雨声温柔，因为有你"
+  }
+}

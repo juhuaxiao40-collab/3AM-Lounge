@@ -3,17 +3,117 @@ let currentEditingNodeId = null;
 let storyDataCopy = JSON.parse(JSON.stringify(storyData)); // 深拷贝数据
 let bgmDatabase = {}; // BGM数据库 { bgmId: { name, file, nodes: [] } }
 let currentUploadedBGM = null; // 当前上传的BGM临时存储
-let assetDatabase = {}; // 素材数据库 { assetId: { name, type, file, nodes: [] } }
+let assetDatabase = {}; // 素材数据库 { assetId: { name, type, file, nodes: [], position: {x, y} } }
 let currentUploadedAsset = null; // 当前上传的素材临时存储
 let currentAssetFilter = 'all'; // 当前素材筛选类型
+let positionHistory = []; // 位置历史记录 [{x, y, label}]
+
+// 加载位置历史
+function loadPositionHistory() {
+    const saved = localStorage.getItem('assetPositionHistory');
+    if (saved) {
+        positionHistory = JSON.parse(saved);
+    } else {
+        // 默认位置预设
+        positionHistory = [
+            { x: 50, y: 80, label: '底部居中' },
+            { x: 20, y: 80, label: '左下' },
+            { x: 80, y: 80, label: '右下' },
+            { x: 50, y: 50, label: '居中' },
+            { x: 20, y: 50, label: '左中' },
+            { x: 80, y: 50, label: '右中' }
+        ];
+        savePositionHistory();
+    }
+}
+
+// 保存位置历史
+function savePositionHistory() {
+    localStorage.setItem('assetPositionHistory', JSON.stringify(positionHistory));
+}
+
+// 添加位置到历史
+function addToPositionHistory(x, y) {
+    const exists = positionHistory.some(p => p.x === x && p.y === y);
+    if (!exists) {
+        positionHistory.unshift({ x, y, label: `${x}%, ${y}%` });
+        // 最多保留10条历史
+        if (positionHistory.length > 10) {
+            positionHistory.pop();
+        }
+        savePositionHistory();
+        renderPositionHistory();
+    }
+}
+
+// 渲染位置历史
+function renderPositionHistory() {
+    const container = document.getElementById('positionHistoryList');
+    if (!container) return;
+    
+    if (positionHistory.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: rgba(150, 170, 200, 0.5); font-size: 12px;">暂无位置记录</div>';
+        return;
+    }
+    
+    container.innerHTML = positionHistory.map((pos, index) => `
+        <div class="position-history-item" onclick="applyPositionHistory(${pos.x}, ${pos.y})">
+            <span>${pos.label}</span>
+            ${index === 0 ? '<span class="recent">最近</span>' : ''}
+        </div>
+    `).join('');
+}
+
+// 应用位置历史
+function applyPositionHistory(x, y) {
+    document.getElementById('positionX').value = x;
+    document.getElementById('positionXValue').textContent = `${x}%`;
+    document.getElementById('positionY').value = y;
+    document.getElementById('positionYValue').textContent = `${y}%`;
+    currentUploadedAsset.position = { x, y };
+}
+
+// 设置位置
+function setPosition(x, y) {
+    document.getElementById('positionX').value = x;
+    document.getElementById('positionXValue').textContent = `${x}%`;
+    document.getElementById('positionY').value = y;
+    document.getElementById('positionYValue').textContent = `${y}%`;
+    currentUploadedAsset.position = { x, y };
+    addToPositionHistory(x, y);
+}
 
 // ==================== 初始化 ====================
 document.addEventListener('DOMContentLoaded', () => {
     renderNodeList();
     loadBGMFromStory();
     loadAssetsFromStory();
+    loadPositionHistory();
+    renderPositionHistory();
     updateBGMCount();
     updateAssetCount();
+    
+    // 设置位置滑块事件
+    const positionX = document.getElementById('positionX');
+    const positionY = document.getElementById('positionY');
+    const positionXValue = document.getElementById('positionXValue');
+    const positionYValue = document.getElementById('positionYValue');
+    
+    positionX?.addEventListener('input', (e) => {
+        positionXValue.textContent = `${e.target.value}%`;
+        if (currentUploadedAsset) {
+            currentUploadedAsset.position = currentUploadedAsset.position || { x: 50, y: 80 };
+            currentUploadedAsset.position.x = parseInt(e.target.value);
+        }
+    });
+    
+    positionY?.addEventListener('input', (e) => {
+        positionYValue.textContent = `${e.target.value}%`;
+        if (currentUploadedAsset) {
+            currentUploadedAsset.position = currentUploadedAsset.position || { x: 50, y: 80 };
+            currentUploadedAsset.position.y = parseInt(e.target.value);
+        }
+    });
 });
 
 // ==================== 从剧情数据加载素材配置 ====================
@@ -829,6 +929,21 @@ function handleAssetUpload(event) {
             currentUploadedAsset.muted = false;
         }
         
+        // 显示位置设置（人物和道具）
+        if (assetType === 'character' || assetType === 'prop') {
+            document.getElementById('positionSettings').style.display = 'block';
+            // 设置默认位置
+            document.getElementById('positionX').value = 50;
+            document.getElementById('positionXValue').textContent = '50%';
+            document.getElementById('positionY').value = assetType === 'character' ? 80 : 60;
+            document.getElementById('positionYValue').textContent = `${assetType === 'character' ? 80 : 60}%`;
+            currentUploadedAsset.position = { x: 50, y: assetType === 'character' ? 80 : 60 };
+            renderPositionHistory();
+        } else {
+            document.getElementById('positionSettings').style.display = 'none';
+            currentUploadedAsset.position = null;
+        }
+        
         document.getElementById('assetNodeSelectorSection').style.display = 'block';
         renderAssetNodeCheckboxList();
     };
@@ -945,6 +1060,7 @@ function saveAssetAssignment() {
     document.getElementById('assetNodeSelectorSection').style.display = 'none';
     document.getElementById('loopSettings').style.display = 'none';
     document.getElementById('videoMuteSettings').style.display = 'none';
+    document.getElementById('positionSettings').style.display = 'none';
     document.getElementById('uploadedAssetName').textContent = '';
     document.getElementById('assetFileInput').value = '';
 
@@ -1085,4 +1201,114 @@ function updateFilterButtons() {
 // 更新素材计数
 function updateAssetCount() {
     document.getElementById('assetCount').textContent = Object.keys(assetDatabase).length;
+}
+
+// ==================== 素材预览功能 ====================
+function openPreviewModal() {
+    document.getElementById('previewModal').classList.add('active');
+    populatePreviewNodeSelect();
+    updatePreview();
+}
+
+function closePreviewModal() {
+    document.getElementById('previewModal').classList.remove('active');
+    const previewArea = document.getElementById('previewArea');
+    previewArea.innerHTML = '<div class="preview-background"><!-- 预览素材会在这里显示 --></div>';
+}
+
+function populatePreviewNodeSelect() {
+    const select = document.getElementById('previewNodeSelect');
+    select.innerHTML = '<option value="">请选择节点</option>';
+    
+    Object.keys(storyDataCopy).forEach(nodeId => {
+        const node = storyDataCopy[nodeId];
+        const hasAssets = node.scene || node.scenes || node.character || node.characters || node.prop || node.props;
+        if (hasAssets) {
+            const typeText = {
+                'dialogue': '对话',
+                'choice': '选择',
+                'ending': '结局'
+            }[node.type] || '对话';
+            const option = document.createElement('option');
+            option.value = nodeId;
+            option.textContent = `${nodeId} (${typeText})`;
+            select.appendChild(option);
+        }
+    });
+}
+
+function updatePreview() {
+    const nodeId = document.getElementById('previewNodeSelect').value;
+    const previewArea = document.getElementById('previewArea');
+    
+    if (!nodeId) {
+        previewArea.innerHTML = '<div class="preview-background"><div style="text-align: center; color: rgba(150, 170, 200, 0.5); padding: 50px;">请选择一个节点进行预览</div></div>';
+        return;
+    }
+    
+    const node = storyDataCopy[nodeId];
+    if (!node) return;
+    
+    // 获取所有素材ID
+    const sceneIds = node.scenes || (node.scene ? [node.scene] : []);
+    const characterIds = node.characters || (node.character ? [node.character] : []);
+    const propIds = node.props || (node.prop ? [node.prop] : []);
+    
+    // 构建预览HTML
+    let html = '<div class="preview-background">';
+    
+    // 添加场景素材
+    sceneIds.forEach(assetId => {
+        const asset = assetDatabase[assetId];
+        if (asset) {
+            html += getAssetPreviewHTML(asset, 'scene');
+        }
+    });
+    
+    // 添加人物素材
+    characterIds.forEach(assetId => {
+        const asset = assetDatabase[assetId];
+        if (asset) {
+            html += getAssetPreviewHTML(asset, 'character');
+        }
+    });
+    
+    // 添加道具素材
+    propIds.forEach(assetId => {
+        const asset = assetDatabase[assetId];
+        if (asset) {
+            html += getAssetPreviewHTML(asset, 'prop');
+        }
+    });
+    
+    html += '</div>';
+    previewArea.innerHTML = html;
+    
+    // 自动播放视频
+    setTimeout(() => {
+        previewArea.querySelectorAll('video').forEach(video => {
+            video.play().catch(() => {});
+        });
+    }, 100);
+}
+
+function getAssetPreviewHTML(asset, assetType) {
+    const position = asset.position || { x: 50, y: assetType === 'character' ? 80 : 50 };
+    
+    if (asset.fileType === 'video') {
+        return `
+            <div class="preview-asset preview-${assetType}" style="left: ${position.x}%; top: ${position.y}%;">
+                <video src="${asset.file}" ${asset.muted ? 'muted' : ''} ${asset.loopCount === -1 ? 'loop' : ''} playsinline>
+                </video>
+                <div class="preview-asset-label">${asset.name}</div>
+            </div>
+        `;
+    } else {
+        return `
+            <div class="preview-asset preview-${assetType}" style="left: ${position.x}%; top: ${position.y}%;">
+                <img src="${asset.file}" alt="${asset.name}">
+                <div class="preview-asset-label">${asset.name}</div>
+            </div>
+        `;
+    }
 }

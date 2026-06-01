@@ -246,14 +246,27 @@ function showAsset(assetId, assetType) {
     const isVideo = asset.fileType === 'video';
     const isGif = asset.name && asset.name.match(/\.gif$/i);
     const loopCount = asset.loopCount || -1;
+    const position = asset.position || { x: 50, y: assetType === 'character' ? 80 : 50 };
 
     let element;
     if (isVideo) {
         element = document.createElement('video');
         element.src = asset.file;
         element.className = `asset-${assetType}`;
-        element.style.maxWidth = '100%';
-        element.style.maxHeight = '100%';
+        
+        // 设置位置（人物和道具）
+        if (assetType === 'character' || assetType === 'prop') {
+            element.style.position = 'absolute';
+            element.style.left = `${position.x}%`;
+            element.style.top = `${position.y}%`;
+            element.style.transform = 'translate(-50%, -50%)';
+            element.style.maxWidth = assetType === 'character' ? '300px' : '200px';
+            element.style.maxHeight = assetType === 'character' ? '450px' : '200px';
+        } else {
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.objectFit = 'cover';
+        }
         
         // 设置静音
         element.muted = asset.muted || false;
@@ -278,6 +291,20 @@ function showAsset(assetId, assetType) {
         element = document.createElement('img');
         element.src = asset.file;
         element.className = `asset-${assetType}`;
+        
+        // 设置位置（人物和道具）
+        if (assetType === 'character' || assetType === 'prop') {
+            element.style.position = 'absolute';
+            element.style.left = `${position.x}%`;
+            element.style.top = `${position.y}%`;
+            element.style.transform = 'translate(-50%, -50%)';
+            element.style.maxWidth = assetType === 'character' ? '300px' : '200px';
+            element.style.maxHeight = assetType === 'character' ? '450px' : '200px';
+        } else {
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.objectFit = 'cover';
+        }
         
         // GIF循环控制（通过CSS或JavaScript）
         if (isGif && loopCount > 0) {
@@ -313,7 +340,12 @@ function showAsset(assetId, assetType) {
 
     // 缓存元素
     assetElements[assetId] = element;
-    currentAssets[assetType] = element;
+    
+    // 添加到当前素材列表（支持多个同类型素材）
+    if (!Array.isArray(currentAssets[assetType])) {
+        currentAssets[assetType] = [];
+    }
+    currentAssets[assetType].push(element);
     
     // 添加到DOM
     assetLayer.appendChild(element);
