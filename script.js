@@ -270,13 +270,14 @@ function showAsset(assetId, assetType) {
             element.style.left = `${position.x}%`;
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
-            
-            const baseMaxWidth = assetType === 'character' ? 300 : 200;
-            const baseMaxHeight = assetType === 'character' ? 450 : 200;
-            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}px`;
-            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}px`;
-            element.style.width = '100%';
-            element.style.height = '100%';
+
+            // 使用视口宽度单位，确保在不同设备上比例一致
+            const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
+            const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}vw`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}vw`;
+            element.style.width = 'auto';
+            element.style.height = 'auto';
             element.style.objectFit = 'contain';
         } else {
             element.style.width = '100%';
@@ -315,13 +316,14 @@ function showAsset(assetId, assetType) {
             element.style.left = `${position.x}%`;
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
-            
-            const baseMaxWidth = assetType === 'character' ? 300 : 200;
-            const baseMaxHeight = assetType === 'character' ? 450 : 200;
-            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}px`;
-            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}px`;
-            element.style.width = '100%';
-            element.style.height = '100%';
+
+            // 使用视口宽度单位，确保在不同设备上比例一致
+            const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
+            const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}vw`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}vw`;
+            element.style.width = 'auto';
+            element.style.height = 'auto';
             element.style.objectFit = 'contain';
         } else {
             element.style.width = '100%';

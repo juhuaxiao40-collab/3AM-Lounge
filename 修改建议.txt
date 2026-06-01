@@ -1,0 +1,243 @@
+这是网页游戏、GalGame项目里最常见的问题之一。
+
+你的问题本质上是：
+
+> 你的人物位置是按照电脑屏幕尺寸摆放的，但手机屏幕尺寸完全不同，所以素材发生了偏移。
+
+
+
+一般新手做网页时都会这样：
+
+.character{
+    position:absolute;
+    left:500px;
+    top:100px;
+}
+
+电脑上：
+
+1920×1080
+
+看起来正常。
+
+但手机：
+
+390×844
+
+浏览器会强行缩放。
+
+于是：
+
+人物飞出屏幕
+
+脑袋被切掉
+
+对话框挡住人物
+
+按钮跑偏
+
+
+
+---
+
+最简单的解决方案
+
+不要用 px
+
+改用：
+
+left:50%;
+top:50%;
+
+或者：
+
+left:30vw;
+top:20vh;
+
+
+---
+
+推荐做法
+
+人物素材：
+
+.character{
+    position:absolute;
+
+    bottom:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    height:80vh;
+}
+
+解释：
+
+left:50%;
+
+表示：
+
+人物中心放在屏幕中间。
+
+
+---
+
+transform:translateX(-50%);
+
+表示：
+
+让人物真正居中。
+
+
+---
+
+height:80vh;
+
+表示：
+
+人物高度占屏幕高度80%。
+
+电脑和手机都会自动适配。
+
+
+---
+
+GalGame常用布局
+
+例如：
+
+.game-container{
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+    position:relative;
+}
+
+人物：
+
+.character{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    height:75vh;
+}
+
+对话框：
+
+.dialog-box{
+    position:absolute;
+    bottom:0;
+
+    width:100%;
+    height:25vh;
+}
+
+这样：
+
+无论：
+
+手机
+
+平板
+
+电脑
+
+
+都会比较稳定。
+
+
+---
+
+如果你有多个角色
+
+例如：
+
+岚站左边
+
+left:35%;
+
+男主站右边
+
+left:65%;
+
+不要写：
+
+left:500px;
+left:1200px;
+
+而是：
+
+left:35%;
+left:65%;
+
+
+---
+
+更推荐的方法（比赛项目）
+
+直接使用：
+
+.character{
+    position:absolute;
+    bottom:0;
+
+    left:50%;
+
+    transform:
+    translateX(-50%)
+    scale(var(--scale));
+}
+
+然后：
+
+:root{
+    --scale:1;
+}
+
+手机：
+
+@media (max-width:768px){
+
+:root{
+    --scale:0.8;
+}
+
+}
+
+这样手机自动缩小人物。
+
+
+---
+
+先检查这三个地方
+
+把你的项目代码发给 Claude Code 让它检查：
+
+请检查我的GalGame项目响应式布局问题。
+
+重点检查：
+
+1. 是否使用大量px定位人物
+2. 是否缺少viewport设置
+3. 是否缺少移动端媒体查询
+4. 是否应该改用vw vh %
+5. 请直接帮我修改为手机和电脑都兼容的方案
+
+以下是我的HTML和CSS代码：
+
+然后把：
+
+index.html
+
+style.css
+
+
+发给它。
+
+
+---
+
+如果你把目前的 index.html 和 style.css 发给我，我可以直接帮你找出是哪几行代码导致手机端人物偏移，并告诉你具体该怎么改。

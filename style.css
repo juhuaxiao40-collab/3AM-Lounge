@@ -78,24 +78,30 @@ body {
 }
 
 .room-bg .cloud-1 {
-    width: 150px;
-    height: 60px;
+    width: 15vw;
+    height: 6vw;
+    max-width: 150px;
+    max-height: 60px;
     top: 20%;
     left: 10%;
     animation: cloudFloat1 20s ease-in-out infinite;
 }
 
 .room-bg .cloud-2 {
-    width: 120px;
-    height: 50px;
+    width: 12vw;
+    height: 5vw;
+    max-width: 120px;
+    max-height: 50px;
     top: 40%;
     right: 15%;
     animation: cloudFloat2 25s ease-in-out infinite;
 }
 
 .room-bg .cloud-3 {
-    width: 100px;
-    height: 40px;
+    width: 10vw;
+    height: 4vw;
+    max-width: 100px;
+    max-height: 40px;
     top: 65%;
     left: 20%;
     animation: cloudFloat3 30s ease-in-out infinite;
@@ -103,17 +109,17 @@ body {
 
 @keyframes cloudFloat1 {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(30px); }
+    50% { transform: translateX(3vw); }
 }
 
 @keyframes cloudFloat2 {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-40px); }
+    50% { transform: translateX(-4vw); }
 }
 
 @keyframes cloudFloat3 {
     0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(25px); }
+    50% { transform: translateX(2.5vw); }
 }
 
 /* 素材显示层 */
@@ -217,8 +223,10 @@ body {
     position: absolute;
     top: 15%;
     left: 25%;
-    width: 400px;
-    height: 400px;
+    width: 40vw;
+    height: 40vw;
+    max-width: 400px;
+    max-height: 400px;
     background: radial-gradient(circle,
         rgba(180, 200, 255, 0.25) 0%,
         rgba(150, 180, 230, 0.15) 40%,
@@ -246,8 +254,10 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 200px;
-    height: 200px;
+    width: 20vw;
+    height: 20vw;
+    max-width: 200px;
+    max-height: 200px;
     background: radial-gradient(circle,
         rgba(255, 230, 200, 0.2) 0%,
         transparent 60%);
@@ -265,8 +275,12 @@ body {
 .background::before {
     content: '';
     position: absolute;
-    width: 8px;
-    height: 8px;
+    width: 0.8vw;
+    height: 0.8vw;
+    min-width: 6px;
+    min-height: 6px;
+    max-width: 8px;
+    max-height: 8px;
     background: rgba(180, 200, 255, 0.4);
     border-radius: 50%;
     top: 30%;
@@ -280,8 +294,12 @@ body {
 .background::after {
     content: '';
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 0.6vw;
+    height: 0.6vw;
+    min-width: 5px;
+    min-height: 5px;
+    max-width: 6px;
+    max-height: 6px;
     background: rgba(255, 230, 200, 0.4);
     border-radius: 50%;
     top: 60%;
@@ -290,6 +308,40 @@ body {
         0 0 15px rgba(255, 230, 200, 0.6),
         0 0 30px rgba(255, 230, 200, 0.3);
     animation: floatLight2 10s ease-in-out infinite;
+}
+
+@keyframes floatLight1 {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.5;
+    }
+    25% {
+        transform: translate(2vw, -3vh);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translate(-1vw, -5vh);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translate(3vw, -2vh);
+        opacity: 0.9;
+    }
+}
+
+@keyframes floatLight2 {
+    0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+    }
+    33% {
+        transform: translate(-2.5vw, 2vh);
+        opacity: 0.7;
+    }
+    66% {
+        transform: translate(1.5vw, 4vh);
+        opacity: 0.5;
+    }
 }
 
 @keyframes floatLight1 {
@@ -342,17 +394,27 @@ body {
 }
 
 .character {
-    width: 450px;
-    height: 650px;
+    width: 100%;
+    height: 100%;
+    max-width: 450px;
+    max-height: 650px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+/* 响应式调整 - 手机端 */
+@media (max-width: 768px) {
+    .character {
+        max-width: 80vw;
+        max-height: 60vh;
+    }
+}
+
 /* 对话框 - GalGame经典风格 */
 .dialogue-box {
     position: fixed;
-    bottom: 30px;
+    bottom: 3vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -370,6 +432,15 @@ body {
         0 0 60px rgba(100, 150, 220, 0.15);
     backdrop-filter: blur(12px);
     display: none;
+}
+
+/* 响应式调整 - 手机端对话框 */
+@media (max-width: 768px) {
+    .dialogue-box {
+        width: 92%;
+        padding: 20px 25px;
+        bottom: 2vh;
+    }
 }
 
 /* 对话框装饰边角 */
@@ -427,7 +498,7 @@ body {
 /* 选择层 - 更可爱的按钮设计 */
 .choices-container {
     position: fixed;
-    bottom: 200px;
+    bottom: 22vh;
     left: 50%;
     transform: translateX(-50%);
     width: 88%;
@@ -436,6 +507,15 @@ body {
     display: none;
     flex-direction: column;
     gap: 16px;
+}
+
+/* 响应式调整 - 手机端选择层 */
+@media (max-width: 768px) {
+    .choices-container {
+        width: 92%;
+        bottom: 20vh;
+        gap: 12px;
+    }
 }
 
 .choice-button {
@@ -532,8 +612,10 @@ body {
 .start-screen::after {
     content: '';
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 30vw;
+    height: 30vw;
+    max-width: 300px;
+    max-height: 300px;
     top: 20%;
     right: 15%;
     background: radial-gradient(circle,

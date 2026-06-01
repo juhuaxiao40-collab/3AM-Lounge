@@ -174,7 +174,7 @@ function updatePositionPreview() {
         `;
     }
 
-    // 根据素材类型设置样式，与script.js保持一致
+    // 根据素材类型设置样式，与script.js保持一致（使用vw单位）
     if (assetType === 'scene') {
         // 场景素材填充整个预览区域
         gamePreviewAssets.innerHTML = `
@@ -183,15 +183,15 @@ function updatePositionPreview() {
             </div>
         `;
     } else if (assetType === 'character' || assetType === 'prop') {
-        // 人物和道具素材按位置和大小显示，使用与script.js相同的计算方式
-        const baseMaxWidth = assetType === 'character' ? 300 : 200;
-        const baseMaxHeight = assetType === 'character' ? 450 : 200;
+        // 人物和道具素材按位置和大小显示，使用与script.js相同的vw单位
+        const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
+        const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
 
         const actualMaxWidth = (size.width / 100) * baseMaxWidth;
         const actualMaxHeight = (size.height / 100) * baseMaxHeight;
 
         gamePreviewAssets.innerHTML = `
-            <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}px; max-height: ${actualMaxHeight}px; width: 100%; height: 100%; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
+            <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}vw; max-height: ${actualMaxHeight}vw; width: auto; height: auto; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
                 ${assetHTML}
             </div>
         `;
