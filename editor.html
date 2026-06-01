@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>剧情编辑器 - 凌晨三点的休息室</title>
     <style>
         * {
@@ -16,6 +16,13 @@
             background: #1a1a2e;
             color: #e8e8e8;
             padding: 20px;
+            overflow-x: hidden;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
         }
 
         .container {
@@ -988,11 +995,18 @@
             width: 100%;
             max-width: 360px;
             margin: 20px auto;
-            padding-top: 177.78%; /* 9:16 手机屏幕比例 */
+            aspect-ratio: 9 / 16;
             background: linear-gradient(180deg, #2d3561 0%, #1f2847 40%, #1a1f3a 100%);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .game-preview-screen {
+                max-width: 100%;
+                margin: 10px auto;
+            }
         }
 
         .game-preview-inner {
