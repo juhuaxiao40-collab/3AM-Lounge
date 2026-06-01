@@ -957,6 +957,181 @@
                 padding: 12px;
             }
         }
+
+        /* 游戏界面实时预览样式 */
+        .game-preview-container {
+            border: 2px solid rgba(150, 170, 200, 0.3);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: rgba(10, 15, 25, 0.95);
+        }
+
+        .game-preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: rgba(100, 150, 200, 0.2);
+            border-bottom: 1px solid rgba(150, 170, 200, 0.2);
+            font-size: 13px;
+            color: rgba(168, 192, 224, 0.9);
+        }
+
+        .preview-resolution {
+            font-size: 11px;
+            color: rgba(150, 170, 200, 0.6);
+        }
+
+        .game-preview-screen {
+            position: relative;
+            width: 100%;
+            padding-top: 177.78%; /* 1080x1920 = 9/16 = 177.78% */
+            background: #0a0f19;
+            border-radius: 0 0 6px 6px;
+            overflow: hidden;
+        }
+
+        .game-preview-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(20, 30, 50, 1) 0%, rgba(30, 40, 60, 1) 100%);
+        }
+
+        .game-preview-room {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 50% 30%, rgba(100, 120, 150, 0.15) 0%, transparent 60%);
+        }
+
+        .game-preview-assets {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .game-preview-character {
+            position: absolute;
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            max-width: 35%;
+            max-height: 50%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .game-preview-character img,
+        .game-preview-character video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .game-preview-dialogue {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 100%);
+            padding: 15px;
+            padding-bottom: 25px;
+            border-radius: 15px 15px 0 0;
+            border-top: 2px solid rgba(150, 180, 220, 0.3);
+            z-index: 20;
+        }
+
+        .game-preview-name {
+            color: #a8c0e0;
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .game-preview-text {
+            color: #e8e8e8;
+            font-size: 13px;
+            line-height: 1.6;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .game-preview-hint {
+            text-align: right;
+            color: rgba(168, 192, 224, 0.6);
+            font-size: 12px;
+        }
+
+        .game-preview-coords {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            color: rgba(106, 183, 255, 0.9);
+            z-index: 30;
+            pointer-events: none;
+        }
+
+        .game-preview-safe-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 15%;
+            border-bottom: 1px dashed rgba(255, 100, 100, 0.3);
+            pointer-events: none;
+            z-index: 25;
+        }
+
+        .game-preview-safe-area::after {
+            content: '⚠️ 顶部安全区域';
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 10px;
+            color: rgba(255, 100, 100, 0.5);
+        }
+
+        .game-preview-asset {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            border: 2px solid rgba(106, 183, 255, 0.6);
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(106, 183, 255, 0.3);
+            pointer-events: none;
+            z-index: 15;
+        }
+
+        .game-preview-asset img,
+        .game-preview-asset video {
+            display: block;
+            max-width: 120px;
+            max-height: 150px;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .game-preview-asset.character {
+            z-index: 12;
+        }
+
+        .game-preview-asset.prop {
+            z-index: 13;
+        }
     </style>
 </head>
 <body>
@@ -1057,13 +1232,31 @@
                 <div class="form-group" id="positionSettings" style="margin-bottom: 15px; display: none;">
                     <label>📍 位置调整</label>
                     
-                    <!-- 实时预览监视器 -->
-                    <div class="position-preview-monitor" id="positionPreviewMonitor">
-                        <div class="preview-header">
-                            <span>👁️ 实时预览</span>
+                    <!-- 游戏界面实时预览 -->
+                    <div class="game-preview-container" id="gamePreviewContainer">
+                        <div class="game-preview-header">
+                            <span>🎮 游戏界面预览（实时监控）</span>
+                            <span class="preview-resolution">模拟 1080x1920 手机屏幕</span>
                         </div>
-                        <div class="preview-content" id="previewContent">
-                            <div class="preview-placeholder">上传素材后预览</div>
+                        <div class="game-preview-screen" id="gamePreviewScreen">
+                            <!-- 背景层 -->
+                            <div class="game-preview-bg">
+                                <div class="game-preview-room"></div>
+                            </div>
+                            <!-- 素材层 -->
+                            <div class="game-preview-assets" id="gamePreviewAssets"></div>
+                            <!-- 人物层 -->
+                            <div class="game-preview-character" id="gamePreviewCharacter"></div>
+                            <!-- 对话框层 -->
+                            <div class="game-preview-dialogue">
+                                <div class="game-preview-name">角色名称</div>
+                                <div class="game-preview-text">这是一段示例对话文本，用于展示对话框的位置和样式。</div>
+                                <div class="game-preview-hint">点击继续 ▼</div>
+                            </div>
+                            <!-- 位置坐标显示 -->
+                            <div class="game-preview-coords" id="gamePreviewCoords">X: 50% | Y: 80%</div>
+                            <!-- 安全区域提示 -->
+                            <div class="game-preview-safe-area"></div>
                         </div>
                     </div>
                     

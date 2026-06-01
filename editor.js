@@ -84,17 +84,23 @@ function setPosition(x, y) {
     updatePositionPreview();
 }
 
-// 更新位置预览监视器
+// 更新游戏界面实时预览
 function updatePositionPreview() {
-    const previewContent = document.getElementById('previewContent');
-    if (!previewContent) return;
+    const gamePreviewAssets = document.getElementById('gamePreviewAssets');
+    const gamePreviewCoords = document.getElementById('gamePreviewCoords');
+    
+    if (!gamePreviewAssets || !gamePreviewCoords) return;
+    
+    const position = currentUploadedAsset?.position || { x: 50, y: 80 };
+    
+    // 更新坐标显示
+    gamePreviewCoords.textContent = `X: ${position.x}% | Y: ${position.y}%`;
     
     if (!currentUploadedAsset || !currentUploadedAsset.file) {
-        previewContent.innerHTML = '<div class="preview-placeholder">上传素材后预览</div>';
+        gamePreviewAssets.innerHTML = '';
         return;
     }
     
-    const position = currentUploadedAsset.position || { x: 50, y: 80 };
     const assetType = currentUploadedAsset.type;
     const isVideo = currentUploadedAsset.fileType === 'video';
     
@@ -111,15 +117,9 @@ function updatePositionPreview() {
         `;
     }
     
-    const typeIcon = assetType === 'character' ? '👤' : '📦';
-    
-    previewContent.innerHTML = `
-        <div class="preview-asset" style="left: ${position.x}%; top: ${position.y}%;">
+    gamePreviewAssets.innerHTML = `
+        <div class="game-preview-asset ${assetType}" style="left: ${position.x}%; top: ${position.y}%;">
             ${assetHTML}
-        </div>
-        <div class="position-marker" style="left: ${position.x}%; top: ${position.y}%;" title="位置: ${position.x}%, ${position.y}%"></div>
-        <div style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.6); padding: 5px 10px; border-radius: 5px; font-size: 11px; color: rgba(200, 210, 230, 0.9);">
-            ${typeIcon} ${position.x}%, ${position.y}%
         </div>
     `;
 }
