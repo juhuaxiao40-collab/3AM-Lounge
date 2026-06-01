@@ -974,12 +974,27 @@ function saveAssetAssignment() {
         currentUploadedAsset.muted = videoMuteSelect.value === 'true';
     }
 
+    const assetType = currentUploadedAsset.type;
+    const fieldName = assetType + 's';
+    
+    if (currentUploadedAsset.isEditing) {
+        const oldAsset = assetDatabase[currentUploadedAsset.id];
+        if (oldAsset && oldAsset.nodes) {
+            oldAsset.nodes.forEach(oldNodeId => {
+                if (storyDataCopy[oldNodeId] && Array.isArray(storyDataCopy[oldNodeId][fieldName])) {
+                    const index = storyDataCopy[oldNodeId][fieldName].indexOf(currentUploadedAsset.id);
+                    if (index > -1) {
+                        storyDataCopy[oldNodeId][fieldName].splice(index, 1);
+                    }
+                }
+            });
+        }
+        delete currentUploadedAsset.isEditing;
+    }
+
     currentUploadedAsset.nodes = selectedNodes;
 
     assetDatabase[currentUploadedAsset.id] = currentUploadedAsset;
-
-    const assetType = currentUploadedAsset.type;
-    const fieldName = assetType + 's';
 
     selectedNodes.forEach(nodeId => {
         if (storyDataCopy[nodeId]) {
@@ -997,11 +1012,14 @@ function saveAssetAssignment() {
         }
     });
 
+    saveStory();
+
     const typeText = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
     const loopInfo = currentUploadedAsset.loopCount === -1 ? '（无限循环）' : `（循环${currentUploadedAsset.loopCount}次）`;
     const muteInfo = currentUploadedAsset.muted ? '（已静音）' : '';
     const posInfo = currentUploadedAsset.position ? `（位置: ${currentUploadedAsset.position.x}%, ${currentUploadedAsset.position.y}%）` : '';
-    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}\n已应用到 ${selectedNodes.length} 个节点`);
+    const sizeInfo = currentUploadedAsset.size ? `（大小: ${currentUploadedAsset.size.width}% × ${currentUploadedAsset.size.height}%）` : '';
+    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}${sizeInfo}\n已应用到 ${selectedNodes.length} 个节点\n\n📥 配置文件已自动下载，请将 story.js 替换项目中的文件`);
 
     currentUploadedAsset = null;
     document.getElementById('assetNodeSelectorSection').style.display = 'none';
@@ -1058,11 +1076,15 @@ function renderAssetList() {
                             ${typeLabel} ${asset.name}
                             <span class="asset-type-badge asset-type-${typeClass}">${typeClass === 'scene' ? '场景' : typeClass === 'character' ? '人物' : '道具'}</span>
                         </span>
-                        <button class="btn btn-small btn-danger" onclick="deleteAsset('${assetId}')">删除</button>
+                        <div style="display: flex; gap: 5px;">
+                            <button class="btn btn-small btn-primary" onclick="editAsset('${assetId}')">编辑</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteAsset('${assetId}')">删除</button>
+                        </div>
                     </div>
                     <div class="asset-nodes">
                         ${asset.nodes.length} 个节点
                         ${asset.position ? `<br>位置: ${asset.position.x}%, ${asset.position.y}%` : ''}
+                        ${asset.size ? `<br>大小: ${asset.size.width}% × ${asset.size.height}%` : ''}
                         ${asset.loopCount !== undefined && asset.loopCount !== -1 ? `<br>循环: ${asset.loopCount}次` : ''}
                         ${asset.muted ? '<br>🔇 已静音' : ''}
                     </div>
@@ -1072,16 +1094,70 @@ function renderAssetList() {
     }).join('');
 }
 
+function editAsset(assetId) {
+    const asset = assetDatabase[assetId];
+    if (!asset) return;
+
+    currentUploadedAsset = JSON.parse(JSON.stringify(asset));
+    currentUploadedAsset.isEditing = true;
+
+    const typeLabel = asset.type === 'scene' ? '场景' : asset.type === 'character' ? '人物' : '道具';
+    const fileType = asset.fileType === 'video' ? '视频' : '图片';
+    document.getElementById('uploadedAssetName').textContent = `✏️ 正在编辑: ${asset.name} (${typeLabel} - ${fileType})`;
+
+    const isAnimated = asset.fileType === 'video' || (asset.name && asset.name.match(/\.gif$/i));
+    if (isAnimated) {
+        document.getElementById('loopSettings').style.display = 'block';
+        document.getElementById('loopCountSelect').value = asset.loopCount || '-1';
+    } else {
+        document.getElementById('loopSettings').style.display = 'none';
+    }
+
+    if (asset.fileType === 'video') {
+        document.getElementById('videoMuteSettings').style.display = 'block';
+        document.getElementById('videoMuteSelect').value = asset.muted ? 'true' : 'false';
+    } else {
+        document.getElementById('videoMuteSettings').style.display = 'none';
+    }
+
+    if (asset.type === 'character' || asset.type === 'prop') {
+        document.getElementById('positionSettings').style.display = 'block';
+        
+        const pos = asset.position || { x: 50, y: asset.type === 'character' ? 80 : 50 };
+        document.getElementById('positionX').value = pos.x;
+        document.getElementById('positionXValue').textContent = `${pos.x}%`;
+        document.getElementById('positionY').value = pos.y;
+        document.getElementById('positionYValue').textContent = `${pos.y}%`;
+        
+        const size = asset.size || { width: 100, height: 100 };
+        document.getElementById('assetWidth').value = size.width;
+        document.getElementById('assetWidthValue').textContent = `${size.width}%`;
+        document.getElementById('assetHeight').value = size.height;
+        document.getElementById('assetHeightValue').textContent = `${size.height}%`;
+        
+        renderPositionHistory();
+        updatePositionPreview();
+    } else {
+        document.getElementById('positionSettings').style.display = 'none';
+    }
+
+    document.getElementById('assetNodeSelectorSection').style.display = 'block';
+    renderAssetNodeCheckboxList();
+}
+
 function deleteAsset(assetId) {
     if (!confirm('确定要删除这个素材配置吗？\n相关节点的素材设置也会被清除。')) return;
 
     const asset = assetDatabase[assetId];
 
     if (asset && asset.nodes) {
-        const fieldName = asset.type;
+        const fieldName = asset.type + 's';
         asset.nodes.forEach(nodeId => {
-            if (storyDataCopy[nodeId]) {
-                delete storyDataCopy[nodeId][fieldName];
+            if (storyDataCopy[nodeId] && Array.isArray(storyDataCopy[nodeId][fieldName])) {
+                const index = storyDataCopy[nodeId][fieldName].indexOf(assetId);
+                if (index > -1) {
+                    storyDataCopy[nodeId][fieldName].splice(index, 1);
+                }
             }
         });
     }
