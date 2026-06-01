@@ -1012,14 +1012,12 @@ function saveAssetAssignment() {
         }
     });
 
-    saveStory();
-
     const typeText = assetType === 'scene' ? '场景' : assetType === 'character' ? '人物' : '道具';
     const loopInfo = currentUploadedAsset.loopCount === -1 ? '（无限循环）' : `（循环${currentUploadedAsset.loopCount}次）`;
     const muteInfo = currentUploadedAsset.muted ? '（已静音）' : '';
     const posInfo = currentUploadedAsset.position ? `（位置: ${currentUploadedAsset.position.x}%, ${currentUploadedAsset.position.y}%）` : '';
     const sizeInfo = currentUploadedAsset.size ? `（大小: ${currentUploadedAsset.size.width}% × ${currentUploadedAsset.size.height}%）` : '';
-    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}${sizeInfo}\n已应用到 ${selectedNodes.length} 个节点\n\n📥 配置文件已自动下载，请将 story.js 替换项目中的文件`);
+    alert(`✅ ${typeText}素材配置成功！${loopInfo}${muteInfo}${posInfo}${sizeInfo}\n已应用到 ${selectedNodes.length} 个节点\n\n� 请在完成所有素材添加后，点击顶部「保存到文件」按钮下载配置`);
 
     currentUploadedAsset = null;
     document.getElementById('assetNodeSelectorSection').style.display = 'none';

@@ -7,84 +7,89 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 背景层 -->
-    <div class="background">
-        <div class="room-bg"></div>
-        <div class="light-effect"></div>
-        <!-- 素材显示层 -->
-        <div class="asset-layer" id="assetLayer"></div>
-    </div>
-
-    <!-- BGM控制按钮 -->
-    <div class="bgm-control" id="bgmControl">
-        <button class="bgm-button" id="bgmButton" onclick="toggleBGM()">
-            <span id="bgmIcon">🔇</span>
-        </button>
-        <div class="bgm-tooltip">点击播放背景音乐</div>
-    </div>
-
-    <!-- 回溯按钮 -->
-    <div class="backtrack-control" id="backtrackControl">
-        <button class="backtrack-button" id="backtrackButton" onclick="showBacktrackMenu()">
-            <span>⏪</span>
-        </button>
-        <div class="backtrack-tooltip">回溯剧情</div>
-    </div>
-
-    <!-- 角色层 -->
-    <div class="character-container">
-        <div class="character" id="lan">
-            <!-- 角色立绘将在这里显示 -->
-        </div>
-    </div>
-
-    <!-- 对话层 -->
-    <div class="dialogue-box">
-        <div class="character-name" id="characterName">岚</div>
-        <div class="dialogue-text" id="dialogueText">
-            欢迎来到凌晨三点的休息室...
-        </div>
-        <div class="continue-hint" id="continueHint">点击继续 ▼</div>
-    </div>
-
-    <!-- 选择层 -->
-    <div class="choices-container" id="choicesContainer">
-        <!-- 选项将通过JS动态生成 -->
-    </div>
-
-    <!-- 开始按钮 -->
-    <div class="start-screen" id="startScreen">
-        <div class="title">
-            <h1>凌晨三点的休息室</h1>
-            <p class="subtitle">3AM Lounge</p>
-            <p class="tagline">在人生迷茫时，有人陪你走一段路</p>
-        </div>
-        <button class="start-button" id="startButton">开始</button>
-        <div class="start-tips">
-            <p>💡 建议佩戴耳机以获得最佳体验</p>
-            <p>🎵 进入游戏后可点击右上角按钮开启背景音乐</p>
-        </div>
-    </div>
-
-    <!-- 回溯菜单 -->
-    <div class="backtrack-modal" id="backtrackModal">
-        <div class="backtrack-overlay" onclick="hideBacktrackMenu()"></div>
-        <div class="backtrack-content">
-            <div class="backtrack-header">
-                <h2>⏪ 剧情回溯</h2>
-                <button class="backtrack-close" onclick="hideBacktrackMenu()">✕</button>
+    <!-- 游戏容器 -->
+    <div class="game-container">
+        <div class="game-content">
+            <!-- 背景层 -->
+            <div class="background">
+                <div class="room-bg"></div>
+                <div class="light-effect"></div>
+                <!-- 素材显示层 -->
+                <div class="asset-layer" id="assetLayer"></div>
             </div>
-            <div class="backtrack-body">
-                <div class="backtrack-section">
-                    <h3>选择回溯节点</h3>
-                    <div class="backtrack-list" id="backtrackList">
-                        <!-- 动态生成选择节点列表 -->
-                    </div>
+
+            <!-- BGM控制按钮 -->
+            <div class="bgm-control" id="bgmControl">
+                <button class="bgm-button" id="bgmButton" onclick="toggleBGM()">
+                    <span id="bgmIcon">🔇</span>
+                </button>
+                <div class="bgm-tooltip">点击播放背景音乐</div>
+            </div>
+
+            <!-- 回溯按钮 -->
+            <div class="backtrack-control" id="backtrackControl">
+                <button class="backtrack-button" id="backtrackButton" onclick="showBacktrackMenu()">
+                    <span>⏪</span>
+                </button>
+                <div class="backtrack-tooltip">回溯剧情</div>
+            </div>
+
+            <!-- 角色层 -->
+            <div class="character-container">
+                <div class="character" id="lan">
+                    <!-- 角色立绘将在这里显示 -->
                 </div>
-                <div class="backtrack-actions">
-                    <button class="backtrack-action-btn backtrack-restart" onclick="restartGame()">
-                        🔄 重新开始
-                    </button>
+            </div>
+
+            <!-- 对话层 -->
+            <div class="dialogue-box">
+                <div class="character-name" id="characterName">岚</div>
+                <div class="dialogue-text" id="dialogueText">
+                    欢迎来到凌晨三点的休息室...
+                </div>
+                <div class="continue-hint" id="continueHint">点击继续 ▼</div>
+            </div>
+
+            <!-- 选择层 -->
+            <div class="choices-container" id="choicesContainer">
+                <!-- 选项将通过JS动态生成 -->
+            </div>
+
+            <!-- 开始按钮 -->
+            <div class="start-screen" id="startScreen">
+                <div class="title">
+                    <h1>凌晨三点的休息室</h1>
+                    <p class="subtitle">3AM Lounge</p>
+                    <p class="tagline">在人生迷茫时，有人陪你走一段路</p>
+                </div>
+                <button class="start-button" id="startButton">开始</button>
+                <div class="start-tips">
+                    <p>💡 建议佩戴耳机以获得最佳体验</p>
+                    <p>🎵 进入游戏后可点击右上角按钮开启背景音乐</p>
+                </div>
+            </div>
+
+            <!-- 回溯菜单 -->
+            <div class="backtrack-modal" id="backtrackModal">
+                <div class="backtrack-overlay" onclick="hideBacktrackMenu()"></div>
+                <div class="backtrack-content">
+                    <div class="backtrack-header">
+                        <h2>⏪ 剧情回溯</h2>
+                        <button class="backtrack-close" onclick="hideBacktrackMenu()">✕</button>
+                    </div>
+                    <div class="backtrack-body">
+                        <div class="backtrack-section">
+                            <h3>选择回溯节点</h3>
+                            <div class="backtrack-list" id="backtrackList">
+                                <!-- 动态生成选择节点列表 -->
+                            </div>
+                        </div>
+                        <div class="backtrack-actions">
+                            <button class="backtrack-action-btn backtrack-restart" onclick="restartGame()">
+                                🔄 重新开始
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
