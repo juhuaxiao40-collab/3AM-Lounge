@@ -174,9 +174,9 @@ function updatePositionPreview() {
             </div>
         `;
     } else if (assetType === 'character' || assetType === 'prop') {
-        // 人物和道具素材：使用与script.js完全相同的vw单位计算方式
-        const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
-        const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
+        // 人物和道具素材：使用与script.js完全相同的百分比计算方式
+        const baseMaxWidth = assetType === 'character' ? 45 : 30;   // 百分比
+        const baseMaxHeight = assetType === 'character' ? 55 : 30;  // 百分比
 
         // 按照script.js中的公式计算实际尺寸
         const actualMaxWidth = (size.width / 100) * baseMaxWidth;
@@ -187,7 +187,7 @@ function updatePositionPreview() {
             `<img src="${currentUploadedAsset.file}" alt="预览" style="width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain;">`;
 
         gamePreviewAssets.innerHTML = `
-            <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}vw; max-height: ${actualMaxHeight}vw; width: auto; height: auto; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
+            <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}%; max-height: ${actualMaxHeight}%; width: auto; height: auto; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
                 ${mediaHTML}
             </div>
         `;

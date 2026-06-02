@@ -271,11 +271,11 @@ function showAsset(assetId, assetType) {
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
 
-            // 使用视口宽度单位，确保在不同设备上比例一致
-            const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
-            const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
-            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}vw`;
-            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}vw`;
+            // 使用百分比相对于游戏容器，确保在不同设备上比例一致
+            const baseMaxWidth = assetType === 'character' ? 45 : 30;   // 百分比
+            const baseMaxHeight = assetType === 'character' ? 55 : 30;  // 百分比
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}%`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}%`;
             element.style.width = 'auto';
             element.style.height = 'auto';
             element.style.objectFit = 'contain';
@@ -317,11 +317,11 @@ function showAsset(assetId, assetType) {
             element.style.top = `${position.y}%`;
             element.style.transform = 'translate(-50%, -50%)';
 
-            // 使用视口宽度单位，确保在不同设备上比例一致
-            const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
-            const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
-            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}vw`;
-            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}vw`;
+            // 使用百分比相对于游戏容器，确保在不同设备上比例一致
+            const baseMaxWidth = assetType === 'character' ? 45 : 30;   // 百分比
+            const baseMaxHeight = assetType === 'character' ? 55 : 30;  // 百分比
+            element.style.maxWidth = `${(size.width / 100) * baseMaxWidth}%`;
+            element.style.maxHeight = `${(size.height / 100) * baseMaxHeight}%`;
             element.style.width = 'auto';
             element.style.height = 'auto';
             element.style.objectFit = 'contain';

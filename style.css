@@ -17,14 +17,16 @@ body {
     justify-content: center;
 }
 
-/* 游戏容器 - 响应式设计，适配所有设备 */
+/* 游戏容器 - 保持9:16比例，居中显示 */
 .game-container {
     position: relative;
     width: 100vw;
     height: 100vh;
-    max-width: 100vw;
+    max-width: 56.25vh; /* 保持9:16比例 (9/16 = 0.5625) */
     max-height: 100vh;
+    margin: 0 auto;
     overflow: hidden;
+    background: #0a0f19;
 }
 
 /* 游戏内容区域 */
@@ -133,7 +135,7 @@ body {
     overflow: hidden;
 }
 
-/* 素材基本样式 - 使用百分比和vw单位确保响应式 */
+/* 素材基本样式 - 使用百分比确保相对于容器的响应式 */
 .asset-layer img,
 .asset-layer video {
     position: absolute;
@@ -150,28 +152,28 @@ body {
     object-position: center;
 }
 
-/* 人物素材 - 使用vw单位确保不同设备比例一致 */
+/* 人物素材 - 使用百分比确保不同设备比例一致 */
 .asset-character {
     /* 位置由JavaScript动态设置为百分比 */
     /* 默认底部居中，如果JS未设置 */
     bottom: 25%;
     left: 50%;
     transform: translateX(-50%);
-    /* 使用vw单位确保响应式 */
-    max-width: 55vw;
-    max-height: 83vw;
+    /* 使用百分比相对于游戏容器 */
+    max-width: 45%;
+    max-height: 55%;
 }
 
-/* 道具素材 - 使用vw单位确保响应式 */
+/* 道具素材 - 使用百分比确保响应式 */
 .asset-prop {
     /* 位置由JavaScript动态设置为百分比 */
     /* 默认居中，如果JS未设置 */
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    /* 使用vw单位确保响应式 */
-    max-width: 37vw;
-    max-height: 37vw;
+    /* 使用百分比相对于游戏容器 */
+    max-width: 30%;
+    max-height: 30%;
 }
 
 /* 星星装饰 */

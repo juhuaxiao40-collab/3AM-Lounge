@@ -7679,11 +7679,11 @@ const assetConfig = {
         ],
         "position": {
             "x": 50,
-            "y": 65
+            "y": 60
         },
         "size": {
-            "width": 200,
-            "height": 200
+            "width": 150,
+            "height": 150
         }
     }
 };
