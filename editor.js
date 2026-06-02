@@ -161,38 +161,34 @@ function updatePositionPreview() {
     const assetType = currentUploadedAsset.type;
     const isVideo = currentUploadedAsset.fileType === 'video';
 
-    let assetHTML;
-    if (isVideo) {
-        assetHTML = `
-            <video src="${currentUploadedAsset.file}" ${currentUploadedAsset.muted ? 'muted' : ''} loop autoplay playsinline style="display: block; width: 100%; height: 100%; object-fit: contain;">
-                您的浏览器不支持视频播放
-            </video>
-        `;
-    } else {
-        assetHTML = `
-            <img src="${currentUploadedAsset.file}" alt="预览" style="width: 100%; height: 100%; object-fit: contain;">
-        `;
-    }
-
-    // 根据素材类型设置样式，与script.js保持一致（使用vw单位）
+    // 根据素材类型设置样式，完全复制script.js的逻辑
     if (assetType === 'scene') {
         // 场景素材填充整个预览区域
+        const sceneHTML = isVideo ?
+            `<video src="${currentUploadedAsset.file}" ${currentUploadedAsset.muted ? 'muted' : ''} loop autoplay playsinline style="width: 100%; height: 100%; object-fit: contain; object-position: center;">您的浏览器不支持视频播放</video>` :
+            `<img src="${currentUploadedAsset.file}" alt="预览" style="width: 100%; height: 100%; object-fit: contain; object-position: center;">`;
+
         gamePreviewAssets.innerHTML = `
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
-                ${assetHTML}
+                ${sceneHTML}
             </div>
         `;
     } else if (assetType === 'character' || assetType === 'prop') {
-        // 人物和道具素材按位置和大小显示，使用与script.js相同的vw单位
+        // 人物和道具素材：使用与script.js完全相同的vw单位计算方式
         const baseMaxWidth = assetType === 'character' ? 55 : 37;  // vw单位
         const baseMaxHeight = assetType === 'character' ? 83 : 37; // vw单位
 
+        // 按照script.js中的公式计算实际尺寸
         const actualMaxWidth = (size.width / 100) * baseMaxWidth;
         const actualMaxHeight = (size.height / 100) * baseMaxHeight;
 
+        const mediaHTML = isVideo ?
+            `<video src="${currentUploadedAsset.file}" ${currentUploadedAsset.muted ? 'muted' : ''} loop autoplay playsinline style="display: block; width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain;">您的浏览器不支持视频播放</video>` :
+            `<img src="${currentUploadedAsset.file}" alt="预览" style="width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain;">`;
+
         gamePreviewAssets.innerHTML = `
             <div style="position: absolute; left: ${position.x}%; top: ${position.y}%; transform: translate(-50%, -50%); max-width: ${actualMaxWidth}vw; max-height: ${actualMaxHeight}vw; width: auto; height: auto; z-index: ${assetType === 'character' ? 10 : 11}; border: 2px dashed rgba(106, 183, 255, 0.5); border-radius: 8px; box-shadow: 0 0 10px rgba(106, 183, 255, 0.3);">
-                ${assetHTML}
+                ${mediaHTML}
             </div>
         `;
     }

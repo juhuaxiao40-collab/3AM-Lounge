@@ -7679,7 +7679,7 @@ const assetConfig = {
         ],
         "position": {
             "x": 50,
-            "y": 69
+            "y": 65
         },
         "size": {
             "width": 200,
